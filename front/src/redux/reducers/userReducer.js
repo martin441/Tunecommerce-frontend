@@ -8,7 +8,7 @@ const initialState = {
   name: null,
   lastName: null,
   email: null,
-  adress: null,
+  address: null,
   celNumber: null,
   isAdmin: false,
 };
