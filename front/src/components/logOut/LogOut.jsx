@@ -16,7 +16,7 @@ const Logout = () => {
 
   return (
     <button onClick={handleLogout} type="button" class="btn btn-primary">
-      Cerrar Sesion
+      Logout
     </button>
   );
 };
