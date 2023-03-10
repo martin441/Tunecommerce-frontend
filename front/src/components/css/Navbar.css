@@ -1,14 +1,33 @@
+.contenedor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* height: 100%;*/
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5); /* Agrega un fondo semi-transparente */
+  z-index: 999;
+}
+
 header {
-  min-height: 70px;
+  width: 100%;
+  min-height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
 }
+.user-name{
+  color: white;
+  padding-left: 6px;
+}
 header .logo a {
   text-decoration: none;
   text-transform: uppercase;
-  color: black;
+  color: white;
 }
 header nav {
   display: flex;
@@ -16,11 +35,12 @@ header nav {
 nav ul li {
   list-style: none;
   display: inline-block;
+  margin-right: 15px;
 }
 nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
-  color: #555;
+  color: rgb(203, 203, 203);
   padding: 0 15px;
 }
 nav ul li a:hover {
@@ -29,7 +49,28 @@ nav ul li a:hover {
 nav .nav-cart {
   cursor: pointer;
   position: relative;
+  margin-left: auto;
 }
+
+nav .user-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.logout-icon {
+  position: fixed;
+  margin-top: 8px;
+  padding-right: 40px;
+  top: 20px;
+  right: 20px;
+  transform: translate(50%, -50%);
+  cursor: pointer;
+}
+
 nav .nav-cart span {
   position: absolute;
   top: -12px;
@@ -47,6 +88,12 @@ header .close {
   display: none;
 }
 @media (max-width: 650px) {
+  nav ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    padding: 0 15px;
+  }
   header ul {
     position: fixed;
     top: 0;
@@ -75,3 +122,4 @@ header .close {
     left: 0;
   }
 }
+

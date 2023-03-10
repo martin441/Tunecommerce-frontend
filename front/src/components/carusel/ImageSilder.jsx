@@ -89,6 +89,10 @@ export class ImageSilder extends Component {
                   <Link to={`/product/${product.id}`}>{product.title}</Link>
                 </h3>
                 <span>${product.price}</span>
+                {/* agrego un botón para agregar el producto al carrito de compras */}
+                <button onClick={() => this.context.addCart(product.id)}>
+                  Add to cart
+                </button>
               </div>
             </div>
           ))}
