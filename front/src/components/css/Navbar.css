@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(0, 0, 0, 0.5); /* Agrega un fondo semi-transparente */
+  background-color: crimson; /* Agrega un fondo semi-transparente */
   z-index: 999;
 }
 
@@ -20,7 +20,7 @@ header {
   align-items: center;
   overflow: hidden;
 }
-.user-name{
+.user-name {
   color: white;
   padding-left: 6px;
 }
@@ -40,11 +40,12 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
+  font-weight: bold;
   color: rgb(203, 203, 203);
   padding: 0 15px;
 }
 nav ul li a:hover {
-  color: lightseagreen;
+  color: rgb(0, 0, 0);
 }
 nav .nav-cart {
   cursor: pointer;
@@ -65,6 +66,7 @@ nav .user-menu {
   position: fixed;
   margin-top: 8px;
   padding-right: 40px;
+  color: white;
   top: 20px;
   right: 20px;
   transform: translate(50%, -50%);
@@ -75,9 +77,9 @@ nav .nav-cart span {
   position: absolute;
   top: -12px;
   right: -7px;
-  background: crimson;
+  background: rgb(255, 255, 255);
   font-size: 10px;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 3px 5px;
   border-radius: 50%;
   z-index: -1;
@@ -122,4 +124,3 @@ header .close {
     left: 0;
   }
 }
-

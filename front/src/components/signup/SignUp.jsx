@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "../css/Signup.module.css";
 import { useState } from "react";
 import axios from "axios";
-import {
-  Redirect,
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const SignUp = () => {
+  const history = useHistory();
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -15,9 +14,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [celnumber, setcelNumber] = useState("");
+  const [userCreated, setUserCreated] = useState(false);
 
   const handleSubmit = (e) => {
-    console.log("SUMBIT");
     e.preventDefault();
     axios
       .post("http://localhost:3001/api/user/register", {
@@ -29,15 +28,18 @@ const SignUp = () => {
         address: address,
         celnumber: celnumber,
       })
-      .then((res) => <Redirect
-      to={{
-        pathname: "/login", // Redirige al usuario a la página de inicio
-      }}
-    />)
+      .then((res) => {
+        setUserCreated(true);
+        alert("Se creó el usuario correctamente");
+      })
       .catch(() => {
         alert("Hubo un error al crear el usuario");
       });
   };
+
+  if (userCreated) {
+    history.push("/login");
+  }
 
   return localStorage.getItem("user") === null ? (
     <div
@@ -65,7 +67,7 @@ const SignUp = () => {
               justifyContent: "center",
             }}
           >
-            Create account
+            Crea tu cuenta
           </h1>
           <div className={styles.inputContainer}>
             <label
@@ -76,10 +78,11 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              User Name:{" "}
+              Nombre de usuario:{" "}
             </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su nombre de usuario"
               type="text"
               required
               value={username}
@@ -96,11 +99,12 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              Password:{" "}
+              Contraseña: (minimo 8 caracteres)
             </label>
             <input
               className={styles.input}
-              type="text"
+              placeholder="Ingrese su contraseña"
+              type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -116,10 +120,11 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              Name:{" "}
+              Nombre:{" "}
             </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su nombre"
               type="text"
               required
               value={name}
@@ -136,10 +141,11 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              Last Name:{" "}
+              Apellido:{" "}
             </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su apellido"
               type="text"
               required
               value={lastname}
@@ -160,7 +166,8 @@ const SignUp = () => {
             </label>
             <input
               className={styles.input}
-              type="text"
+              placeholder="Ingrese su email"
+              type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -176,10 +183,11 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              Address:{" "}
+              Dirección:{" "}
             </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su dirección"
               type="text"
               required
               value={address}
@@ -196,10 +204,11 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
-              Cel Number:{" "}
+              Número de teléfono:{" "}
             </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su número de teléfono"
               type="text"
               required
               value={celnumber}
@@ -216,7 +225,7 @@ const SignUp = () => {
               justifyContent: "center",
             }}
           >
-            Submit
+            Registrarse
           </button>
           <br />
           <div>

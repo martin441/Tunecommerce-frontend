@@ -11,17 +11,18 @@ import ProfilePage from "../components/profilePage/ProfilePage.js";
 import Details from "../components/section/Details.jsx";
 import Products from "../components/section/Products.jsx";
 import { DataProvider } from "../utils/fakeData/Products.js";
-import { Checkout } from '../components/checkout/Checkout';
+import { Checkout } from "../components/checkout/Checkout";
 import Login from "../components/login/Login.jsx";
-import SignUp from '../components/signup/SignUp';
+import SignUp from "../components/signup/SignUp";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
   // Devuelve verdadero o falso dependiendo de si el usuario está autenticado o no.
   // En esta ocasión voy a probar en hardcore
-  return true;
+  const userLogueadoo = JSON.parse(localStorage.getItem("user")) || {};
+  return userLogueadoo;
 };
-
+const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
 // Componente para renderizar rutas privadas
 function PrivateRoute(props) {
   // Extraer las propiedades de la ruta
@@ -30,7 +31,7 @@ function PrivateRoute(props) {
   // Devuelvo una ruta que renderice el componente sólo si el usuario está autenticado
   return (
     <Route path={path}>
-      {isAuthenticated() ? (
+      {userLogueado.name ? (
         <Component />
       ) : (
         // Redirigir al usuario a la página de inicio si no está autenticado
