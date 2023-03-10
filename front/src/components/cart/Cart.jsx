@@ -25,6 +25,10 @@ export class Cart extends Component {
       return (
         <div>
           <Navbar />
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <h2 style={{ textAlign: "center" }}>
             No hay productos en el carrito
           </h2>
@@ -36,6 +40,10 @@ export class Cart extends Component {
       return (
         <>
           <Navbar />
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <div class="details-container">
             {cart.map((item) => (
               <div className="details" key={item.id}>

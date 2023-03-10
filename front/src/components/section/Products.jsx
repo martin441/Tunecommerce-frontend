@@ -14,6 +14,11 @@ export class Products extends Component {
     return (
       <div>
         <Navbar />
+
+        <br />
+        <br />
+        <br />
+        <br />
         <ImageSlider />
         <div>
           <h2>Productos Populares:</h2>

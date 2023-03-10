@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Signup.module.css";
-import { useState } from "react";
 import axios from "axios";
+import Products from "../section/Products";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
+    setUser(userLogueado);
+  }, [setUser]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/api/user/login", {
+    setLoading(true);
+
+    try {
+      const res = await axios.post("http://localhost:3001/api/user/login", {
         email: email,
         password: password,
-      })
-      .then(() => alert("Usuario creado correctamente"))
-      .catch(() => {
-        alert("Hubo un error al crear el usuario");
       });
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      alert("Hubo un error al iniciar sesión");
+    }
   };
 
-  return localStorage.getItem("user") === null ? (
+  return loading ? (
+    <div>Loading...</div>
+  ) : localStorage.getItem("user") === null ? (
     <div
       style={{
         position: "absolute",
@@ -33,7 +49,6 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-
         backgroundSize: "80vw",
       }}
     >
@@ -76,7 +91,9 @@ const Login = () => {
       </div>
     </div>
   ) : (
-    <h2>Welcome {localStorage.getItem("user").username}</h2>
+    <div>
+      <Products />
+    </div>
   );
 };
 
