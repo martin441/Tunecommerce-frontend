@@ -1,11 +1,14 @@
 // Importo las dependencias necesarias
-import React, { Component } from "react"; // React y Componentes
+import React, { Component, useEffect } from "react"; // React y Componentes
 import { DataContext } from "../../utils/fakeData/Products.js"; // El contexto de datos
 import Navbar from "../navbar/Navbar"; // Componente de la barra de navegación
 import { Link } from "react-router-dom"; // Componente de enlace para la navegación
 import "../css/Cart.css"; // Hoja de estilos CSS para el carrito de compras
 
 // Defino el componente Carrito
+
+let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
+
 export class Cart extends Component {
   // Especifico el contexto de datos utilizado
   static contextType = DataContext;
@@ -16,6 +19,7 @@ export class Cart extends Component {
   }
 
   // Renderizo el componente
+
   render() {
     // Obtengo los elementos necesarios del contexto de datos
     const { cart, increase, reduction, removeProduct, total } = this.context;
@@ -25,10 +29,10 @@ export class Cart extends Component {
       return (
         <div>
           <Navbar />
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
           <h2 style={{ textAlign: "center" }}>
             No hay productos en el carrito
           </h2>
@@ -40,10 +44,10 @@ export class Cart extends Component {
       return (
         <>
           <Navbar />
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
           <div class="details-container">
             {cart.map((item) => (
               <div className="details" key={item.id}>
@@ -75,8 +79,15 @@ export class Cart extends Component {
                 </div>
               </div>
             ))}
+
             <div className="total">
-              <Link to="/checkout">Checkout</Link>
+              {userLogueado.name ? (
+                <Link to="/checkout">Checkout</Link>
+              ) : (
+                <Link to="/login">Iniciar sesión</Link>
+              )}
+
+              <Link to="/">Volver al inicio</Link>
               <h3>Total: ${total}</h3>
             </div>
           </div>

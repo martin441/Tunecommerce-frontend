@@ -56,12 +56,12 @@ export class Navbar extends Component {
               <li>
                 <Link to="/product">Product</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/contact">Contact</Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to="/about">About</Link>
-              </li>
+              </li> */}
               {loggedInUser ? (
                 <li>
                   <div

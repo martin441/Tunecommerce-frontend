@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styles from "../css/Signup.module.css";
+import { Link, useHistory } from "react-router-dom";
+import styles from "../css/Login.module.css";
 import axios from "axios";
 import Products from "../section/Products";
 
 const Login = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [userCreated, setUserCreated] = useState(false);
 
   useEffect(() => {
     const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
@@ -34,6 +36,9 @@ const Login = () => {
       alert("Hubo un error al iniciar sesión");
     }
   };
+  if (userCreated) {
+    history.push("/");
+  }
 
   return loading ? (
     <div>Loading...</div>
@@ -54,29 +59,33 @@ const Login = () => {
     >
       <div className={styles.wrapper}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h1 className={styles.title}>Login</h1>
+          <h1 className={styles.title}>Iniciar sesión</h1>
           <div className={styles.inputContainer}>
-            <label className={styles.label}>email: </label>
+            <label className={styles.label}>Email: </label>
             <input
               className={styles.input}
+              placeholder="Ingrese su email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
+              required
             ></input>
           </div>
           <div className={styles.inputContainer}>
             <br />
-            <label className={styles.label}>password: </label>
+            <label className={styles.label}>Contraseña: </label>
             <input
+              placeholder="Ingrese su contraseña"
               className={styles.input}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             ></input>
           </div>
           <br />
           <button type="submit" className={styles.submitBtn}>
-            Submit
+            Iniciar sesión
           </button>
           <br />
           <div>
@@ -91,9 +100,7 @@ const Login = () => {
       </div>
     </div>
   ) : (
-    <div>
-      <Products />
-    </div>
+    <div>{history.push("/")}</div>
   );
 };
 
