@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../../utils/fakeData/Products.js"; // importo los datos falsos para utilizar en el contexto
 import ImageSlider from "../carusel/ImageSilder.jsx";
 import "../css/Products.css"; // importo el archivo de estilos CSS
-import Footer from "../footer/Footer.jsx";
+//import Footer from "../footer/Footer.jsx";
 import Navbar from "../navbar/Navbar.jsx"; // importo la navbar
 
 export class Products extends Component {
@@ -50,7 +50,7 @@ export class Products extends Component {
             </div>
           ))}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
