@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ImageSlider from "../carusel/ImageSilder.jsx";
 import "../css/Products.css"; // importo el archivo de estilos CSS
-//import Footer from "../footer/Footer.jsx";
 import Navbar from "../navbar/Navbar.jsx"; // importo la navbar
 
 const Products = () => {
   const products = [
     {
+      id: 1,
       name: "Guitarra Criolla clásica Fonseca para diestros",
       description:
         "Está diseñada para aficionados y profesionales. Con este instrumento descubrirás nuevos acordes, entonarás tus canciones y disfrutarás de la vida musical. La tapa de abeto genera un tono brillante y claro, incluso en los registros más agudos.",
@@ -22,6 +22,7 @@ const Products = () => {
     },
 
     {
+      id: 2,
       name: "Guitarra Acústica para diestros",
       description:
         "Las cuerdas de metal se caracterizan por su bajo estiramiento y resistencia a la corrosión y abrasión. Son más duraderas, sólidas y generan un sonido brillante y claro.",
@@ -40,45 +41,39 @@ const Products = () => {
     <>
       <h1>Hola</h1>
       <Navbar />
-    </>
-    // <div>
-    //   <br />
-    //   <br />
-    //   <br />
-    //   <br />
-    //   <ImageSlider />
-    //   <div>
-    //     <h2>Productos Populares:</h2>
-    //   </div>
-    //   <div id="product" className="card-container">
-    //     {/* mapeo los productos para crear un card por cada uno */}
-    //     {products.map((product) => (
-    //       <div className="card" key={product.id}>
-    //         {/* agrego un enlace para que al hacer click en la imagen o el título, se redirija a la página de detalles del producto */}
-    //         <Link to={`/product/${product.id}`}>
-    //           <img src={product.image} alt="" />
-    //         </Link>
-    //         <div className="content">
-    //           <h3>
-    //             {/* agrego un enlace para que al hacer click en el título, se redirija a la página de detalles del producto */}
-    //             <Link to={`/product/${product.id}`}>{product.name}</Link>
-    //           </h3>
-    //           <span>${product.price}</span>
-    //           <p>{product.description}</p>
-    //           {/* <button onClick={() => addCart(product.id)}>
-    //               Add to cart
-    //             </button> */}
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <ImageSlider />
+        <div>
+          <h2>Productos Populares:</h2>
+        </div>
+        <div id="product" className="card-container">
+          {/* mapeo los productos para crear un card por cada uno */}
+          {products.map((product) => (
+            <div className="card" key={product.id}>
+              {/* agrego un enlace para que al hacer click en la imagen o el título, se redirija a la página de detalle del producto */}
 
-    //           {/* agrego un botón para agregar el producto al carrito de compras */}
-    //           <button onClick={() => this.context.addCart(product.id)}>
-    //             Add to cart
-    //           </button>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    //   {/* <Footer /> */}
-    // </div>
+              <Link to={`/products/${product.id}`}>
+                <img src={product.image[0]} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
+              <p>{product.description}</p>
+              <div className="card-info">
+                <div className="price">
+                  <h4>${product.price}</h4>
+                </div>
+                <div className="stock">
+                  <h4>Stock: {product.stock}</h4>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

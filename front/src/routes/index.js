@@ -6,7 +6,7 @@ import Details from "../components/section/Details.jsx";
 import Products from "../components/section/Products.jsx";
 import { Checkout } from "../components/checkout/Checkout";
 import Login from "../components/login/Login.jsx";
-// import SignUp from "../components/signup/SignUp";
+import SignUp from "../components/signup/SignUp";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -44,13 +44,13 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Products />} />
       {/* <Route path="/product" component={Products} exact />
-      <Route path="/product/:id" component={Details} exact />
-      <Route exact path="/cart" component={Cart} />
-      <Route exact path="/login" component={Login} />
-      {/* <Route exact path="/signup" component={SignUp} /> */}
-      {/* <Route path="/checkout" component={Checkout} />
-      <Route path="/profile" component={ProfilePage} />
-      <Route path="*" component={NotFoundPage} /> */}
+      <Route path="/product/:id" component={Details} exact /> */}
+      {/* <Route exact path="/cart" component={Cart} /> */}
+      <Route exact path="/login" element={<Login/>} />
+      <Route exact path="/signup" element={<SignUp/>} />
+      {/*<Route path="/checkout" component={Checkout} />
+      <Route path="/profile" component={ProfilePage} /> */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
