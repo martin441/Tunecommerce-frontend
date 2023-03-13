@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import axios from "axios";
 import Products from "../section/Products";
 
 const Login = () => {
-  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState({});
@@ -37,7 +36,7 @@ const Login = () => {
     }
   };
   if (userCreated) {
-    history.push("/");
+    <Link to="/" />;
   }
 
   return loading ? (
@@ -100,7 +99,7 @@ const Login = () => {
       </div>
     </div>
   ) : (
-    <div>{history.push("/")}</div>
+    <div>Link to="/" </div>
   );
 };
 
