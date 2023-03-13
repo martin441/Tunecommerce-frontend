@@ -1,12 +1,9 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { React, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../css/Signup.module.css";
-import { useState } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 const SignUp = () => {
-  const history = useHistory();
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -38,7 +35,7 @@ const SignUp = () => {
   };
 
   if (userCreated) {
-    history.push("/login");
+    <Link to="/login"></Link>;
   }
 
   return localStorage.getItem("user") === null ? (
@@ -229,7 +226,7 @@ const SignUp = () => {
           </button>
           <br />
           <div>
-            <Link to="/login">¿tienes cuenta? Inicia Sesión aquí</Link>
+            <Link to="/login">¿Ya tienes cuenta? Inicia Sesión aquí</Link>
           </div>
         </form>
       </div>
