@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import axios from "axios";
-import Products from "../section/Products";
+import { useNavigate } from "react-router-dom";
+//import Products from "../section/Products";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const Login = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
@@ -36,7 +38,7 @@ const Login = () => {
     }
   };
   if (userCreated) {
-    <Link to="/" />;
+    navigate("/");
   }
 
   return loading ? (
