@@ -234,7 +234,7 @@ const SignUp = () => {
       </div>
     </div>
   ) : (
-    <h2>Welcome {localStorage.getItem("user").username}</h2>
+    navigate("/")
   );
 };
 

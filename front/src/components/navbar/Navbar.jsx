@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "../svg/bars-solid.svg";
 import Close from "../svg/times-solid.svg";
 import CartIcon from "../svg/shopping-cart-solid.svg";
@@ -6,29 +6,38 @@ import UserIcon from "../svg/user-solid.svg";
 import LogoutIcon from "../svg/logout.svg";
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
+import axios from "axios";
 
 const Navbar = () => {
-  const [state, setState] = useState("");
-  const [toggle, setToggle] = useState("");
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [toggle, setToggle] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("user")
+  );
   const [expandUserMenu, setExpandUserMenu] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setLoggedInUser(JSON.parse(localStorage.getItem("user")));
+    // Obtener productos del servidor
+    axios.get("http://localhost:3001/api/products").then((response) => {
+      setProducts(response.data);
+    });
   }, []);
-
-  const menuToggle = () => {
-    setToggle({ toggle: !state.toggle });
-  };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    setLoggedInUser({});
+    setLoggedInUser(null);
+  };
+
+  const menuToggle = () => {
+    setToggle(!toggle);
   };
 
   const expandUserMenuToggle = () => {
     setExpandUserMenu(!expandUserMenu);
   };
+
+  const user = JSON.parse(loggedInUser); // Parseamos la información del usuario
 
   return (
     <div className="contenedor">
@@ -60,9 +69,7 @@ const Navbar = () => {
                 <div className="user-icon" onClick={expandUserMenuToggle}>
                   <img src={UserIcon} alt="" width="20" />
                   {/* Mostramos el nombre de usuario */}
-                  {loggedInUser && (
-                    <span className="user-name">{loggedInUser.username}</span>
-                  )}
+                  {user && <span className="user-name">{user.username}</span>}
                   {expandUserMenu && (
                     <div className="user-menu">
                       <Link to="/profile">Profile</Link>
@@ -83,18 +90,40 @@ const Navbar = () => {
               <img src={Close} alt="" width="20" />
             </li>
           </ul>
-          {/* <div className="nav-cart">
+          <div className="nav-cart">
             <span>{cart.length}</span>
             <Link to="/cart">
               <img src={CartIcon} alt="" width="20" />
             </Link>
-            {loggedInUser && (
-              <div className="logout-icon" onClick={handleLogout}>
-                Logout
-                <img src={LogoutIcon} alt="" width="20" />
+            {/* {loggedInUser && (
+              <div className="cart-dropdown">
+                <ul>
+                  {cart.length === 0 ? (
+                    <li></li>
+                  ) : (
+                    cart.map((item) => (
+                      <li key={item.id}>
+                        <Link to={`/product/${item.id}`}>
+                          <img src={item.image} alt={item.title} />
+                          <div>
+                            <h3>{item.title}</h3>
+                            <p>
+                              {item.price}€ x {item.quantity}
+                            </p>
+                          </div>
+                        </Link>
+                      </li>
+                    ))
+                  )}
+                  {cart.length > 0 && (
+                    <li>
+                      <Link to="/cart">Go to cart</Link>
+                    </li>
+                  )}
+                </ul>
               </div>
-            )}
-          </div> */}
+            )} */}
+          </div>
         </nav>
       </header>
     </div>

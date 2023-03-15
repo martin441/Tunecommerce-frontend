@@ -4,42 +4,54 @@ import styles from "../css/Login.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //import Products from "../section/Products";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/reducers/userReducer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+
   const [loading, setLoading] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
-    setUser(userLogueado);
+    dispatch(setUser(userLogueado));
   }, [setUser]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    setEmail("");
+    setPassword("");
     try {
+
       const res = await axios.post("http://localhost:3001/api/user/login", {
         email: email,
         password: password,
       });
-      setUser(res.data);
+
+      dispatch(setUser(res.data));
       localStorage.setItem("user", JSON.stringify(res.data));
-      setEmail("");
-      setPassword("");
       setLoading(false);
+      navigate("/");
     } catch (error) {
       setLoading(false);
       alert("Hubo un error al iniciar sesión");
     }
   };
-  if (userCreated) {
-    navigate("/");
-  }
+
+  console.log("USER", user);
+  // if (userCreated) {
+    
+  // }
 
   return loading ? (
     <div>Loading...</div>
@@ -101,7 +113,8 @@ const Login = () => {
       </div>
     </div>
   ) : (
-    <div>Link to="/" </div>
+    // <div>Link to="/" </div>
+    navigate("/")
   );
 };
 

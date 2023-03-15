@@ -8,6 +8,8 @@ import axios from "axios";
 function ProductSlider() {
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleProducts, setVisibleProducts] = useState(10);
+  const [loadMore, setLoadMore] = useState(10);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
@@ -19,6 +21,9 @@ function ProductSlider() {
     setCurrentIndex((prevIndex) =>
       prevIndex === products.length - 1 ? 0 : prevIndex + 1
     );
+    if (currentIndex === 9) {
+      setCurrentIndex(0);
+    }
   };
 
   useEffect(() => {
@@ -27,7 +32,6 @@ function ProductSlider() {
       .then((res) => setProducts(res.data));
   }, []);
 
-  console.log(products[0]);
   return (
     <div>
       <section className={estilo.slider}>
@@ -39,57 +43,39 @@ function ProductSlider() {
           className={estilo.right_arrow}
           onClick={handleNextClick}
         />
-        {/* //.slice(0, 10) */}
-        {products.slice(0, 10).map((slide, index) => {
-          console.log("SLIDE", slide);
-          if(!slide.name){
-            return <span>Error</span>
-          }
-          return (
-            <div
-              className={
-                index === currentIndex ? estilo.slide + " active" : estilo.slide
-              }
-              key={index}
-            >
-              {index === currentIndex && (
-                <Link to={`/product/${slide.id}`}>
-                  <img
-                    src={slide.image[0]}
-                    alt="travel image"
-                    className={estilo.image}
-                  />
-                  <div className="content">
-                    <h3 style={{ color: "white", fontSize: "18px" }}>
-                      <Link to={`/product/${slide.id}`}>{slide.name}</Link>
-                    </h3>
-                    <span>${slide.price}</span>
-                  </div>
-                </Link>
-              )}
-            </div>
-          );
-        })}
+        {products.slice(0, visibleProducts).map(
+          (slide, index) => (
+            //console.log("SLIDE", slide.image[0]),
+            (
+              <div>
+                {index === currentIndex && (
+                  <Link to={`/product/${slide.id}`}>
+                    <div key={slide.id}>
+                      {slide.image && (
+                        <img
+                          key={slide.image[0]}
+                          src={slide.image[0]}
+                          alt={`Imagen 1`}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/img/image-error.png";
+                          }}
+                        />
+                      )}
+                    </div>
+                    <div className="content">
+                      <h3 style={{ color: "white", fontSize: "18px" }}>
+                        <Link to={`/product/${slide.id}`}>{slide.name}</Link>
+                      </h3>
+                      <span>${slide.price}</span>
+                    </div>
+                  </Link>
+                )}
+              </div>
+            )
+          )
+        )}
       </section>
-      <div>
-        <h2>Nuestros productos</h2>
-      </div>
-      <div id="product" className={estilo.slider}>
-        {products.map((product) => (
-          <div className="card" key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.image} alt="" />
-            </Link>
-            <div className="content">
-              <h3>
-                <Link to={`/product/${product.id}`}>{product.title}</Link>
-              </h3>
-              <span>${product.price}</span>
-              {/* <button onClick={() => addCart(product.id)}>Add to cart</button> */}
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

@@ -1,100 +1,202 @@
-// Importo las dependencias necesarias
-import React, { Component, useEffect } from "react"; // React y Componentes
-import { DataContext } from "../../utils/fakeData/Products.js"; // El contexto de datos
-import Navbar from "../navbar/Navbar"; // Componente de la barra de navegación
-import { Link } from "react-router-dom"; // Componente de enlace para la navegación
-import "../css/Cart.css"; // Hoja de estilos CSS para el carrito de compras
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToCart,
+  clearCart,
+  delFromCart,
+} from "../../redux/action/cartActions";
+import Navbar from "../navbar/Navbar";
+import { Link } from "react-router-dom";
+import "../css/Cart.css";
+import axios from "axios";
+import { setCart } from "../../redux/reducers/CartReducers";
 
-// Defino el componente Carrito
+const Cart = () => {
+  let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
+  const dispatch = useDispatch();
 
-let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
 
-export class Cart extends Component {
-  // Especifico el contexto de datos utilizado
-  static contextType = DataContext;
+  console.log("CART", cart);
 
-  // Ejecuto el método getTotal() del contexto de datos una vez que se ha montado el componente
-  componentDidMount() {
-    this.context.getTotal();
-  }
+  let cantidadTotal = 0;
 
-  // Renderizo el componente
+  //let cartItems;
+  
+  const [total, setTotal] = useState(0);
 
-  render() {
-    // Obtengo los elementos necesarios del contexto de datos
-    const { cart, increase, reduction, removeProduct, total } = this.context;
+  const cartItems = useSelector((state) => {
+    return state.cartItems;
+  });
 
-    // Si el carrito está vacío, mostrar un mensaje de "No hay productos en el carrito"
-    if (cart.length === 0) {
-      return (
-        <div>
-          <Navbar />
-          <br />
-          <br />
-          <br />
-          <br />
-          <h2 style={{ textAlign: "center" }}>
-            No hay productos en el carrito
-          </h2>
-        </div>
-      );
+
+  console.log("CARTITEMS", cartItems);
+
+  
+  useEffect(() => {
+    
+  }, [cartItems]);
+
+  useEffect(() => {
+    console.log("USER", userLogueado);
+    axios
+      .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+      .then((response) => {
+        console.log("DATOS", response.data);
+        dispatch(setCart(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getTotal();
+  }, [cart]);
+
+  const getTotal = () => {
+    const res = cart.reduce((prev, item) => {
+      return prev + item.price * item.cantidad;
+    }, 0);
+    setTotal(res);
+  };
+
+  const increase = (id, cantidad) => {
+    axios
+      .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+        cantidad: cantidad + 1,
+      })
+      .then((response) => {
+        console.log("CART-INCREASE", response.data);
+        cantidadTotal += 1
+        dispatch(setCart(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const reduction = (id, cantidad) => {
+    // if (cantidad === 1) {
+    //   if (window.confirm("¿Quieres quitar este producto?")) {
+    //     removeProduct(id);
+    //   }
+    // } else {
+    axios
+      .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+        cantidad: cantidad - 1,
+      })
+      .then((response) => {
+        console.log("CART-REDUCCION", response.data);
+        cantidadTotal -= 1
+        dispatch(setCart(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    //}
+  };
+
+  const removeProduct = (id) => {
+    if (window.confirm("¿Quieres quitar este producto?")) {
+      axios
+        .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
+        .then((response) => {
+          console.log("CART-REMOVE", response.data);
+          dispatch(setCart(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-    // Si el carrito contiene elementos, mostrar la información correspondiente
-    else {
-      return (
-        <>
-          <Navbar />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div class="details-container">
-            {cart.map((item) => (
-              <div className="details" key={item.id}>
-                <img src={item.image} alt="" />
-                <div className="box">
-                  <div className="row">
-                    <h2>{item.title}</h2>
-                    <span>${item.price * item.count}</span>
-                  </div>
-                  <p>{item.ranking}</p>
-                  <p>{item.description}</p>
-                  <div className="amount">
-                    <button
-                      className="count"
-                      onClick={() => reduction(item.id)}
-                    >
-                      {" "}
-                      -{" "}
-                    </button>
-                    <span>{item.count}</span>
-                    <button className="count" onClick={() => increase(item.id)}>
-                      {" "}
-                      +{" "}
-                    </button>
-                  </div>
+  };
+
+  if (cart.length === 0) {
+    return (
+      <div>
+        <Navbar />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <Navbar />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className="details-container">
+          {cartItems.map((item) => (
+            <div className="product-container" key={item.id}>
+              <img src={item.image} alt="" />
+              <div className="product-details">
+                <h2>{item.name}</h2>
+                <p>Precio: ${item.price}</p>
+                <div className="cantidad">
+                  <button
+                    className="cantidad-button"
+                    onClick={() =>
+                      reduction(
+                        item.id,
+                        cart.filter((e) => e.productId === item.id)[0].cantidad
+                      )
+                    }
+                  >
+                    -
+                  </button>
+                  <span>
+                    {cart.filter((e) => e.productId === item.id)[0].cantidad}
+                  </span>
+                  <button
+                    className="cantidad-button"
+                    onClick={() =>
+                      increase(
+                        item.id,
+                        cart.filter((e) => e.productId === item.id)[0].cantidad
+                      )
+                    }
+                  >
+                    +
+                  </button>
                 </div>
-                <div className="delete" onClick={() => removeProduct(item.id)}>
-                  X
-                </div>
+                <button
+                  className="remove-button"
+                  onClick={() => removeProduct(item.id)}
+                >
+                  Eliminar
+                </button>
               </div>
-            ))}
-
-            <div className="total">
-              {userLogueado.name ? (
-                <Link to="/checkout">Checkout</Link>
-              ) : (
-                <Link to="/login">Iniciar sesión</Link>
-              )}
-
-              <Link to="/">Volver al inicio</Link>
-              <h3>Total: ${total}</h3>
             </div>
-          </div>
-        </>
-      );
-    }
+          ))}
+        </div>
+        <div className="total-container">
+          <h2>Total: ${total}</h2>
+          <button
+            className="clear-button"
+            onClick={() => dispatch(clearCart())}
+          >
+            Vaciar carrito
+          </button>
+          {userLogueado.id ? (
+            <Link to="/checkout" className="checkout-button">
+              Comprar
+            </Link>
+          ) : (
+            <Link to="/login" className="login-button">
+              Ingresar
+            </Link>
+          )}
+        </div>
+      </>
+    );
   }
-}
+};
 
 export default Cart;
