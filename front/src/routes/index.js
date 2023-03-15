@@ -46,10 +46,10 @@ const App = () => {
       {/* <Route path="/product" component={Products} exact />
       <Route path="/product/:id" component={Details} exact /> */}
       {/* <Route exact path="/cart" component={Cart} /> */}
-      <Route exact path="/login" element={<Login/>} />
-      <Route exact path="/signup" element={<SignUp/>} />
-      {/*<Route path="/checkout" component={Checkout} />
-      <Route path="/profile" component={ProfilePage} /> */}
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/signup" element={<SignUp />} />
+      {/* <Route path="/checkout" component={Checkout} /> */}
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
