@@ -7,6 +7,7 @@ import Navbar from "../navbar/Navbar.jsx";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
+import FilterCategories from "../Filter/filterCategories";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -87,6 +88,7 @@ const Products = () => {
 
   return (
     <>
+
       <Navbar />
       <div>
         <br />
@@ -94,6 +96,7 @@ const Products = () => {
         <br />
         <br />
         <ProductSlider />
+      <FilterCategories/>
         <div>
           <h2>Productos Populares:</h2>
         </div>
