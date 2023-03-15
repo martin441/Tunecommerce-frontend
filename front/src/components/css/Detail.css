@@ -1,56 +1,93 @@
-.details {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 50px 0;
-}
-.details-container {
-  max-width: 80%;
-  margin: 0 auto;
-  border: 1px solid #eee;
+/* Centramos los elementos principales verticalmente y le agregamos un padding */
+.container{
+  padding-top: 8vh;
 }
 
-.details img {
-  max-width: 500px;
-  min-width: 290px;
-  height: 300px;
-  display: block;
-  object-fit: contain;
-  margin: 25px;
-}
-.details .box {
-  max-width: 500px;
-  min-width: 290px;
-  margin: 25px;
-}
-.box .row {
+
+.details-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
-.box .row h2 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
+
+/* Agregamos un fondo y un borde a los contenedores de los elementos principales */
+.details-container,
+.details-reviews {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.box .row span {
-  color: crimson;
+
+/* Alineamos verticalmente los elementos de la imagen */
+.details-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.box .colors button {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #333;
-  outline: none;
-  margin-right: 5px;
+
+/* Damos estilo al botón "Añadir al carrito" */
+.details-cart button {
+  margin: 10px 10px;
+  background-color: #008cba;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
   cursor: pointer;
 }
-.box p {
-  line-height: 1.5;
-  margin: 15px 0;
+
+/* Damos estilo al botón "Volver" */
+.button-volver {
+  margin: 0px 10px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
 }
-.box .cart {
-  background: #333;
-  color: white;
-  text-decoration: none;
-  padding: 10px 25px;
-  display: inline-block;
+
+/* Estilizamos la sección de Reviews */
+.details-reviews {
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.details-review-percentage {
+  margin-bottom: 1rem;
+}
+
+.details-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.details-review {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.details-images {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.details-images img {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  margin-right: 20px;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.details-images img:hover {
+  border-color: #000;
 }

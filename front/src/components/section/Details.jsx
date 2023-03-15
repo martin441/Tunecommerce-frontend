@@ -1,68 +1,89 @@
-import React, { Component } from "react";
-import { DataContext } from "../../utils/fakeData/Products.js";
-import Navbar from "../navbar/Navbar";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import Navbar from "../navbar/Navbar.jsx";
 import "../css/Detail.css";
+import axios from "axios";
 
-export class Details extends Component {
-  static contextType = DataContext;
+const Details = () => {
+  const [product, setProduct] = useState(null);
+  const [cart, setCart] = useState([]);
+  const { id } = useParams();
 
-  state = {
-    product: [],
-  };
-
-  getProduct = () => {
-    if (this.props.match.params.id) {
-      const res = this.context.products;
-      const data = res.filter((item) => {
-        return item.id === this.props.match.params.id;
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/products/${id}`)
+      .then((response) => {
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      // console.log(data);
-      this.setState({ product: data });
-    }
+  }, [id]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
   };
 
-  componentDidMount() {
-    this.getProduct();
+  if (!product) {
+    return <div>Loading...</div>;
   }
 
-  render() {
-    // console.log(this.props);
-    // console.log(this.props.match.params.id);
-
-    // console.log(this.context.products);
-
-    const { product } = this.state;
-    const { addCart } = this.context;
-
-    return (
-      <>
+  return (
+    <>
+      <div>
         <Navbar />
-        <div class="details-container">
-          {product.map((item) => (
-            <div className="details" key={item.id}>
-              <img src={item.image} alt="" />
-              <div className="box">
-                <div className="row">
-                  <h2>{item.title}</h2>
-                  <span>${item.price}</span>
-                </div>
-                <p>{item.ranking}</p>
-                <p>{item.description}</p>
-                <Link
-                  to="/cart"
-                  className="cart"
-                  onClick={() => addCart(item.id)}
-                >
-                  Add to cart
-                </Link>
-              </div>
+        <div className="container">
+          <div className="details-container">
+            <div className="details-image">
+              <img src={product.image[0]} alt={product.name} />
             </div>
-          ))}
+            <div className="details-info">
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+              <div className="details-price">
+                <h3>Precio: ${product.price}</h3>
+                <h3>Stock: {product.stock}</h3>
+              </div>
+              <div>
+                <h3>Otras imágenes:</h3>
+                <div className="details-images">
+                  {product.image.map((img, index) => (
+                    <img key={index} src={img} alt={product.name} />
+                  ))}
+                </div>
+              </div>
+              <div className="details-cart">
+                <button onClick={() => addToCart(product)}>
+                  Añadir al carrito
+                </button>
+                {/* {console.log("CART", cart)} */}
+              </div>
+              <Link to="/">
+                <button className="button-volver">Volver</button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </>
-    );
-  }
-}
+
+        <div>
+          <div className="details-reviews">
+            <h3>Reviews:</h3>
+            <div className="details-review-percentage">
+              <p>{product.reviews}% de reviews positivas</p>
+            </div>
+            <div className="details-review-list">
+              {/* {product.reviews.map((review) => (
+                <div className="details-review" key={review.id}>
+                  <p>{review.text}</p>
+                  <p>Por: {review.author}</p>
+                </div>
+              ))} */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Details;

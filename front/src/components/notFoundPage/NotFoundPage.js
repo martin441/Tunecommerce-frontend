@@ -5,9 +5,7 @@ const NotFoundPage = () => {
     <div>
       <h1>Error 404: Página no encontrada</h1>
       <p>Lo siento, la página que estás buscando no existe.</p>
-      <button variant="contained" color="primary" component={Link} to="/">
-        Volver a la página principal
-      </button>
+      <Link to="/">Volver a la página principal</Link>
     </div>
   );
 };

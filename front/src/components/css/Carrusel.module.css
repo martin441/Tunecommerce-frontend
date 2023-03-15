@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.sliderCard{
+  height: 10px;
+}
+
 .right_arrow {
   position: absolute;
 
