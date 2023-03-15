@@ -1,3 +1,5 @@
+import React from "react";
+
 // import PrivateRoute from "../../routes/index.js";
 import { Link } from "react-router-dom";
 const ProfilePage = () => {
