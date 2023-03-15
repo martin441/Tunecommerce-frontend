@@ -22,9 +22,11 @@ const FilterCategories = () => {
   }, []);
 
   const handleCategoryClick = (id) => {
+    console.log("ID", id)
     axios
       .get(`http://localhost:3001/api/products/filter/${id}`)
-      .then((products) =>  setSelectedCategory(products.data));
+      .then((products) =>  {setSelectedCategory(products.data)
+        console.log(selectedCategory)});
   };
 
   const handleAddToCart = (product) => {
@@ -64,7 +66,7 @@ const FilterCategories = () => {
           );
         })}
       </div>
-      <div id="product" className="card-container">
+      <div id="product"  className="card-container">
           {selectedCategory.map((product) => (
             <div className="card" key={product.id}>
               <Link to={`/products/${product.id}`}>
