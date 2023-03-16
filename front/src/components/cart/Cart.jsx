@@ -58,7 +58,9 @@ const Cart = () => {
 
   const getTotal = () => {
     const res = cart.reduce((prev, item) => {
-      return prev + item.price * item.cantidad;
+      const precio = cartItems[0].price
+      const calculo = prev + precio * item.cantidad;
+      return calculo;
     }, 0);
     setTotal(res);
   };
@@ -69,7 +71,6 @@ const Cart = () => {
         cantidad: cantidad + 1,
       })
       .then((response) => {
-        console.log("CART-INCREASE", response.data);
         cantidadTotal += 1
         dispatch(setCart(response.data));
       })
@@ -98,6 +99,10 @@ const Cart = () => {
       });
     //}
   };
+
+useEffect(()=> {
+  
+},[])
 
   const removeProduct = (id) => {
     if (window.confirm("¿Quieres quitar este producto?")) {
