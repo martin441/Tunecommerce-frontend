@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .form {
@@ -25,13 +25,13 @@ body {
 }
 
 .title {
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 50px;
 }
 
 .inputContainer {
   position: relative;
-  height: 45px;
+  height: 35px;
   width: 90%;
   margin-bottom: 20px;
 }
@@ -81,7 +81,7 @@ body {
   margin-left: auto;
   padding: 15px 30px;
   border: none;
-  background-color: rgb(84, 80, 84);
+  background-color: crimson;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -90,7 +90,7 @@ body {
 }
 
 .submitBtn:hover {
-  background-color: #474549;
+  background-color: rgb(91, 7, 24);
   transform: translateY(-2px);
 }
 .input:focus + .label {
