@@ -8,6 +8,9 @@ import { Checkout } from "../components/checkout/Checkout";
 import Login from "../components/login/Login.jsx";
 import SignUp from "../components/signup/SignUp";
 import ProductsAdmin from "../components/admin/products/ProductsAdmin.jsx";
+import Historial from "../components/checkout/Historial";
+import DetalleHistorial from "../components/section/DetalleHistorial.jsx";
+
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -53,6 +56,9 @@ const App = () => {
       <Route path="/checkout" element={<Checkout />} />
       {/* <Route path="/profile" component={ProfilePage} /> */}
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/historial" element={<Historial />} />
+      <Route path="/detalleOrden/:id" element={<DetalleHistorial />} />
     </Routes>
   );
 };

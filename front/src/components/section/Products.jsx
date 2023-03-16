@@ -7,6 +7,7 @@ import Navbar from "../navbar/Navbar.jsx";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
+import FilterCategories from "../Filter/filterCategories";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -20,13 +21,7 @@ const Products = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const cartItems = useSelector((state) => state.cartItems);
-  console.log("CARTITEMS", cartItems);
 
-  // useEffect(() => {
-
-  // });
-
-  //console.log("USER", user);
 
   useEffect(() => {
     axios
@@ -65,7 +60,7 @@ const Products = () => {
       });
 
       const cart = JSON.parse(localStorage.getItem("dataCart"));
-      console.log("CARTREAL", cart);
+    
     // const newCart = [...cart];
     // const index = newCart.findIndex((item) => item.id === product.id);
     // if (index === -1) {
@@ -87,6 +82,7 @@ const Products = () => {
 
   return (
     <>
+
       <Navbar />
       <div>
         <br />
@@ -94,6 +90,7 @@ const Products = () => {
         <br />
         <br />
         <ProductSlider />
+      <FilterCategories/>
         <div>
           <h2>Productos Populares:</h2>
         </div>
