@@ -8,6 +8,7 @@ const AddCategories = () => {
   const [categoria, setCategoria] = useState({});
   const [editarNombre, setEditarNombre] = useState("");
   const [editarDescripcion, setEditarDescripcion] = useState("");
+  const [deleteCategoria, setDeleteCategoria] = useState("");
 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/categories/todo`).then((res) => {
@@ -41,12 +42,24 @@ const AddCategories = () => {
         name: editarNombre,
         description: editarDescripcion,
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        alert("Categoria editada correctamente");
       });
   };
+
+  const handleDeleteCategory = (e) => {
+    e.preventDefault();
+    console.log("asdasd", deleteCategoria);
+    axios
+      .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
+      .then(() => {
+        alert("Categoria eliminada correctamente");
+      });
+  };
+  console.log(deleteCategoria);
+
   return (
-    <>
+    <div>
       <div>
         <h3>Agregar Categorias</h3>
         <form onSubmit={handleAddCategoty}>
@@ -88,7 +101,6 @@ const AddCategories = () => {
             })}
           </select>
           <label>Nombre de categoria: </label>
-          {console.log(categoria.name)}
           <input
             value={editarNombre}
             onChange={(e) => setEditarNombre(e.target.value)}
@@ -101,10 +113,31 @@ const AddCategories = () => {
             type="text"
             required
           ></input>
-          <button type="submit">Editar categoria</button>
+          <button type="submit">Editar</button>
         </form>
       </div>
-    </>
+      <br></br>
+      <div>
+        <h3>Eliminar Categorias</h3>
+        <form action="#" onSubmit={handleDeleteCategory}>
+          <label for="cat">Categorias</label>
+          <select
+            name="categorias"
+            id="cat"
+            onChange={(e) => setDeleteCategoria(e.target.value)}
+          >
+            {categorias.map((category, i) => {
+              return (
+                <option key={i} value={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
+          </select>
+          <button type="submit">Eliminar</button>
+        </form>
+      </div>
+    </div>
   );
 };
 
