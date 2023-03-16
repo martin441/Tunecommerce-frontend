@@ -8,7 +8,7 @@ const ProductsAdmin = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState([]);
   const [stock, setStock] = useState("");
   const [category, setCategory] = useState("");
   const [editingProduct, setEditingProduct] = useState(null);
@@ -50,11 +50,11 @@ const ProductsAdmin = () => {
       price,
       image,
       stock,
-      categoryId: category,
+      category,
     };
     const url = editingProduct
       ? `http://localhost:3001/api/products/${editingProduct.id}`
-      : "http://localhost:3001/api/products";
+      : "http://localhost:3001/api/products/1";
 
     axios({
       method: editingProduct ? "put" : "post",
@@ -66,7 +66,7 @@ const ProductsAdmin = () => {
         setName("");
         setDescription("");
         setPrice("");
-        setImage("");
+        setImage([]);
         setStock("");
         setCategory("");
         setEditingProduct(null);
@@ -134,7 +134,7 @@ const ProductsAdmin = () => {
               <input
                 type="text"
                 value={image}
-                onChange={(event) => setImage(event.target.value)}
+                onChange={(event) => setImage([event.target.value])}
               />
             </div>
             <div>
@@ -152,11 +152,16 @@ const ProductsAdmin = () => {
                 onChange={(event) => setCategory(event.target.value)}
               >
                 <option value="">-- Seleccione una categoría --</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories.map(
+                  (category) => (
+                    console.log("CATEGORIASSS", category),
+                    (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    )
+                  )
+                )}
               </select>
             </div>
             <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>
@@ -177,26 +182,34 @@ const ProductsAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.description}</td>
-                  <td>{product.price}</td>
-                  <td>
-                    {product.image.length > 0 && (
-                      <img src={product.image[0]} alt={product.name} />
-                    )}
-                  </td>
-                  <td>{product.stock}</td>
-                  <td>{product.category}</td>
-                  <td>
-                    <button onClick={() => editProduct(product)}>Editar</button>
-                    <button onClick={() => deleteProduct(product.id)}>
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {products.map(
+                (product) => (
+                  //console.log("PRODUCTIRO", product.categoryId),
+                  (
+                    //console.log("CARTITEMS", cartItems),
+                    <tr key={product.id}>
+                      <td>{product.name}</td>
+                      <td>{product.description}</td>
+                      <td>{product.price}</td>
+                      <td>
+                        {product.image.length > 0 && (
+                          <img src={product.image[0]} alt={product.name} />
+                        )}
+                      </td>
+                      <td>{product.stock}</td>
+                      <td>{product.categoryId}</td>
+                      <td>
+                        <button onClick={() => editProduct(product)}>
+                          Editar
+                        </button>
+                        <button onClick={() => deleteProduct(product.id)}>
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )
+              )}
             </tbody>
           </table>
         </div>

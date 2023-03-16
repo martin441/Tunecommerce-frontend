@@ -31,6 +31,14 @@ const Cart = () => {
 
   console.log("CARTITEMS", cartItems);
 
+  const [first, setfirst] = useState(0);
+
+  const [precio, setPrecio] = useState(0);
+
+  console.log("PRECIO", precio);
+
+  //localStorage.setItem("user", JSON.stringify(res.data));
+
   useEffect(() => {
     console.log("USER", userLogueado);
     axios
@@ -42,15 +50,20 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [dispatch, userLogueado.id, cartItems]);
+  }, [first]);
 
   useEffect(() => {
-    getTotal();
-  }, [cart, cartItems]);
+    //getTotal();
+    localStorage.setItem("total", JSON.stringify(total));
+  }, [cart, cartItems, precio]);
 
   const getTotal = () => {
     const res = cart.reduce((prev, item) => {
-      return prev + item.price * item.cantidad;
+      const producto = cartItems.find((p) => p.id === item.productId);
+      setPrecio(producto.price);
+      let calculo = prev + precio * item.cantidad;
+      console.log("PRODUCTO", producto);
+      return calculo;
     }, 0);
     setTotal(res);
   };
@@ -61,10 +74,10 @@ const Cart = () => {
         cantidad: contador + 1,
       })
       .then((response) => {
-        alert("cantidad incrementada")
+        //alert("cantidad incrementada");
         console.log("CART-INCREASE", response.data);
         //navigate("/cart");
-        //contador = contador + 1;
+        setfirst(Math.random());
         //dispatch(setCart(response.data));
       })
       .catch((error) => {
@@ -73,29 +86,32 @@ const Cart = () => {
   };
 
   const reduction = (id, contador) => {
-    // if (cantidad === 1) {
-    //   if (window.confirm("¿Quieres quitar este producto?")) {
-    //     removeProduct(id);
-    //   }
-    // } else {
-    axios
-      .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
-        cantidad: contador - 1,
-      })
-      .then((response) => {
-        //navigate("/cart");
-        //alert("cantidad reducida")
-        console.log("CART-REDUCCION", response.data);
+    if (contador === 1) {
+      if (window.confirm("¿Quieres quitar este producto?")) {
+        removeProduct(id);
+      }
+    } else {
+      axios
+        .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+          cantidad: contador - 1,
+        })
+        .then((response) => {
+          //navigate("/cart");
+          //alert("cantidad reducida")
+          console.log("CART-REDUCCION", response.data);
 
-        //dispatch(setCart(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    //}
+          //dispatch(setCart(response.data));
+          setfirst(Math.random());
+          //dispatch(setCart(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const removeProduct = (id) => {
+    //e.preventDefault();
     if (window.confirm("¿Quieres quitar este producto?")) {
       axios
         .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
@@ -130,8 +146,9 @@ const Cart = () => {
         <br />
         <div className="details-container">
           {cartItems.map((item) => {
-            let contador = cart.filter((e) => e.productId === item.id)[0]
-              .cantidad;
+            let contador =
+              cart.filter((e) => e.productId === item.id)[0]?.cantidad || 0;
+
             return (
               <div className="product-container" key={item.id}>
                 <img src={item.image} alt="" />
