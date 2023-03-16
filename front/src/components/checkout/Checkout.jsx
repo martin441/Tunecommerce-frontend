@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteCartItems } from '../../redux/reducers/CartItemsReducer';
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
   const [date, setDate] = useState("");
@@ -8,7 +11,12 @@ const Checkout = () => {
   const [tarjetaSeg, setTarjetaSeg] = useState("");
   const [transferencia, setTransferencia] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
+  const total = JSON.parse(localStorage.getItem("totales"));
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector((state) => state.cartItems);
+  console.log("CARTITEMS", cartItems);
 
   const handleCheckout = (e) => {
     e.preventDefault();
@@ -21,6 +29,7 @@ const Checkout = () => {
       .then((res) => {
         if (res.status === 201) {
           alert("Pago realizado correctamente");
+          dispatch(deleteCartItems([]))
           return navigate("/");
         } else {
           alert("No se pudo realizar el pago");
@@ -51,7 +60,7 @@ const Checkout = () => {
         </h5>
         <h5>Direccion: {user.address}</h5>
         <h5>Celular: {user.celnumber}</h5>
-        <h5>Total a pagar:</h5>
+        <h5>Total a pagar:{total}</h5>
         {/* pasar el total a pagar desde el carrito */}
         <label for="pay">Metodo de pago</label>
         <select
