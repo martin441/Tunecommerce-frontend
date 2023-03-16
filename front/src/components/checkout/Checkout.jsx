@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteCartItems } from '../../redux/reducers/CartItemsReducer';
+import "../admin/css/Checkout.css";
+
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
   const [date, setDate] = useState("");
@@ -53,7 +55,7 @@ const Checkout = () => {
     <div>
       <h2 style={{ textAlign: "center" }}>Checkout</h2>
 
-      <h3>Agregar Categorias</h3>
+      <h3>Checkout</h3>
       <form onSubmit={handleCheckout}>
         <h5>
           Comprador: {user.name} {user.lastname}
@@ -105,7 +107,7 @@ const Checkout = () => {
           ""
         )}
         <br></br>
-        <button type="submit">Pagar</button>
+        <button type="submit" className="buttons">Pagar</button>
         <Link to="/cart">
           <button>Volver al carrito</button>
         </Link>

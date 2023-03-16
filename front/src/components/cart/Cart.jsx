@@ -123,105 +123,102 @@ const Cart = () => {
     }
   };
 
-  return (
-    <>
-      <Navbar />
-      {!cartItems[0] ? (
-        <div>
-          <Navbar />
-          <br />
-          <br />
-          <br />
-          <br />
-          <h2 style={{ textAlign: "center" }}>
-            No hay productos en el carrito
-          </h2>
-        </div>
-      ) : (
-        <>
-          {" "}
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className="details-container">
-            {cartItems.map((item) => {
-              let contador = cart.filter((e) => e.productId === item.id)[0]
-                .cantidad;
+  if (cart.length === 0) {
+    return (
+      <div>
+        <Navbar />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <Navbar />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className="details-container">
+          {cartItems.map((item) => {
+            let contador =
+              cart.filter((e) => e.productId === item.id)[0].cantidad;
 
-              return (
-                <div className="product-container" key={item.id}>
-                  <img src={item.image} alt="" />
-                  <div className="product-details">
-                    <h2>{item.name}</h2>
-                    <p>Precio: ${item.price}</p>
-                    <div className="cantidad">
-                      <button
-                        className="cantidad-button"
-                        onClick={() => {
-                          reduction(
-                            item.id,
-                            contador
-                            // cart.filter((e) => e.productId === item.id)[0]
-                            //   .cantidad
-                          );
-                          return contador--;
-                        }}
-                      >
-                        -
-                      </button>
-                      <span>
-                        {`${contador}`}
-                        {/* {cart.filter((e) => e.productId === item.id)[0].cantidad} */}
-                      </span>
-                      <button
-                        className="cantidad-button"
-                        onClick={() => {
-                          increase(
-                            item.id,
-                            contador
-                            // cart.filter((e) => e.productId === item.id)[0]
-                            //   .cantidad
-                          );
-                          return contador++;
-                        }}
-                      >
-                        +
-                      </button>
-                    </div>
+            return (
+              <div className="product-container" key={item.id}>
+                <img src={item.image} alt="" />
+                <div className="product-details">
+                  <h2>{item.name}</h2>
+                  <p>Precio: ${item.price}</p>
+                  <div className="cantidad">
                     <button
-                      className="remove-button"
-                      onClick={() => removeProduct(item.id)}
+                      className="cantidad-button"
+                      onClick={() => {
+                        reduction(
+                          item.id,
+                          contador
+                          // cart.filter((e) => e.productId === item.id)[0]
+                          //   .cantidad
+                        );
+                        return contador--;
+                      }}
                     >
-                      Eliminar
+                      -
+                    </button>
+                    <span>
+                      {`${contador}`}
+                      {/* {cart.filter((e) => e.productId === item.id)[0].cantidad} */}
+                    </span>
+                    <button
+                      className="cantidad-button"
+                      onClick={() => {
+                        increase(
+                          item.id,
+                          contador
+                          // cart.filter((e) => e.productId === item.id)[0]
+                          //   .cantidad
+                        );
+                        return contador++;
+                      }}
+                    >
+                      +
                     </button>
                   </div>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeProduct(item.id)}
+                  >
+                    Eliminar
+                  </button>
                 </div>
-              );
-            })}
-          </div>
-          <div className="total-container">
-            <h2>Total: ${total}</h2>
-            <button
-              className="clear-button"
-              onClick={() => dispatch(clearCart())}
-            >
-              Vaciar carrito
-            </button>
-            {userLogueado.id ? (
-              <Link to="/checkout" className="checkout-button">
-                Comprar
-              </Link>
-            ) : (
-              <Link to="/login" className="login-button">
-                Ingresar
-              </Link>
-            )}
-          </div>{" "}
-        </>
-      )}
-    </>
-  );
+              </div>
+            );
+          })}
+        </div>
+        <div className="total-container">
+          <h2>Total: ${total}</h2>
+          <button
+            className="clear-button"
+            onClick={() => dispatch(clearCart())}
+          >
+            Vaciar carrito
+          </button>
+          {userLogueado.id ? (
+            <Link to="/checkout" className="checkout-button">
+              Comprar
+            </Link>
+          ) : (
+            <Link to="/login" className="login-button">
+              Ingresar
+            </Link>
+          )}
+        </div>
+      </>
+    );
+  }
 };
 
 export default Cart;

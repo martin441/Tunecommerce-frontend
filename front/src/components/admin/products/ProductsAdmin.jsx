@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "../css/ProductsAdmin.css";
+import { Link } from "react-router-dom";
 
 const ProductsAdmin = () => {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,7 @@ const ProductsAdmin = () => {
     axios
       .get("http://localhost:3001/api/categories/todo")
       .then((response) => {
-        console.log("CATEGORIEES", response);
+        console.log("CATEGORIEES", response.data);
         setCategories(response.data);
       })
       .catch((error) => {
@@ -73,6 +74,7 @@ const ProductsAdmin = () => {
         setEditingProduct(null);
       })
       .catch((error) => {
+        alert("Ocurrió un error inesperado")
         setError(error.message);
       });
   };
@@ -155,9 +157,10 @@ const ProductsAdmin = () => {
                 <option value="">-- Seleccione una categoría --</option>
                 {categories.map(
                   (category) => (
-                    console.log("CATEGORIASSS", category),
+                    console.log("CATEGORIASSSfdg", category),
+                    console.log("CATEGORIASSS", category.id),
                     (
-                      <option key={category.id} value={category.name}>
+                      <option key={category.id} value={category.id}>
                         {category.name}
                       </option>
                     )
@@ -166,6 +169,10 @@ const ProductsAdmin = () => {
               </select>
             </div>
             <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>
+            <br />
+            <Link to="/profile">
+              <button className="volver">Volver</button>
+            </Link>
           </form>
         </div>
         <div style={{ width: "50%" }}>
@@ -183,34 +190,33 @@ const ProductsAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map(
-                (product) => (
-                  //console.log("PRODUCTIRO", product.categoryId),
-                  (
-                    //console.log("CARTITEMS", cartItems),
-                    <tr key={product.id}>
-                      <td>{product.name}</td>
-                      <td>{product.description}</td>
-                      <td>{product.price}</td>
-                      <td>
-                        {product.image.length > 0 && (
-                          <img src={product.image[0]} alt={product.name} />
-                        )}
-                      </td>
-                      <td>{product.stock}</td>
-                      <td>{categories.filter((e) => e.id === product.categoryId)[0].name}</td>
-                      <td>
-                        <button onClick={() => editProduct(product)}>
-                          Editar
-                        </button>
-                        <button onClick={() => deleteProduct(product.id)}>
-                          Eliminar
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                )
-              )}
+              {products.map((product) => (
+                //console.log("PRODUCTIRO", product.categoryId),
+                //console.log("CARTITEMS", cartItems),
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.description}</td>
+                  <td>{product.price}</td>
+                  <td>
+                    {product.image.length > 0 && (
+                      <img src={product.image[0]} alt={product.name} />
+                    )}
+                  </td>
+                  <td>{product.stock}</td>
+                  <td>
+                    {
+                      categories.filter((e) => e.id === product.categoryId)[0]
+                        .name
+                    }
+                  </td>
+                  <td>
+                    <button onClick={() => editProduct(product)}>Editar</button>
+                    <button onClick={() => deleteProduct(product.id)}>
+                      Eliminar ❕
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

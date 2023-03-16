@@ -10,6 +10,8 @@ import ProductsAdmin from "../components/admin/products/ProductsAdmin.jsx";
 import Historial from "../components/checkout/Historial";
 import DetalleHistorial from "../components/section/DetalleHistorial.jsx";
 import Checkout from "../components/checkout/Checkout.jsx";
+import AddCategories from "../components/admin/categories/AddCategories.jsx";
+import Navbar from "../components/navbar/Navbar.jsx";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -44,21 +46,28 @@ function PrivateRoute(props) {
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Products />} />
-      {/* <Route path="/product" component={Products} exact /> */}
-      <Route path="/product/:id" element={<Details />} />
-      <Route exact path="/cart" element={<Cart />} />
-      <Route exact path="/login" element={<Login />} />
-      <Route exact path="/signup" element={<SignUp />} />
-      <Route exact path="/admin/products" element={<ProductsAdmin />} />
-      <Route path="/checkout" element={<Checkout />} />
-      {/* <Route path="/profile" component={ProfilePage} /> */}
-      <Route path="*" element={<NotFoundPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/historial" element={<Historial />} />
-      <Route path="/detalleOrden/:id" element={<DetalleHistorial />} />
-    </Routes>
+    <>
+    <Navbar/>
+      <Routes>
+        <Route path="/" element={<Products />} />
+        {/* <Route path="/product" component={Products} exact /> */}
+        <Route path="/product/:id" element={<Details />} />
+        <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        {/* rutas de admin */}
+        <Route exact path="/admin/products" element={<ProductsAdmin />} />
+        <Route exact path="/admin/categories" element={<AddCategories />} />
+        {/* ------------------------------------------------------------ */}
+
+        <Route path="/checkout" element={<Checkout />} />
+        {/* <Route path="/profile" component={ProfilePage} /> */}
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/historial" element={<Historial />} />
+        <Route path="/detalleOrden/:id" element={<DetalleHistorial />} />
+      </Routes>
+    </>
   );
 };
 

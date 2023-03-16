@@ -1,0 +1,122 @@
+
+/* body {
+  background-color: crimson;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+} */
+
+h2 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  color: white;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+button[type="submit"],
+button {
+  margin-top: 20px;
+  background-color: crimson;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+button[type="submit"]:hover,
+button:hover {
+  background-color: #db3b3b;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+select {
+  font-size: 18px;
+}
+
+select:focus {
+  outline: none;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-option {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.payment-option-image {
+  width: 60px;
+  margin-right: 20px;
+}
+
+.payment-option-label {
+  font-size: 24px;
+  font-weight: bold;
+  color: #666;
+}
+
+.payment-option-selected {
+  border: 2px solid crimson;
+}
+
+.payment-option-selected .payment-option-label {
+  color: crimson;
+}
+
+.payment-option:hover {
+  border: 2px solid #ccc;
+}
+
+.payment-option:hover .payment-option-label {
+  color: #ccc;
+}
+
+.payment-option-radio {
+  display: none;
+}
