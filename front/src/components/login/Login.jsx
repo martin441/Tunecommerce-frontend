@@ -103,7 +103,7 @@ const Login = () => {
             </button>
             <br />
             <div>
-              <Link to="/signup">¿no tienes cuenta? Registrate aquí</Link>
+              <Link to="/signup">¿No tienes cuenta? Registrate aquí</Link>
             </div>
             <br />
             <hr />
