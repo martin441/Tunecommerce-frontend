@@ -79,6 +79,9 @@ button {
   border-radius: 0.3rem;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
 }
 
 .add-to-cart button {
@@ -91,4 +94,18 @@ button {
 }
 .add-to-cart button:active {
   transform: translateY(1px);
+}
+
+/*Estilo para botones "add-to-cart"*/
+.add-to-cart {
+  font-size: 14px; /*Tamaño de fuente original*/
+  padding: 8px 16px; /*Padding original*/
+  border-radius: 4px; /*Borde original*/
+}
+
+/*Estilo para botones "add-to-cart" reducidos*/
+.add-to-cart.small {
+  font-size: 12px; /*Nuevo tamaño de fuente*/
+  padding: 6px 12px; /*Nuevo padding*/
+  border-radius: 2px; /*Nuevo borde*/
 }
