@@ -22,7 +22,6 @@ const Products = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const cartItems = useSelector((state) => state.cartItems);
 
-
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/products")
@@ -51,16 +50,14 @@ const Products = () => {
             dispatch(setCartItems(response.data));
             localStorage.setItem("dataCart", JSON.stringify(response.data));
             //JSON.stringify(localStorage.setItem("dataCart"));
-            
           });
-
       })
       .catch((error) => {
         console.log(error);
       });
 
-      const cart = JSON.parse(localStorage.getItem("dataCart"));
-    
+    const cart = JSON.parse(localStorage.getItem("dataCart"));
+
     // const newCart = [...cart];
     // const index = newCart.findIndex((item) => item.id === product.id);
     // if (index === -1) {
@@ -82,87 +79,96 @@ const Products = () => {
 
   return (
     <>
-
       <Navbar />
       <div>
         <br />
         <br />
         <br />
         <br />
+      </div>
+      <div>
         <ProductSlider />
-      <FilterCategories/>
-        <div>
-          <h2>Productos Populares:</h2>
-        </div>
-        <div id="product" className="card-container">
-          {products.slice(0, visibleProducts).map((product) => (
-            <div className="card" key={product.id}>
-              <Link to={`/product/${product.id}`}>
-                <img src={product.image[0]} alt={product.name} />
-                <h3>{product.name}</h3>
-              </Link>
-              <p>{product.description}</p>
-              <div className="card-info">
-                <div className="price">
-                  <h4>${product.price}</h4>
-                </div>
-                <div className="stock">
-                  <h4>Stock: {product.stock}</h4>
-                </div>
-                <div className="add-to-cart">
-                  {cart.some((item) => item.id === product.id) ? (
-                    <button disabled>Añadido al carrito</button>
-                  ) : (
-                    <button onClick={() => handleAddToCart(product)}>
-                      Añadir al carrito
-                    </button>
-                  )}
-                </div>
+      </div>
+      <div>
+        <FilterCategories />
+      </div>
+      <div>
+        <h2>Productos Populares:</h2>
+      </div>
+      <div id="product" className="card-container">
+        {products.slice(0, visibleProducts).map((product) => (
+          <div className="card" key={product.id}>
+            <Link to={`/product/${product.id}`}>
+              <img src={product.image[0]} alt={product.name} />
+              <h3>{product.name}</h3>
+            </Link>
+            <p>{product.description}</p>
+            <div className="card-info">
+              <div className="price">
+                <h4>${product.price}</h4>
+              </div>
+              <div className="stock">
+                <h4>Stock: {product.stock}</h4>
+              </div>
+              <div className="add-to-cart">
+                {cart.some((item) => item.id === product.id) ? (
+                  <button disabled>Añadido al carrito</button>
+                ) : (
+                  <button
+                    class="add-to-cart small"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Añadir al carrito
+                  </button>
+                )}
               </div>
             </div>
-          ))}
-          <div>
-            {visibleProducts < products.length && (
-              <button onClick={handleLoadMore}>Ver más</button>
-            )}
           </div>
-        </div>
+        ))}
         <div>
-          <h2>Nuestros productos</h2>
+          {visibleProducts < products.length && (
+            <button onClick={handleLoadMore}>Ver más</button>
+          )}
         </div>
-        <div id="product" className={estilo.slider}>
-          {products.slice(0, visibleProducts).map((product) => (
-            <div className="card" key={product.id}>
-              <Link to={`/product/${product.id}`}>
-                <img src={product.image[0]} alt={product.name} />
-                <h3>{product.name}</h3>
-              </Link>
-              <p>{product.description}</p>
-              <div className="card-info">
-                <div className="price">
-                  <h4>${product.price}</h4>
-                </div>
-                <div className="stock">
-                  <h4>Stock: {product.stock}</h4>
-                </div>
-                <div className="add-to-cart">
-                  {cart.some((item) => item.id === product.id) ? (
-                    <button disabled>Añadido al carrito</button>
-                  ) : (
-                    <button onClick={() => handleAddToCart(product)}>
-                      Añadir al carrito
-                    </button>
-                  )}
-                </div>
-                {console.log("CART", cart)}
+      </div>
+      <div>
+        <h2>Nuestros productos</h2>
+      </div>
+      <div id="product" className={estilo.slider}>
+        {products.slice(0, visibleProducts).map((product) => (
+          <div className="card" key={product.id}>
+            <Link to={`/product/${product.id}`}>
+              <img src={product.image[0]} alt={product.name} />
+              <h3>{product.name}</h3>
+            </Link>
+            <p>{product.description}</p>
+            <div className="card-info">
+              <div className="price">
+                <h4>${product.price}</h4>
               </div>
+              <div className="stock">
+                <h4>Stock: {product.stock}</h4>
+              </div>
+              <div className="add-to-cart">
+                {cart.some((item) => item.id === product.id) ? (
+                  <button disabled>Añadido al carrito</button>
+                ) : (
+                  <button
+                    class="add-to-cart small"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Añadir al carrito
+                  </button>
+                )}
+              </div>
+              {console.log("CART", cart)}
             </div>
-          ))}
-          <div>
-            {visibleProducts < products.length && (
-              <button onClick={handleLoadMore}>Ver más</button>
-            )}
           </div>
+        ))}
+        <div>
+          {visibleProducts < products.length && (
+            <button onClick={handleLoadMore}>Ver más</button>
+          )}
         </div>
       </div>
     </>
