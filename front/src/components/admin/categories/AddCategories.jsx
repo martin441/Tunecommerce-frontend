@@ -1,5 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import "../css/ProductsAdmin.css";
 
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
@@ -23,13 +26,20 @@ const AddCategories = () => {
         name: categoriaNombre,
         description: categoriaDescripcion,
       })
-      .then(() => {});
+      .then(() => {
+        // Setear los campos
+        setCategoriaNombre("");
+        setCategoriaDescripcion("");
+        //recargar la pagina para cargar los dats
+        window.location.reload();
+      });
   };
 
   const handleCategoryChange = (categoryId) => {
     const categoria = categorias.filter(
       (e) => e.id === parseInt(categoryId)
     )[0];
+
     setCategoria(categoria);
     setEditarNombre(categoria.name);
     setEditarDescripcion(categoria.description);
@@ -44,23 +54,33 @@ const AddCategories = () => {
       })
       .then(() => {
         alert("Categoria editada correctamente");
+        setEditarNombre("");
+        setEditarDescripcion("");
+        // Recargar la página para cargar los datos
+        window.location.reload();
       });
   };
 
   const handleDeleteCategory = (e) => {
     e.preventDefault();
-    console.log("asdasd", deleteCategoria);
-    axios
-      .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
-      .then(() => {
-        alert("Categoria eliminada correctamente");
-      });
+    const confirmation = window.confirm(
+      "¿Está seguro que desea eliminar la categoría?"
+    );
+    if (confirmation) {
+      axios
+        .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
+        .then(() => {
+          alert("Categoria eliminada correctamente");
+          // Recargar la página para cargar los datos
+          window.location.reload();
+        });
+    }
   };
   console.log(deleteCategoria);
 
   return (
-    <div>
-      <div>
+    <div style={{ display: "flex" }}>
+      <div style={{ width: "33.3%" }} className="form-container">
         <h3>Agregar Categorias</h3>
         <form onSubmit={handleAddCategoty}>
           <label>Nombre de categoria: </label>
@@ -81,9 +101,13 @@ const AddCategories = () => {
           ></input>
           <button type="submit">Agregar</button>
         </form>
+        <br />
+        <Link to="/profile">
+          <button className="volver">Volver</button>
+        </Link>
       </div>
       <br></br>
-      <div>
+      <div style={{ width: "33.3%" }} className="form-container">
         <h3>Editar Categorias</h3>
         <form action="#" onSubmit={handleEditCategory}>
           <label for="cat">Categorias</label>
@@ -117,7 +141,7 @@ const AddCategories = () => {
         </form>
       </div>
       <br></br>
-      <div>
+      <div style={{ width: "33.3%" }} className="form-container">
         <h3>Eliminar Categorias</h3>
         <form action="#" onSubmit={handleDeleteCategory}>
           <label for="cat">Categorias</label>
@@ -134,7 +158,7 @@ const AddCategories = () => {
               );
             })}
           </select>
-          <button type="submit">Eliminar</button>
+          <button type="submit">Eliminar ❕ </button>
         </form>
       </div>
     </div>
