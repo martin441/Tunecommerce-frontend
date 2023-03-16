@@ -35,6 +35,7 @@ const ProductsAdmin = () => {
     axios
       .get("http://localhost:3001/api/categories/todo")
       .then((response) => {
+        console.log("CATEGORIEES", response);
         setCategories(response.data);
       })
       .catch((error) => {
@@ -197,7 +198,7 @@ const ProductsAdmin = () => {
                         )}
                       </td>
                       <td>{product.stock}</td>
-                      <td>{product.categoryId}</td>
+                      <td>{categories.filter((e) => e.id === product.categoryId)[0].name}</td>
                       <td>
                         <button onClick={() => editProduct(product)}>
                           Editar
