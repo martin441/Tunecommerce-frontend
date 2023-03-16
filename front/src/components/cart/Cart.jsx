@@ -61,7 +61,7 @@ const Cart = () => {
         cantidad: contador + 1,
       })
       .then((response) => {
-        
+        alert("cantidad incrementada")
         console.log("CART-INCREASE", response.data);
         //navigate("/cart");
         //contador = contador + 1;
@@ -84,6 +84,7 @@ const Cart = () => {
       })
       .then((response) => {
         //navigate("/cart");
+        //alert("cantidad reducida")
         console.log("CART-REDUCCION", response.data);
 
         //dispatch(setCart(response.data));

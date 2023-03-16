@@ -7,6 +7,8 @@ import LogoutIcon from "../svg/logout.svg";
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
 import axios from "axios";
+import CartItemsReducer from "../../redux/reducers/CartItemsReducer";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -16,6 +18,9 @@ const Navbar = () => {
   const [expandUserMenu, setExpandUserMenu] = useState(false);
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
+
+  const cartItems = useSelector((state) => state.cartItems);
+  console.log("CARTITEMS", cartItems);
 
   useEffect(() => {
     // Obtener productos del servidor
@@ -91,7 +96,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="nav-cart">
-            <span>{cart.length}</span>
+            <span>{cartItems.length}</span>
             <Link to="/cart">
               <img src={CartIcon} alt="" width="20" />
             </Link>
