@@ -7,6 +7,7 @@ import Products from "../components/section/Products.jsx";
 import { Checkout } from "../components/checkout/Checkout";
 import Login from "../components/login/Login.jsx";
 import SignUp from "../components/signup/SignUp";
+import ProductsAdmin from "../components/admin/products/ProductsAdmin.jsx";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -48,6 +49,7 @@ const App = () => {
       <Route exact path="/cart" element={<Cart />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<SignUp />} />
+      <Route exact path="/admin/products" element={<ProductsAdmin />} />
       <Route path="/checkout" element={<Checkout />} />
       {/* <Route path="/profile" component={ProfilePage} /> */}
       <Route path="*" element={<NotFoundPage />} />

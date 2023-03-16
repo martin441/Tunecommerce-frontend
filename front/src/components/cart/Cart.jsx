@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import "../css/Cart.css";
 import axios from "axios";
 import { setCart } from "../../redux/reducers/CartReducers";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
@@ -21,23 +22,14 @@ const Cart = () => {
 
   console.log("CART", cart);
 
-  let cantidadTotal = 0;
-
-  //let cartItems;
-  
-  const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const cartItems = useSelector((state) => {
     return state.cartItems;
   });
-
+  const [total, setTotal] = useState(0);
 
   console.log("CARTITEMS", cartItems);
-
-  
-  useEffect(() => {
-    
-  }, [cartItems]);
 
   useEffect(() => {
     console.log("USER", userLogueado);
@@ -50,11 +42,11 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [dispatch, userLogueado.id, cartItems]);
 
   useEffect(() => {
     getTotal();
-  }, [cart]);
+  }, [cart, cartItems]);
 
   const getTotal = () => {
     const res = cart.reduce((prev, item) => {
@@ -63,22 +55,24 @@ const Cart = () => {
     setTotal(res);
   };
 
-  const increase = (id, cantidad) => {
+  const increase = (id, contador) => {
     axios
       .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
-        cantidad: cantidad + 1,
+        cantidad: contador + 1,
       })
       .then((response) => {
+        
         console.log("CART-INCREASE", response.data);
-        cantidadTotal += 1
-        dispatch(setCart(response.data));
+        //navigate("/cart");
+        //contador = contador + 1;
+        //dispatch(setCart(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const reduction = (id, cantidad) => {
+  const reduction = (id, contador) => {
     // if (cantidad === 1) {
     //   if (window.confirm("¿Quieres quitar este producto?")) {
     //     removeProduct(id);
@@ -86,12 +80,13 @@ const Cart = () => {
     // } else {
     axios
       .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
-        cantidad: cantidad - 1,
+        cantidad: contador - 1,
       })
       .then((response) => {
+        //navigate("/cart");
         console.log("CART-REDUCCION", response.data);
-        cantidadTotal -= 1
-        dispatch(setCart(response.data));
+
+        //dispatch(setCart(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -133,48 +128,59 @@ const Cart = () => {
         <br />
         <br />
         <div className="details-container">
-          {cartItems.map((item) => (
-            <div className="product-container" key={item.id}>
-              <img src={item.image} alt="" />
-              <div className="product-details">
-                <h2>{item.name}</h2>
-                <p>Precio: ${item.price}</p>
-                <div className="cantidad">
+          {cartItems.map((item) => {
+            let contador = cart.filter((e) => e.productId === item.id)[0]
+              .cantidad;
+            return (
+              <div className="product-container" key={item.id}>
+                <img src={item.image} alt="" />
+                <div className="product-details">
+                  <h2>{item.name}</h2>
+                  <p>Precio: ${item.price}</p>
+                  <div className="cantidad">
+                    <button
+                      className="cantidad-button"
+                      onClick={() => {
+                        reduction(
+                          item.id,
+                          contador
+                          // cart.filter((e) => e.productId === item.id)[0]
+                          //   .cantidad
+                        );
+                        return contador--;
+                      }}
+                    >
+                      -
+                    </button>
+                    <span>
+                      {`${contador}`}
+                      {/* {cart.filter((e) => e.productId === item.id)[0].cantidad} */}
+                    </span>
+                    <button
+                      className="cantidad-button"
+                      onClick={() => {
+                        increase(
+                          item.id,
+                          contador
+                          // cart.filter((e) => e.productId === item.id)[0]
+                          //   .cantidad
+                        );
+                        return contador++;
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
-                    className="cantidad-button"
-                    onClick={() =>
-                      reduction(
-                        item.id,
-                        cart.filter((e) => e.productId === item.id)[0].cantidad
-                      )
-                    }
+                    className="remove-button"
+                    onClick={() => removeProduct(item.id)}
                   >
-                    -
-                  </button>
-                  <span>
-                    {cart.filter((e) => e.productId === item.id)[0].cantidad}
-                  </span>
-                  <button
-                    className="cantidad-button"
-                    onClick={() =>
-                      increase(
-                        item.id,
-                        cart.filter((e) => e.productId === item.id)[0].cantidad
-                      )
-                    }
-                  >
-                    +
+                    Eliminar
                   </button>
                 </div>
-                <button
-                  className="remove-button"
-                  onClick={() => removeProduct(item.id)}
-                >
-                  Eliminar
-                </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="total-container">
           <h2>Total: ${total}</h2>
