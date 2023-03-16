@@ -33,9 +33,7 @@ const Cart = () => {
 
   const [first, setfirst] = useState(0);
 
-  const [precio, setPrecio] = useState(0);
-
-  console.log("PRECIO", precio);
+  const [precio, setPrecio] = useState(0)
 
   //localStorage.setItem("user", JSON.stringify(res.data));
 
@@ -53,15 +51,15 @@ const Cart = () => {
   }, [first]);
 
   useEffect(() => {
-    //getTotal();
+    getTotal();
     localStorage.setItem("total", JSON.stringify(total));
-  }, [cart, cartItems, precio]);
+  }, [cart, cartItems]);
 
   const getTotal = () => {
     const res = cart.reduce((prev, item) => {
       const producto = cartItems.find((p) => p.id === item.productId);
-      setPrecio(producto.price);
-      let calculo = prev + precio * item.cantidad;
+      const precio = producto.price;
+      const calculo = prev + precio * item.cantidad;
       console.log("PRODUCTO", producto);
       return calculo;
     }, 0);
@@ -111,7 +109,6 @@ const Cart = () => {
   };
 
   const removeProduct = (id) => {
-    //e.preventDefault();
     if (window.confirm("¿Quieres quitar este producto?")) {
       axios
         .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
