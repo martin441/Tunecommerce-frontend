@@ -133,7 +133,7 @@ const Products = () => {
         <div id="product" className={estilo.slider}>
           {products.slice(0, visibleProducts).map((product) => (
             <div className="card" key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <Link to={`/product/${product.id}`}>
                 <img src={product.image[0]} alt={product.name} />
                 <h3>{product.name}</h3>
               </Link>
