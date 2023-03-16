@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../css/ProfilePage.module.css";
@@ -11,10 +10,11 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  console.log("REDUX", user);
 
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [celnumber, setCelnumber] = useState("");
   const [password, setPassword] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
@@ -25,18 +25,20 @@ function ProfilePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Telefono", celnumber);
     axios
       .put(`http://localhost:3001/api/user/update/${user.id}`, {
         password: password,
         email: email,
         address: address,
-        celNumber: phoneNumber,
+        celnumber: celnumber,
       })
       .then((res) => {
         console.log("reeeees", res);
         dispatch(setUser(res.data));
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsEditing(false);
+
         alert("Se realizaron los cambios satisfactoriamente");
       })
       .catch(() => {
@@ -45,88 +47,111 @@ function ProfilePage() {
   };
 
   return !isEditing ? (
-    <>
-      <div className={styles.profilecontainer}>
-        <h2 className={styles.username}>Usuario: {user.username} </h2>
-        <div className={styles.profileinfo}>
-          <p className={styles.name}>Nombre: {user.name}</p>
-          <p className={styles.lastname}>Apellido: {user.lastname}</p>
-          <p className={styles.mail}>Mail: {user.email}</p>
-          <p className={styles.address}>Dirección: {user.address}</p>
-          <p className={styles.phone}>Número de teléfono: {user.celnumber}</p>
+    <div className={styles.profilecontainer}>
+      <h2 className={styles.username}>Usuario: {user.username} </h2>
+      <div className={styles.profileinfo}>
+        <p className={styles.name}>Nombre: {user.name}</p>
+        <p className={styles.lastname}>Apellido: {user.lastname}</p>
+        <p className={styles.mail}>Mail: {user.email}</p>
+        <p className={styles.address}>Dirección: {user.address}</p>
+        <p className={styles.phone}>Número de teléfono: {user.celnumber}</p>
+        <button
+          onClick={() => {
+            navigate("/historial");
+          }}
+        >
+          Historial de órdenes
+        </button>
+
+        <button
+          onClick={() => {
+            setIsEditing(true);
+          }}
+        >
+          Editar perfil
+        </button>
+
+        {!user.isAdmin ? (
+          <></>
+        ) : (
+          <>
+            <div>Panel administrador ↓</div>
+            <button
+              onClick={() => {
+                navigate("/editusuarios");
+              }}
+            >
+              Editar usuarios
+            </button>
+            <button
+              onClick={() => {
+                navigate("/addcategories");
+              }}
+            >
+              Editar categorias
+            </button>
+            <button
+              onClick={() => {
+                navigate("/admin/products");
+              }}
+            >
+              Editar productos
+            </button>
+          </>
+        )}
+        <Link to="/">Volver a inicio</Link>
+      </div>
+    </div>
+  ) : (
+    <div className={styles.profilecontainer}>
+      <form className={styles.profileform} onSubmit={handleSubmit}>
+        <label>
+          Dirección:
+          <input
+            type="text"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+          />
+        </label>
+        <label>
+          Número de teléfono:
+          <input
+            type="number"
+            value={celnumber}
+            onChange={(event) => setCelnumber(event.target.value)}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </label>
+        <label>
+          Contraseña:
+          <input
+            type="text"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+
+        <div className={styles.buttoncontainer}>
+          <button type="submit">Guardar</button>
           <button
+            type="button"
             onClick={() => {
-              navigate("/historial");
+              setIsEditing(false);
             }}
           >
-            Historial de órdenes
-          </button>
-          {/* cuando haga el click me cambie el estado de isEditing */}
-          <button
-            onClick={() => {
-              setIsEditing(true);
-            }}
-          >
-            Editar perfil
+            Cancelar
           </button>
           <Link to="/">Volver a inicio</Link>
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      {/* hacer condicional para que muestre lo que corresponda con isEditing. hacer que cambie con el onclick */}
-      <div className={styles.profilecontainer}>
-        <form className={styles.profileform} onSubmit={handleSubmit}>
-          <label>
-            Dirección:
-            <input
-              type="text"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
-            />
-          </label>
-          <label>
-            Número de teléfono:
-            <input
-              type="text"
-              value={phoneNumber}
-              onChange={(event) => setPhoneNumber(event.target.value)}
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="text"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </label>
-          <label>
-            Contraseña:
-            <input
-              type="text"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
-
-          <div className={styles.buttoncontainer}>
-            <button type="submit">Guardar</button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsEditing(false);
-              }}
-            >
-              Cancelar
-            </button>
-            <Link to="/">Volver a inicio</Link>
-          </div>
-        </form>
-      </div>
-    </>
-
+      </form>
+    </div>
   );
 }
 

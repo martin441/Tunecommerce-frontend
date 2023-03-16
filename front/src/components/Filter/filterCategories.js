@@ -83,35 +83,42 @@ const FilterCategories = () => {
         })}
       </div>
       <div id="product" className="card-container">
-        {selectedCategory.map((product) => (
-          <div className="card" key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.image[0]} alt={product.name} />
-              <h3>{product.name}</h3>
-            </Link>
-            <p>{product.description}</p>
-            <div className="card-info">
-              <div className="price">
-                <h4>${product.price}</h4>
-              </div>
-              <div className="stock">
-                <h4>Stock: {product.stock}</h4>
-              </div>
-              <div className="add-to-cart">
-                {cart.some((item) => item.id === product.id) ? (
-                  <button disabled>Añadido al carrito</button>
-                ) : (
-                  <button
-                    class="add-to-cart small"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                )}
+        {console.log("Selected CAT", selectedCategory)}
+        {selectedCategory === "Not found" ? (
+          <h2>
+            No contamos con stock de productos de esta categoría en este momento
+          </h2>
+        ) : (
+          selectedCategory.map((product) => (
+            <div className="card" key={product.id}>
+              <Link to={`/product/${product.id}`}>
+                <img src={product.image[0]} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
+              <p>{product.description}</p>
+              <div className="card-info">
+                <div className="price">
+                  <h4>${product.price}</h4>
+                </div>
+                <div className="stock">
+                  <h4>Stock: {product.stock}</h4>
+                </div>
+                <div className="add-to-cart">
+                  {cart.some((item) => item.id === product.id) ? (
+                    <button disabled>Añadido al carrito</button>
+                  ) : (
+                    <button
+                      class="add-to-cart small"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* <input type="text" placeholder="Buscar categorias"></input> */}
