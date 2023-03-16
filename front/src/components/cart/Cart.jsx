@@ -31,6 +31,10 @@ const Cart = () => {
 
   console.log("CARTITEMS", cartItems);
 
+  const [first, setfirst] = useState(0);
+
+  //localStorage.setItem("user", JSON.stringify(res.data));
+
   useEffect(() => {
     console.log("USER", userLogueado);
     axios
@@ -42,7 +46,11 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [dispatch, userLogueado.id, cartItems]);
+  }, [first]);
+
+  useEffect(() => {
+    localStorage.setItem("totales", JSON.stringify(total));
+  }, [total]);
 
   useEffect(() => {
     getTotal();
@@ -50,7 +58,11 @@ const Cart = () => {
 
   const getTotal = () => {
     const res = cart.reduce((prev, item) => {
-      return prev + item.price * item.cantidad;
+      const producto = cartItems.find((p) => p.id === item.productId);
+      const precio = producto.price;
+      const calculo = prev + precio * item.cantidad;
+      console.log("PRODUCTO", producto);
+      return calculo;
     }, 0);
     setTotal(res);
   };
@@ -61,10 +73,10 @@ const Cart = () => {
         cantidad: contador + 1,
       })
       .then((response) => {
-        alert("cantidad incrementada")
+        //alert("cantidad incrementada");
         console.log("CART-INCREASE", response.data);
         //navigate("/cart");
-        //contador = contador + 1;
+        setfirst(Math.random());
         //dispatch(setCart(response.data));
       })
       .catch((error) => {
@@ -73,26 +85,28 @@ const Cart = () => {
   };
 
   const reduction = (id, contador) => {
-    // if (cantidad === 1) {
-    //   if (window.confirm("¿Quieres quitar este producto?")) {
-    //     removeProduct(id);
-    //   }
-    // } else {
-    axios
-      .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
-        cantidad: contador - 1,
-      })
-      .then((response) => {
-        //navigate("/cart");
-        //alert("cantidad reducida")
-        console.log("CART-REDUCCION", response.data);
+    if (contador === 1) {
+      if (window.confirm("¿Quieres quitar este producto?")) {
+        removeProduct(id);
+      }
+    } else {
+      axios
+        .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+          cantidad: contador - 1,
+        })
+        .then((response) => {
+          //navigate("/cart");
+          //alert("cantidad reducida")
+          console.log("CART-REDUCCION", response.data);
 
-        //dispatch(setCart(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    //}
+          //dispatch(setCart(response.data));
+          setfirst(Math.random());
+          //dispatch(setCart(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const removeProduct = (id) => {
@@ -109,101 +123,105 @@ const Cart = () => {
     }
   };
 
-  if (cart.length === 0) {
-    return (
-      <div>
-        <Navbar />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <Navbar />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className="details-container">
-          {cartItems.map((item) => {
-            let contador = cart.filter((e) => e.productId === item.id)[0]
-              .cantidad;
-            return (
-              <div className="product-container" key={item.id}>
-                <img src={item.image} alt="" />
-                <div className="product-details">
-                  <h2>{item.name}</h2>
-                  <p>Precio: ${item.price}</p>
-                  <div className="cantidad">
+  return (
+    <>
+      <Navbar />
+      {!cartItems[0] ? (
+        <div>
+          <Navbar />
+          <br />
+          <br />
+          <br />
+          <br />
+          <h2 style={{ textAlign: "center" }}>
+            No hay productos en el carrito
+          </h2>
+        </div>
+      ) : (
+        <>
+          {" "}
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="details-container">
+            {cartItems.map((item) => {
+              let contador = cart.filter((e) => e.productId === item.id)[0]
+                .cantidad;
+
+              return (
+                <div className="product-container" key={item.id}>
+                  <img src={item.image} alt="" />
+                  <div className="product-details">
+                    <h2>{item.name}</h2>
+                    <p>Precio: ${item.price}</p>
+                    <div className="cantidad">
+                      <button
+                        className="cantidad-button"
+                        onClick={() => {
+                          reduction(
+                            item.id,
+                            contador
+                            // cart.filter((e) => e.productId === item.id)[0]
+                            //   .cantidad
+                          );
+                          return contador--;
+                        }}
+                      >
+                        -
+                      </button>
+                      <span>
+                        {`${contador}`}
+                        {/* {cart.filter((e) => e.productId === item.id)[0].cantidad} */}
+                      </span>
+                      <button
+                        className="cantidad-button"
+                        onClick={() => {
+                          increase(
+                            item.id,
+                            contador
+                            // cart.filter((e) => e.productId === item.id)[0]
+                            //   .cantidad
+                          );
+                          return contador++;
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
                     <button
-                      className="cantidad-button"
-                      onClick={() => {
-                        reduction(
-                          item.id,
-                          contador
-                          // cart.filter((e) => e.productId === item.id)[0]
-                          //   .cantidad
-                        );
-                        return contador--;
-                      }}
+                      className="remove-button"
+                      onClick={() => removeProduct(item.id)}
                     >
-                      -
-                    </button>
-                    <span>
-                      {`${contador}`}
-                      {/* {cart.filter((e) => e.productId === item.id)[0].cantidad} */}
-                    </span>
-                    <button
-                      className="cantidad-button"
-                      onClick={() => {
-                        increase(
-                          item.id,
-                          contador
-                          // cart.filter((e) => e.productId === item.id)[0]
-                          //   .cantidad
-                        );
-                        return contador++;
-                      }}
-                    >
-                      +
+                      Eliminar
                     </button>
                   </div>
-                  <button
-                    className="remove-button"
-                    onClick={() => removeProduct(item.id)}
-                  >
-                    Eliminar
-                  </button>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="total-container">
-          <h2>Total: ${total}</h2>
-          <button
-            className="clear-button"
-            onClick={() => dispatch(clearCart())}
-          >
-            Vaciar carrito
-          </button>
-          {userLogueado.id ? (
-            <Link to="/checkout" className="checkout-button">
-              Comprar
-            </Link>
-          ) : (
-            <Link to="/login" className="login-button">
-              Ingresar
-            </Link>
-          )}
-        </div>
-      </>
-    );
-  }
+              );
+            })}
+          </div>
+          <div className="total-container">
+            <h2>Total: ${total}</h2>
+            <button
+              className="clear-button"
+              onClick={() => dispatch(clearCart())}
+            >
+              Vaciar carrito
+            </button>
+            {userLogueado.id ? (
+              <Link to="/checkout" className="checkout-button">
+                Comprar
+              </Link>
+            ) : (
+              <Link to="/login" className="login-button">
+                Ingresar
+              </Link>
+            )}
+          </div>{" "}
+        </>
+      )}
+    </>
+  );
 };
 
 export default Cart;

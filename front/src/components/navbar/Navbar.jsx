@@ -4,6 +4,7 @@ import Close from "../svg/times-solid.svg";
 import CartIcon from "../svg/shopping-cart-solid.svg";
 import UserIcon from "../svg/user-solid.svg";
 import LogoutIcon from "../svg/logout.svg";
+import ProductSearch from "../search/ProductSearch";
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
 import axios from "axios";
@@ -40,6 +41,7 @@ const Navbar = () => {
 
   const expandUserMenuToggle = () => {
     setExpandUserMenu(!expandUserMenu);
+    setToggle(false);
   };
 
   const user = JSON.parse(loggedInUser); // Parseamos la información del usuario
@@ -71,6 +73,7 @@ const Navbar = () => {
               </li> */}
             {loggedInUser ? (
               <li>
+                <ProductSearch/>
                 <div className="user-icon" onClick={expandUserMenuToggle}>
                   <img src={UserIcon} alt="" width="20" />
                   {/* Mostramos el nombre de usuario */}

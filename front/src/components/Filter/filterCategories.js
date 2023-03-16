@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import { useDispatch, useSelector } from "react-redux";
+import "../css/Products.css";
 
 const FilterCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -20,7 +21,6 @@ const FilterCategories = () => {
   }, []);
 
   const handleCategoryClick = (id) => {
-    console.log("ID", id);
     axios
       .get(`http://localhost:3001/api/products/filter/${id}`)
       .then((products) => {
@@ -51,12 +51,31 @@ const FilterCategories = () => {
 
   return (
     <div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          maxWidth: "90%",
+          margin: "0 auto",
+        }}
+      >
         {categories.map((category) => {
           return (
             <button
               key={category.id}
               onClick={() => handleCategoryClick(category.id)}
+              style={{
+                fontSize: "1.2rem",
+                padding: "0.8rem 1.2rem",
+                border: "none",
+                borderRadius: "0.3rem",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease, color 0.3s ease",
+                maxWidth: "200px",
+                width: "100%",
+                height: "auto",
+              }}
             >
               {category.name}
             </button>
@@ -64,33 +83,42 @@ const FilterCategories = () => {
         })}
       </div>
       <div id="product" className="card-container">
-        {selectedCategory.map((product) => (
-  
-          <div className="card" key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.image[0]} alt={product.name} />
-              <h3>{product.name}</h3>
-            </Link>
-            <p>{product.description}</p>
-            <div className="card-info">
-              <div className="price">
-                <h4>${product.price}</h4>
-              </div>
-              <div className="stock">
-                <h4>Stock: {product.stock}</h4>
-              </div>
-              <div className="add-to-cart">
-                {cart.some((item) => item.id === product.id) ? (
-                  <button disabled>Añadido al carrito</button>
-                ) : (
-                  <button onClick={() => handleAddToCart(product)}>
-                    Añadir al carrito
-                  </button>
-                )}
+        {console.log("Selected CAT", selectedCategory)}
+        {selectedCategory === "Not found" ? (
+          <h2>
+            No contamos con stock de productos de esta categoría en este momento
+          </h2>
+        ) : (
+          selectedCategory.map((product) => (
+            <div className="card" key={product.id}>
+              <Link to={`/product/${product.id}`}>
+                <img src={product.image[0]} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
+              <p>{product.description}</p>
+              <div className="card-info">
+                <div className="price">
+                  <h4>${product.price}</h4>
+                </div>
+                <div className="stock">
+                  <h4>Stock: {product.stock}</h4>
+                </div>
+                <div className="add-to-cart">
+                  {cart.some((item) => item.id === product.id) ? (
+                    <button disabled>Añadido al carrito</button>
+                  ) : (
+                    <button
+                      class="add-to-cart small"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* <input type="text" placeholder="Buscar categorias"></input> */}

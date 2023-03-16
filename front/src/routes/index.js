@@ -4,14 +4,16 @@ import NotFoundPage from "../components/notFoundPage/NotFoundPage.js";
 import ProfilePage from "../components/profilePage/ProfilePage.js";
 import Details from "../components/section/Details.jsx";
 import Products from "../components/section/Products.jsx";
-import { Checkout } from "../components/checkout/Checkout";
 import Login from "../components/login/Login.jsx";
 import SignUp from "../components/signup/SignUp";
 import ProductsAdmin from "../components/admin/products/ProductsAdmin.jsx";
 import Historial from "../components/checkout/Historial";
 import DetalleHistorial from "../components/section/DetalleHistorial.jsx";
+
 import AddCategories from "../components/AddCategories";
 import EditUsuarios from "../components/EditUsuarios";
+
+import Checkout from "../components/checkout/Checkout.jsx";
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
   // Devuelve verdadero o falso dependiendo de si el usuario está autenticado o no.

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 //import Products from "../section/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/reducers/userReducer";
+import Navbar from "../navbar/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -54,64 +55,66 @@ const Login = () => {
   return loading ? (
     <div>Loading...</div>
   ) : localStorage.getItem("user") === null ? (
-    <div
-      style={{
-        position: "absolute",
-        borderRadius: "5px",
-        left: "20vw",
-        top: "50vh",
-        width: "60vw",
-        height: "30vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundSize: "80vw",
-      }}
-    >
-      <div className={styles.wrapper}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <h1 className={styles.title}>Iniciar sesión</h1>
-          <div className={styles.inputContainer}>
-            <label className={styles.label}>Email: </label>
-            <input
-              className={styles.input}
-              placeholder="Ingrese su email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              required
-            ></input>
-          </div>
-          <div className={styles.inputContainer}>
+    <>
+      <Navbar />
+      <div
+        style={{
+          position: "absolute",
+          borderRadius: "5px",
+          left: "20vw",
+          top: "50vh",
+          width: "60vw",
+          height: "30vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundSize: "80vw",
+        }}
+      >
+        <div className={styles.wrapper}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <h1 className={styles.title}>Iniciar sesión</h1>
+            <div className={styles.inputContainer}>
+              <label className={styles.label}>Email: </label>
+              <input
+                className={styles.input}
+                placeholder="Ingrese su email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+              ></input>
+            </div>
+            <div className={styles.inputContainer}>
+              <br />
+              <label className={styles.label}>Contraseña: </label>
+              <input
+                placeholder="Ingrese su contraseña"
+                className={styles.input}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              ></input>
+            </div>
             <br />
-            <label className={styles.label}>Contraseña: </label>
-            <input
-              placeholder="Ingrese su contraseña"
-              className={styles.input}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            ></input>
-          </div>
-          <br />
-          <button type="submit" className={styles.submitBtn}>
-            Iniciar sesión
-          </button>
-          <br />
-          <div>
-            <Link to="/signup">¿no tienes cuenta? Registrate aquí</Link>
-          </div>
-          <br />
-          <hr />
-          <div>
-            <Link to="/">Volver a inicio</Link>
-          </div>
-        </form>
+            <button type="submit" className={styles.submitBtn}>
+              Iniciar sesión
+            </button>
+            <br />
+            <div>
+              <Link to="/signup">¿No tienes cuenta? Registrate aquí</Link>
+            </div>
+            <br />
+            <hr />
+            <div>
+              <Link to="/">Volver a inicio</Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
-    // <div>Link to="/" </div>
     navigate("/")
   );
 };
