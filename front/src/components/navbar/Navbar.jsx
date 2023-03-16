@@ -40,6 +40,7 @@ const Navbar = () => {
 
   const expandUserMenuToggle = () => {
     setExpandUserMenu(!expandUserMenu);
+    setToggle(false);
   };
 
   const user = JSON.parse(loggedInUser); // Parseamos la información del usuario

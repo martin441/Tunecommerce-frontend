@@ -71,3 +71,24 @@
   letter-spacing: 2px;
   margin: 15px 0;
 }
+
+button {
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-to-cart button {
+  background-color: crimson;
+  color: #fff;
+}
+
+.add-to-cart button:hover {
+  background-color: rgb(91, 5, 22);
+}
+.add-to-cart button:active {
+  transform: translateY(1px);
+}

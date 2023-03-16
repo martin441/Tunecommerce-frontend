@@ -20,23 +20,28 @@ header {
   align-items: center;
   overflow: hidden;
 }
+
 .user-name {
   color: white;
   padding-left: 6px;
 }
+
 header .logo a {
   text-decoration: none;
   text-transform: uppercase;
   color: white;
 }
+
 header nav {
   display: flex;
 }
+
 nav ul li {
   list-style: none;
   display: inline-block;
   margin-right: 15px;
 }
+
 nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
@@ -44,9 +49,11 @@ nav ul li a {
   color: rgb(203, 203, 203);
   padding: 0 15px;
 }
+
 nav ul li a:hover {
   color: rgb(0, 0, 0);
 }
+
 nav .nav-cart {
   cursor: pointer;
   position: relative;
@@ -55,13 +62,37 @@ nav .nav-cart {
 
 nav .user-menu {
   position: absolute;
-  top: 50px;
-  right: 0;
+  top: 40px;
+  right: -10px;
   background-color: white;
+  border: 1px solid white;
+  border-radius: 3px;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  text-align: center;
   z-index: 1;
 }
+
+nav .user-menu a,
+nav .user-menu div {
+  color: black;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+nav .user-menu a:hover,
+nav .user-menu div:hover {
+  background-color: #f2f2f2;
+  color: white;
+}
+
+nav .user-menu img {
+  margin-right: 5px;
+}
+
 .logout-icon {
   position: fixed;
   margin-top: 8px;
@@ -84,11 +115,13 @@ nav .nav-cart span {
   border-radius: 50%;
   z-index: -1;
 }
+
 header .menu,
 header .close {
   cursor: pointer;
   display: none;
 }
+
 @media (max-width: 650px) {
   nav ul li a {
     text-decoration: none;
@@ -96,6 +129,7 @@ header .close {
     color: black;
     padding: 0 15px;
   }
+
   header ul {
     position: fixed;
     top: 0;
@@ -111,15 +145,18 @@ header .close {
     opacity: 0.97;
     transition: 0.5s linear;
   }
+
   header .menu,
   header .close {
     display: block;
   }
+
   header .close {
     position: absolute;
     top: 10px;
     right: 20px;
   }
+
   header ul.toggle {
     left: 0;
   }
