@@ -12,11 +12,8 @@ import DetalleHistorial from "../components/section/DetalleHistorial.jsx";
 import Checkout from "../components/checkout/Checkout.jsx";
 import AddCategories from "../components/admin/categories/AddCategories.jsx";
 import Navbar from "../components/navbar/Navbar.jsx";
-
-import AddCategories from "../components/AddCategories";
 import EditUsuarios from "../components/EditUsuarios";
 
-import Checkout from "../components/checkout/Checkout.jsx";
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
   // Devuelve verdadero o falso dependiendo de si el usuario está autenticado o no.
