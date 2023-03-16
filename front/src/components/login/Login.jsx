@@ -25,14 +25,12 @@ const Login = () => {
     dispatch(setUser(userLogueado));
   }, [setUser]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setEmail("");
     setPassword("");
     try {
-
       const res = await axios.post("http://localhost:3001/api/user/login", {
         email: email,
         password: password,
@@ -50,7 +48,7 @@ const Login = () => {
 
   console.log("USER", user);
   // if (userCreated) {
-    
+
   // }
 
   return loading ? (

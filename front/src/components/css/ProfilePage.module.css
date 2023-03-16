@@ -1,0 +1,117 @@
+/* .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.bio {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  /* background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer; */
+/* display: block;
+  margin-left: auto;
+  padding: 15px 30px;
+  border: none;
+  text-align: left;
+  background-color: rgb(84, 80, 84);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 30px;
+} */
+/* 2 */
+/* .profileform {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.profileform label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.profileform label input {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.buttoncontainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.buttoncontainer button {
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.buttoncontainer button:hover {
+  background-color: #0056b3;
+} */
+
+/* 3 */
+
+.profilecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+}
+
+.username {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profileinfo {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+.profileinfo p {
+  margin: 10px 0;
+}
