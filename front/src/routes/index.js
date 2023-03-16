@@ -9,8 +9,11 @@ import SignUp from "../components/signup/SignUp";
 import ProductsAdmin from "../components/admin/products/ProductsAdmin.jsx";
 import Historial from "../components/checkout/Historial";
 import DetalleHistorial from "../components/section/DetalleHistorial.jsx";
-import Checkout from "../components/checkout/Checkout.jsx";
 
+import AddCategories from "../components/AddCategories";
+import EditUsuarios from "../components/EditUsuarios";
+
+import Checkout from "../components/checkout/Checkout.jsx";
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
   // Devuelve verdadero o falso dependiendo de si el usuario está autenticado o no.
@@ -46,18 +49,18 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Products />} />
-      {/* <Route path="/product" component={Products} exact /> */}
       <Route path="/product/:id" element={<Details />} />
       <Route exact path="/cart" element={<Cart />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<SignUp />} />
       <Route exact path="/admin/products" element={<ProductsAdmin />} />
       <Route path="/checkout" element={<Checkout />} />
-      {/* <Route path="/profile" component={ProfilePage} /> */}
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/historial" element={<Historial />} />
+      <Route path="/addcategories" element={<AddCategories />} />
       <Route path="/detalleOrden/:id" element={<DetalleHistorial />} />
+      <Route path="/editusuarios" element={<EditUsuarios />} />
     </Routes>
   );
 };
