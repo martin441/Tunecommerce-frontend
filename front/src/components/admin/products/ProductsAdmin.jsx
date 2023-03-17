@@ -36,7 +36,6 @@ const ProductsAdmin = () => {
     axios
       .get("http://localhost:3001/api/categories/todo")
       .then((response) => {
-        console.log("CATEGORIEES", response.data);
         setCategories(response.data);
       })
       .catch((error) => {
@@ -74,7 +73,7 @@ const ProductsAdmin = () => {
         setEditingProduct(null);
       })
       .catch((error) => {
-        alert("Ocurrió un error inesperado")
+        alert("Ocurrió un error inesperado");
         setError(error.message);
       });
   };
@@ -157,8 +156,6 @@ const ProductsAdmin = () => {
                 <option value="">-- Seleccione una categoría --</option>
                 {categories.map(
                   (category) => (
-                    console.log("CATEGORIASSSfdg", category),
-                    console.log("CATEGORIASSS", category.id),
                     (
                       <option key={category.id} value={category.id}>
                         {category.name}
@@ -192,8 +189,6 @@ const ProductsAdmin = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                //console.log("PRODUCTIRO", product.categoryId),
-                //console.log("CARTITEMS", cartItems),
                 <tr key={product.id}>
                   <td>{product.id}</td>
                   <td>{product.name}</td>
@@ -205,11 +200,12 @@ const ProductsAdmin = () => {
                     )}
                   </td>
                   <td>{product.stock}</td>
+
                   <td>
-                    {
-                      categories.filter((e) => e.id === product.categoryId)[0]
-                        .name
-                    }
+                    {categories.length === 0
+                      ? window.location.reload()
+                      : categories.filter((e) => e.id === product.categoryId)[0]
+                          .name}
                   </td>
                   <td>
                     <button onClick={() => editProduct(product)}>Editar</button>
