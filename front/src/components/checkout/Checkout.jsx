@@ -3,10 +3,22 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteCartItems } from '../../redux/reducers/CartItemsReducer';
+import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
 
+//import Cards from "react-credit-cards";
+//import "react-credit-cards/es/styles-compiled.css";
+
 const Checkout = () => {
+  // //probando otro metodo
+  // const [cardDetails, setCardDetails] = useState({
+  //   cvc: "",
+  //   expiry: "",
+  //   focus: "",
+  //   name: "",
+  //   number: "",
+  // });
+
   const [paymentM, setPaymentM] = useState("");
   const [date, setDate] = useState("");
   const [tarjeta, setTarjeta] = useState("");
@@ -31,7 +43,7 @@ const Checkout = () => {
       .then((res) => {
         if (res.status === 201) {
           alert("Pago realizado correctamente");
-          dispatch(deleteCartItems([]))
+          dispatch(deleteCartItems([]));
           return navigate("/");
         } else {
           alert("No se pudo realizar el pago");
@@ -56,7 +68,7 @@ const Checkout = () => {
       <h2 style={{ textAlign: "center" }}>Checkout</h2>
 
       <h3>Checkout</h3>
-      <form onSubmit={handleCheckout}>
+      <form className="formCheckout" onSubmit={handleCheckout}>
         <h5>
           Comprador: {user.name} {user.lastname}
         </h5>
@@ -107,7 +119,9 @@ const Checkout = () => {
           ""
         )}
         <br></br>
-        <button type="submit" className="buttons">Pagar</button>
+        <button type="submit" className="buttons">
+          Pagar
+        </button>
         <Link to="/cart">
           <button>Volver al carrito</button>
         </Link>

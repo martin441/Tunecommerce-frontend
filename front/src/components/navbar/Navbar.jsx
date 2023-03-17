@@ -56,6 +56,7 @@ const Navbar = () => {
           <h1>
             <Link to="/">Tunecommerce</Link>
           </h1>
+          
         </div>
         <nav>
           <ul className={toggle ? "toggle" : ""}>
@@ -73,7 +74,9 @@ const Navbar = () => {
               </li> */}
             {loggedInUser ? (
               <li>
-                <ProductSearch/>
+                {/* <div className="buscador">
+                  <ProductSearch />
+                </div> */}
                 <div className="user-icon" onClick={expandUserMenuToggle}>
                   <img src={UserIcon} alt="" width="20" />
                   {/* Mostramos el nombre de usuario */}
@@ -134,6 +137,9 @@ const Navbar = () => {
           </div>
         </nav>
       </header>
+      <div className="buscador">
+            <ProductSearch />
+          </div>
     </div>
   );
 };

@@ -11,6 +11,109 @@
   background-color: crimson; /* Agrega un fondo semi-transparente */
   z-index: 999;
 }
+/* buscador */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  position: relative;
+  margin-right: 10px;
+}
+
+.search-input {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: -40px;
+}
+
+.search-results {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 4px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-result:hover {
+  background-color: #f1f1f1;
+}
+
+.search-result-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.search-result-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+/* buscador */
+/* form {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+form input[type="text"],
+form button[type="submit"] {
+  max-width: 50%;
+} */
+
+.buscarr {
+  display: flex;
+  align-items: flex-start;
+  max-width: 500px;
+  margin: 0 auto;
+  color: white;
+  font-size: small;
+}
+
+.buttonbuscar {
+  background-color: white;
+  color: black;
+  display: flex;
+  width: 100px;
+  align-items: flex-start;
+  max-width: 200px;
+  margin: 0 auto;
+  margin-left: 10px;
+}
 
 header {
   width: 100%;
@@ -19,6 +122,10 @@ header {
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
+}
+
+.buscador {
+  height: 5vh;
 }
 
 .user-name {
@@ -39,7 +146,7 @@ header nav {
 nav ul li {
   list-style: none;
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 20px;
 }
 
 nav ul li a {

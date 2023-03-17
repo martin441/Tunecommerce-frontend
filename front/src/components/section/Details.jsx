@@ -3,11 +3,21 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar.jsx";
 import "../css/Detail.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 
 const Details = () => {
   const [product, setProduct] = useState(null);
   const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
   const { id } = useParams();
+  const [reviews, setReviews] = useState([
+    { id: 1, text: "Excelente producto", author: "Juan Pérez" },
+    { id: 2, text: "Muy buena calidad", author: "María Gómez" },
+    { id: 3, text: "Lo recomiendo totalmente", author: "Pedro Rodríguez" },
+  ]);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     axios
@@ -21,7 +31,25 @@ const Details = () => {
   }, [id]);
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    axios
+      .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+        cantidad: 1,
+      })
+      .then(() => {
+        alert("Producto agregado al carrito");
+        axios
+          .get(`http://localhost:3001/api/products/${product.id}`)
+          .then((response) => {
+            dispatch(setCartItems(response.data));
+            localStorage.setItem("dataCart", JSON.stringify(response.data));
+            //JSON.stringify(localStorage.setItem("dataCart"));
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const cart = JSON.parse(localStorage.getItem("dataCart"));
   };
 
   if (!product) {
@@ -53,9 +81,16 @@ const Details = () => {
                 </div>
               </div>
               <div className="details-cart">
-                <button onClick={() => addToCart(product)}>
-                  Añadir al carrito
-                </button>
+              {cart.some((item) => item.id === product.id) ? (
+                  <button disabled>Añadido al carrito</button>
+                ) : (
+                  <button
+                    class="add-to-cart small"
+                    onClick={() => addToCart(product)}
+                  >
+                    Añadir al carrito
+                  </button>
+                )}
                 {/* {console.log("CART", cart)} */}
               </div>
               <Link to="/">
@@ -69,15 +104,15 @@ const Details = () => {
           <div className="details-reviews">
             <h3>Reviews:</h3>
             <div className="details-review-percentage">
-              <p>{product.reviews}% de reviews positivas</p>
+              <p>{product.ranking[0]} 🌟 de reviews positivas</p>
             </div>
             <div className="details-review-list">
-              {/* {product.reviews.map((review) => (
+              {reviews.map((review) => (
                 <div className="details-review" key={review.id}>
                   <p>{review.text}</p>
                   <p>Por: {review.author}</p>
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
         </div>

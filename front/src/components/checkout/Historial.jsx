@@ -18,32 +18,40 @@ const Historial = () => {
   }, []);
   console.log("ORDERS", orders);
   return (
-    <div>
-      {orders.map((compra) => {
-        return (
-          <Link to={`/detalleOrden/${compra.id}`}>
-            <div>
-              <p>Número de orden: {compra.id}</p>
-              <p>Fecha: {compra.createdAt}</p>
-              <p>Estado de la compra: {compra.status}</p>
-            </div>
-          </Link>
-        );
-        // axios
-        //   .get(`http://localhost:3001/api/order/${user.id}/${compra.id}`)
-        //   .then((res) => {
-        //     res.data[1].map((producto) => {
-        //       axios
-        //         .get(
-        //           `http://localhost:3001/api/products/${producto.productId}/`
-        //         )
-        //         .then((res) => {
-        //           <p>1</p>;
-        //         });
-        //     });
-        //   });
-      })}
-      <Link to="/">Volver a inicio</Link>
+    <div style={{ marginTop: "30vh", textAlign: "center" }}>
+      {orders.length ? (
+        orders.map((compra) => {
+          return (
+            <Link to={`/detalleOrden/${compra.id}`}>
+              <div>
+                <p>Número de orden: {compra.id}</p>
+                <p>Fecha: {compra.createdAt}</p>
+                <p>Estado de la compra: {compra.status}</p>
+              </div>
+            </Link>
+          );
+          // axios
+          //   .get(`http://localhost:3001/api/order/${user.id}/${compra.id}`)
+          //   .then((res) => {
+          //     res.data[1].map((producto) => {
+          //       axios
+          //         .get(
+          //           `http://localhost:3001/api/products/${producto.productId}/`
+          //         )
+          //         .then((res) => {
+          //           <p>1</p>;
+          //         });
+          //     });
+          //   });
+        })
+      ) : (
+        <div style={{ marginTop: "30vh", textAlign: "center" }}>
+          <p>No hay órdenes</p>
+        </div>
+      )}
+      <Link style={{ textAlign: "center" , color: "red"}} to="/">
+        Volver a inicio
+      </Link>
     </div>
   );
 };

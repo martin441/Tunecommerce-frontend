@@ -1,16 +1,18 @@
-
 /* body {
   background-color: crimson;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 } */
+body {
+  margin-top: 8vh;
+}
 
 h2 {
   text-align: center;
   color: rgb(0, 0, 0);
 }
 
-form {
+.formCheckout {
   max-width: 500px;
   margin: 0 auto;
   background-color: white;
@@ -20,7 +22,7 @@ form {
 }
 
 h3 {
-  color: white;
+  color: rgb(9, 9, 9);
   text-align: center;
 }
 
@@ -37,8 +39,8 @@ input[type="email"],
 input[type="tel"],
 input[type="password"],
 select {
-  width: 100%;
-  padding: 12px;
+  width: 40vh;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -47,7 +49,7 @@ select {
   resize: vertical;
 }
 
-button[type="submit"],
+/* button[type="submit"], */
 button {
   margin-top: 20px;
   background-color: crimson;
@@ -57,17 +59,18 @@ button {
   border-radius: 4px;
   cursor: pointer;
   margin-right: 10px;
-  font-size: 18px;
+  font-size: 17px;
+  height: 35px;
 }
 
 button[type="submit"]:hover,
 button:hover {
-  background-color: #db3b3b;
+  background-color: #d08888;
 }
 
 button[type="submit"] {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 select {

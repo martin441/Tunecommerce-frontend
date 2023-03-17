@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
+import Footer from '../footer/Footer';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -171,6 +172,7 @@ const Products = () => {
           )}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
