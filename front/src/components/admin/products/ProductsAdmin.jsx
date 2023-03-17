@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import "../css/ProductsAdmin.css";
 import { Link } from "react-router-dom";
 
@@ -74,7 +73,7 @@ const ProductsAdmin = () => {
         setEditingProduct(null);
       })
       .catch((error) => {
-        alert("Ocurrió un error inesperado")
+        alert("Ocurrió un error inesperado");
         setError(error.message);
       });
   };

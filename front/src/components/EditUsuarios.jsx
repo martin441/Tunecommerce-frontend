@@ -47,7 +47,6 @@ const EditUsuarios = () => {
     <>
       <h1>Editar usuarios</h1>
       {users.map((user) => {
-        console.log("USERMAP", user);
         return (
           <div>
             <li>{user.name}, Admin: </li>{" "}

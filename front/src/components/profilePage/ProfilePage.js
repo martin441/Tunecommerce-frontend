@@ -59,7 +59,7 @@ function ProfilePage() {
           onClick={() => {
             navigate("/historial");
           }}
-          style={{width: "50vh"}}
+          style={{ width: "50vh" }}
         >
           Historial de órdenes
         </button>
