@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addToCart,
-  clearCart,
-  delFromCart,
-} from "../../redux/action/cartActions";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
 import "../css/Cart.css";
 import axios from "axios";
 import { setCart } from "../../redux/reducers/CartReducers";
 import { useNavigate } from "react-router";
+//import { clearCart } from "../../redux/action/clearCart";
+import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 
 const Cart = () => {
   let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
+  const [carts, setCarts] = useState(() => {
+    const storedCart = localStorage.getItem("dataCart");
+    if (storedCart) {
+      return JSON.parse(storedCart);
+      } else {
+      return [];
+      }
+      });
+  
+
+  
+
   const dispatch = useDispatch();
+  // Guardar los datos del carrito en el LocalStorage cada vez que cambian
+  useEffect(() => {
+    localStorage.setItem("dataCart", JSON.stringify(carts));
+  }, [carts]);
+
+  useEffect(() => {
+    axios
+    .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+    .then((response) => {
+    dispatch(setCart(response.data));
+    })
+    .catch((error) => {
+    console.log(error);
+    });
+    }, [dispatch, userLogueado.id]);
 
   const cart = useSelector((state) => {
     return state.cart;
@@ -33,7 +57,41 @@ const Cart = () => {
 
   const [first, setfirst] = useState(0);
 
+  const handleClearCart = () => {
+    const confirmClearCart = window.confirm(
+      "¿Estás seguro de vaciar el carrito?"
+    );
+    if (confirmClearCart) {
+      axios
+        .delete(`http://localhost:3001/api/cart/${userLogueado.id}`)
+        .then((response) => {
+          console.log("CART-CLEAR", response.data);
+          dispatch(deleteCartItems([]));
+          localStorage.removeItem("dataCart");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   //localStorage.setItem("user", JSON.stringify(res.data));
+
+  //permanecia del carro
+
+  // useEffect(() => {
+  //   JSON.parse(localStorage.getItem("dataCart")) || [];
+  // }, []);
+  // useEffect(() => {
+  //   JSON.parse(localStorage.getItem("dataCart")) || [];
+  //   //dispatch(setCart(savedCart));
+  //   //setfirst(Math.random(savedCart));
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("dataCart", JSON.stringify(cart));
+  // }, [cart]);
 
   useEffect(() => {
     console.log("USER", userLogueado);
@@ -57,14 +115,34 @@ const Cart = () => {
   }, [cart, cartItems]);
 
   const getTotal = () => {
-    const res = cart.reduce((prev, item) => {
-      const producto = cartItems.find((p) => p.id === item.productId);
-      const precio = producto.price;
-      const calculo = prev + precio * item.cantidad;
-      console.log("PRODUCTO", producto);
-      return calculo;
-    }, 0);
-    setTotal(res);
+    axios
+      .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+      .then((response) => {
+        const cart = response.data;
+        axios
+          .get(`http://localhost:3001/api/products`)
+          .then((response) => {
+            const cartItems = response.data;
+            if (!Array.isArray(cart) || cart.length === 0) {
+              setTotal(0);
+              return;
+            }
+            const res = cart.reduce((prev, item) => {
+              const producto = cartItems.find((p) => p.id === item.productId);
+              const precio = producto ? producto.price : 0;
+              const calculo = prev + precio * item.cantidad;
+              console.log("PRODUCTO", producto);
+              return calculo;
+            }, 0);
+            setTotal(res);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const increase = (id, contador) => {
@@ -115,7 +193,33 @@ const Cart = () => {
         .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
         .then((response) => {
           console.log("CART-REMOVE", response.data);
-          dispatch(setCart(response.data));
+          // actualizo el estado del carrito con los nuevos datos que devuelve la API
+          setfirst(Math.random());
+          //window.location.reload();
+
+          // obtengo la cantidad del otro producto en el carrito
+          const otroProducto = cart.find((e) => e.productId !== id);
+          if (otroProducto) {
+            const nuevaCantidad = otroProducto.cantidad;
+            // actualizo la cantidad del otro producto en la base de datos
+            axios
+              .put(
+                `http://localhost:3001/api/cart/${userLogueado.id}/${otroProducto.productId}`,
+                {
+                  cantidad: nuevaCantidad,
+                }
+              )
+              .then((response) => {
+                console.log("CART-UPDATE", response.data);
+                // actualizo el estado del carrito con los nuevos datos que devuelve la API
+                //con el setfirst que creamos arriba
+                //dispatch(setCart(response.data));
+                setfirst(Math.random());
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -144,8 +248,14 @@ const Cart = () => {
         <br />
         <div className="details-container">
           {cartItems.map((item) => {
-            let contador =
-              cart.filter((e) => e.productId === item.id)[0].cantidad;
+            let contador = 0;
+            if (
+              Array.isArray(cart) &&
+              cart.some((e) => e.productId === item.id)
+            ) {
+              contador = cart.filter((e) => e.productId === item.id)[0]
+                .cantidad;
+            }
 
             return (
               <div className="product-container" key={item.id}>
@@ -200,12 +310,7 @@ const Cart = () => {
         </div>
         <div className="total-container">
           <h2>Total: ${total}</h2>
-          <button
-            className="clear-button"
-            onClick={() => dispatch(clearCart())}
-          >
-            Vaciar carrito
-          </button>
+          <button onClick={handleClearCart}>Vaciar carrito</button>
           {userLogueado.id ? (
             <Link to="/checkout" className="checkout-button">
               Comprar

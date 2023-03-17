@@ -110,6 +110,8 @@
   flex-direction: column;
   border: 2px solid black;
   padding: 20px;
+  width: 50vh;
+  align-items: center;
 }
 
 .profileinfo p {

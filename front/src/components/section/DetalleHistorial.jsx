@@ -42,10 +42,21 @@ const DetalleHistorial = () => {
   //   console.log("PRODUCTOMAP", productos);
   return (
     <div>
-      {productos.map((unidad) => (
-        <p>{unidad.name}</p>
-      ))}
-      <Link to="/">Volver a inicio</Link>
+      {productos.map(
+        (unidad) => (
+          console.log("UNIDAD", unidad),
+          (
+            <div>
+              {/* <p>{unidad.name}</p> */}
+              <div className="details-images">
+              <img src={unidad.image[0]} alt={unidad.name} />
+              <h3>{unidad.name}</h3>
+              </div>
+            </div>
+          )
+        )
+      )}
+      <Link to="/historial">Volver</Link>
     </div>
   );
 };

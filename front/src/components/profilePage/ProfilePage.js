@@ -59,6 +59,7 @@ function ProfilePage() {
           onClick={() => {
             navigate("/historial");
           }}
+          style={{width: "50vh"}}
         >
           Historial de órdenes
         </button>
@@ -85,7 +86,7 @@ function ProfilePage() {
             </button>
             <button
               onClick={() => {
-                navigate("/addcategories");
+                navigate("/admin/categories");
               }}
             >
               Editar categorias
@@ -104,6 +105,7 @@ function ProfilePage() {
     </div>
   ) : (
     <div className={styles.profilecontainer}>
+      <h2>Editar Perfil</h2>
       <form className={styles.profileform} onSubmit={handleSubmit}>
         <label>
           Dirección:

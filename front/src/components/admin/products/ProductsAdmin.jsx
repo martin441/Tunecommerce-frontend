@@ -180,6 +180,7 @@ const ProductsAdmin = () => {
           <table>
             <thead>
               <tr>
+                <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
@@ -194,6 +195,7 @@ const ProductsAdmin = () => {
                 //console.log("PRODUCTIRO", product.categoryId),
                 //console.log("CARTITEMS", cartItems),
                 <tr key={product.id}>
+                  <td>{product.id}</td>
                   <td>{product.name}</td>
                   <td>{product.description}</td>
                   <td>{product.price}</td>
@@ -212,7 +214,7 @@ const ProductsAdmin = () => {
                   <td>
                     <button onClick={() => editProduct(product)}>Editar</button>
                     <button onClick={() => deleteProduct(product.id)}>
-                      Eliminar ❕
+                      Eliminar
                     </button>
                   </td>
                 </tr>
