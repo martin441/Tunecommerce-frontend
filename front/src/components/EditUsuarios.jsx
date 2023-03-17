@@ -9,12 +9,10 @@ const EditUsuarios = () => {
   const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
 
   useEffect(() => {
-    console.log("USERLOG", userLogueado);
     axios
       .get(`http://localhost:3001/api/admin`)
       .then((res) => {
         const filtrados = res.data.filter((e) => e.id !== userLogueado.id);
-        console.log("FILTRADO", filtrados);
         setUsers(filtrados);
       })
       .catch(() => {

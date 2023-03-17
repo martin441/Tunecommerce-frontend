@@ -35,7 +35,6 @@ const ProductsAdmin = () => {
     axios
       .get("http://localhost:3001/api/categories/todo")
       .then((response) => {
-        console.log("CATEGORIEES", response.data);
         setCategories(response.data);
       })
       .catch((error) => {
@@ -154,17 +153,11 @@ const ProductsAdmin = () => {
                 onChange={(event) => setCategory(event.target.value)}
               >
                 <option value="">-- Seleccione una categoría --</option>
-                {categories.map(
-                  (category) => (
-                    console.log("CATEGORIASSSfdg", category),
-                    console.log("CATEGORIASSS", category.id),
-                    (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    )
-                  )
-                )}
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
             <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>
@@ -191,8 +184,6 @@ const ProductsAdmin = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                //console.log("PRODUCTIRO", product.categoryId),
-                //console.log("CARTITEMS", cartItems),
                 <tr key={product.id}>
                   <td>{product.id}</td>
                   <td>{product.name}</td>

@@ -10,7 +10,6 @@ const DetalleHistorial = () => {
   const [productos, setProductos] = useState([]);
   const user = useSelector((state) => state.user);
   const orders = useSelector((state) => state.orders);
-  console.log("desde detalles", orders);
   const params = useParams();
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const DetalleHistorial = () => {
     setProductos(prod);
   }, []);
   useEffect(() => {}, [first]);
-  console.log("PRODUCTS", productos);
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Detalles de la compra </h1>

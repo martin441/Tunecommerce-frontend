@@ -10,7 +10,6 @@ function ProfilePage() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
-  console.log("REDUX", user);
 
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +24,7 @@ function ProfilePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Telefono", celnumber);
+
     axios
       .put(`http://localhost:3001/api/user/update/${user.id}`, {
         password: password,
@@ -34,7 +33,6 @@ function ProfilePage() {
         celnumber: celnumber,
       })
       .then((res) => {
-        console.log("reeeees", res);
         dispatch(setUser(res.data));
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsEditing(false);

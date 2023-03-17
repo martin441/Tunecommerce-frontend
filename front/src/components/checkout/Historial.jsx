@@ -11,13 +11,13 @@ const Historial = () => {
   const orders = useSelector((state) => state.orders);
 
   const user = useSelector((state) => state.user);
-  console.log("desde historial", user);
+
   useEffect(() => {
     axios.get(`http://localhost:3001/api/order/${user.id}`).then((res) => {
       dispatch(setOrders(res.data));
     });
   }, []);
-  console.log("ORDERS", orders);
+
   return (
     <div
       style={{ marginTop: "30vh", textAlign: "center", textDecoration: "none" }}
