@@ -162,7 +162,6 @@ const Products = () => {
                   </button>
                 )}
               </div>
-              {console.log("CART", cart)}
             </div>
           </div>
         ))}

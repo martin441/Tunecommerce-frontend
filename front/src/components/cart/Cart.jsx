@@ -44,7 +44,6 @@ const Cart = () => {
     return state.cart;
   });
 
-  console.log("CART", cart);
 
   const navigate = useNavigate();
 
@@ -52,8 +51,6 @@ const Cart = () => {
     return state.cartItems;
   });
   const [total, setTotal] = useState(0);
-
-  console.log("CARTITEMS", cartItems);
 
   const [first, setfirst] = useState(0);
 
@@ -94,11 +91,9 @@ const Cart = () => {
   // }, [cart]);
 
   useEffect(() => {
-    console.log("USER", userLogueado);
     axios
       .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
       .then((response) => {
-        console.log("DATOS", response.data);
         dispatch(setCart(response.data));
       })
       .catch((error) => {
@@ -131,7 +126,6 @@ const Cart = () => {
               const producto = cartItems.find((p) => p.id === item.productId);
               const precio = producto ? producto.price : 0;
               const calculo = prev + precio * item.cantidad;
-              console.log("PRODUCTO", producto);
               return calculo;
             }, 0);
             setTotal(res);
@@ -152,7 +146,6 @@ const Cart = () => {
       })
       .then((response) => {
         //alert("cantidad incrementada");
-        console.log("CART-INCREASE", response.data);
         //navigate("/cart");
         setfirst(Math.random());
         //dispatch(setCart(response.data));
@@ -175,8 +168,6 @@ const Cart = () => {
         .then((response) => {
           //navigate("/cart");
           //alert("cantidad reducida")
-          console.log("CART-REDUCCION", response.data);
-
           //dispatch(setCart(response.data));
           setfirst(Math.random());
           //dispatch(setCart(response.data));
@@ -192,7 +183,6 @@ const Cart = () => {
       axios
         .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
         .then((response) => {
-          console.log("CART-REMOVE", response.data);
           // actualizo el estado del carrito con los nuevos datos que devuelve la API
           setfirst(Math.random());
           //window.location.reload();
@@ -210,7 +200,6 @@ const Cart = () => {
                 }
               )
               .then((response) => {
-                console.log("CART-UPDATE", response.data);
                 // actualizo el estado del carrito con los nuevos datos que devuelve la API
                 //con el setfirst que creamos arriba
                 //dispatch(setCart(response.data));

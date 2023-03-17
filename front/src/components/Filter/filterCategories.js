@@ -83,7 +83,6 @@ const FilterCategories = () => {
         })}
       </div>
       <div id="product" className="card-container">
-        {console.log("Selected CAT", selectedCategory)}
         {selectedCategory === "Not found" ? (
           <h2>
             No contamos con stock de productos de esta categoría en este momento

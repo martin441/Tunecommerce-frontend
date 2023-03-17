@@ -21,7 +21,6 @@ const Navbar = () => {
   const [products, setProducts] = useState([]);
 
   const cartItems = useSelector((state) => state.cartItems);
-  console.log("CARTITEMS", cartItems);
 
   useEffect(() => {
     // Obtener productos del servidor
@@ -63,9 +62,9 @@ const Navbar = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/product">Product</Link>
-            </li>
+            </li> */}
             {/* <li>
                 <Link to="/contact">Contact</Link>
               </li> */}
