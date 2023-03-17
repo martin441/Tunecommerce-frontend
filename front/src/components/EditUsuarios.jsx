@@ -21,13 +21,19 @@ const EditUsuarios = () => {
   }, [first]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3001/api/admin/${id}`, {})
-      .then((res) => {
-        alert("usuario borrado");
-        setfirst(Math.random());
-      })
-      .catch((err) => console.log(err));
+    const confirmDelete = window.confirm(
+      "¿Está seguro de que desea eliminar este usuario?"
+    );
+
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:3001/api/admin/${id}`, {})
+        .then((res) => {
+          alert("usuario borrado");
+          setfirst(Math.random());
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleAdmin = (user) => {
@@ -43,24 +49,29 @@ const EditUsuarios = () => {
 
   return (
     <>
-      <h1>Editar usuarios</h1>
-      {users.map((user) => {
-        return (
-          <div>
-            <li>{user.name}, Admin: </li>{" "}
-            <input
-              onClick={() => handleAdmin(user)}
-              type="checkbox"
-              checked={user.isAdmin ? true : false}
-            />
-            <button onClick={() => handleDelete(user.id)}>
-              Eliminar usuario
-            </button>
-          </div>
-        );
-      })}
-
-      <Link to="/">Volver a inicio</Link>
+      <div style={{ textAlign: "center" }}>
+        <h1>Editar usuarios</h1>
+        {users.map((user) => {
+          return (
+            <div>
+              <li>{user.name}, Admin: </li>{" "}
+              <input
+                onClick={() => handleAdmin(user)}
+                type="checkbox"
+                checked={user.isAdmin ? true : false}
+              />
+              <br />
+              <br />
+              <button onClick={() => handleDelete(user.id)}>
+                Eliminar usuario
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ textAlign: "center" }}>
+      <Link to="/profile">Volver</Link>
+      </div>
     </>
   );
 };
