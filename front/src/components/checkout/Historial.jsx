@@ -44,14 +44,16 @@ const Historial = () => {
         })
       ) : (
         <div style={{ marginTop: "30vh", textAlign: "center" }}>
-          <p>No hay órdenes</p>
+          <p >No hay órdenes</p>
         </div>
       )}
+
       <Link
         style={{ textAlign: "center", color: "red", textDecoration: "none" }}
         to="/profile"
       >
         Volver
+
       </Link>
     </div>
   );

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import styles from "./css/EditUsuarios.module.css";
+
 
 const EditUsuarios = () => {
   const [users, setUsers] = useState([]);
@@ -49,28 +51,35 @@ const EditUsuarios = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <h1>Editar usuarios</h1>
-        {users.map((user) => {
-          return (
-            <div>
-              <li>{user.name}, Admin: </li>{" "}
-              <input
-                onClick={() => handleAdmin(user)}
-                type="checkbox"
-                checked={user.isAdmin ? true : false}
-              />
-              <br />
-              <br />
-              <button onClick={() => handleDelete(user.id)}>
-                Eliminar usuario
-              </button>
+    <div className={styles.marcoEditar}>
+
+      <h1 className={styles.editarUsuario}>Editar usuarios</h1>
+      {users.map((user) => {
+        console.log("USERMAP", user);
+        return (
+          <div>
+            <li>{user.name}, Admin: </li>{" "}
+            <input className={styles.checkbox}
+              onClick={() => handleAdmin(user)}
+              type="checkbox"
+              checked={user.isAdmin ? true : false}
+            />
+            <div className={styles.text}>
+             
+            <button className={styles.botonEliminar} onClick={() => handleDelete(user.id)}>
+              Eliminar usuario
+            </button>
             </div>
-          );
-        })}
-      </div>
-      <div style={{ textAlign: "center" }}>
-      <Link to="/profile">Volver</Link>
+          </div>
+        );
+      })}
+
+      <Link style={{ marginTop: "30vh", textAlign: "center", textDecoration: "none", color: "grey" , paddingBottom: "30px", paddingTop: "30px"}}to="/">Volver a inicio</Link>
+     
+
+
+
+     
       </div>
     </>
   );
