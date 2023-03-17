@@ -1,0 +1,23 @@
+
+.marcoEditar{
+justify-content: center;
+  margin-top: 10%;
+  margin-left: 40%;
+ 
+}
+
+.editarUsuario{
+    color: rgb(99, 96, 96)
+}
+
+:checked{
+  
+    border: 1px solid rgb(127, 127, 147);
+}
+
+li{
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
