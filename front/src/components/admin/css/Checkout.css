@@ -39,7 +39,7 @@ input[type="email"],
 input[type="tel"],
 input[type="password"],
 select {
-  width: 40vh;
+  width: 34vh;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
