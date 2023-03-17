@@ -100,7 +100,7 @@ const Products = () => {
       <div id="product" className="card-container">
         {products.slice(0, visibleProducts).map((product) => (
           <div className="card" key={product.id}>
-            <Link to={`/product/${product.id}`}>
+            <Link style={{textDecoration: "none" }} to={`/product/${product.id}`}>
               <img src={product.image[0]} alt={product.name} />
               <h3>{product.name}</h3>
             </Link>
@@ -139,7 +139,7 @@ const Products = () => {
       <div id="product" className={estilo.slider}>
         {products.slice(0, visibleProducts).map((product) => (
           <div className="card" key={product.id}>
-            <Link to={`/product/${product.id}`}>
+            <Link style={{textDecoration: "none" }} to={`/product/${product.id}`}>
               <img src={product.image[0]} alt={product.name} />
               <h3>{product.name}</h3>
             </Link>

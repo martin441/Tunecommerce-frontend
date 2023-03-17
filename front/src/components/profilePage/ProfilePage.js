@@ -98,7 +98,7 @@ function ProfilePage() {
             </button>
           </>
         )}
-        <Link to="/">Volver a inicio</Link>
+        <Link style={{textDecoration: "none" , color:"grey", marginTop:"10px"}} to="/">Volver a inicio</Link>
       </div>
     </div>
   ) : (

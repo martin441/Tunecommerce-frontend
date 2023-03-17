@@ -93,7 +93,7 @@ const Details = () => {
                 )}
                 {/* {console.log("CART", cart)} */}
               </div>
-              <Link to="/">
+              <Link style={{textDecoration: "none" }} to="/">,
                 <button className="button-volver">Volver</button>
               </Link>
             </div>
