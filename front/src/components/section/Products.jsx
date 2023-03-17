@@ -8,7 +8,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
-import Footer from '../footer/Footer';
+import Footer from "../footer/Footer";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,9 +17,6 @@ const Products = () => {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
   const [loadMore, setLoadMore] = useState(10);
-
-  // const user = useSelector((state) => state.user);
-
   const user = JSON.parse(localStorage.getItem("user"));
   const cartItems = useSelector((state) => state.cartItems);
 
@@ -39,23 +36,27 @@ const Products = () => {
   };
 
   const handleAddToCart = (product) => {
-    axios
-      .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
-        cantidad: 1,
-      })
-      .then(() => {
-        alert("Producto agregado al carrito");
-        axios
-          .get(`http://localhost:3001/api/products/${product.id}`)
-          .then((response) => {
-            dispatch(setCartItems(response.data));
-            localStorage.setItem("dataCart", JSON.stringify(response.data));
-            //JSON.stringify(localStorage.setItem("dataCart"));
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!user) {
+      alert("Debes loguearte para agregar productos al carrito");
+    } else {
+      axios
+        .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+          cantidad: 1,
+        })
+        .then(() => {
+          alert("Producto agregado al carrito");
+          axios
+            .get(`http://localhost:3001/api/products/${product.id}`)
+            .then((response) => {
+              dispatch(setCartItems(response.data));
+              localStorage.setItem("dataCart", JSON.stringify(response.data));
+              //JSON.stringify(localStorage.setItem("dataCart"));
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 
     const cart = JSON.parse(localStorage.getItem("dataCart"));
 
@@ -171,7 +172,7 @@ const Products = () => {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
