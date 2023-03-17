@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import "../css/ProductsAdmin.css";
 import { Link } from "react-router-dom";
 
@@ -154,15 +153,13 @@ const ProductsAdmin = () => {
                 onChange={(event) => setCategory(event.target.value)}
               >
                 <option value="">-- Seleccione una categoría --</option>
-                {categories.map(
-                  (category) => (
-                    (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    )
-                  )
-                )}
+
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+
               </select>
             </div>
             <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>

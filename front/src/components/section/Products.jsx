@@ -88,88 +88,99 @@ const Products = () => {
         <br />
         <br />
       </div>
-      <div>
-        <ProductSlider />
-      </div>
-      <div>
-        <FilterCategories />
-      </div>
-      <div>
-        <h2>Productos Populares:</h2>
-      </div>
-      <div id="product" className="card-container">
-        {products.slice(0, visibleProducts).map((product) => (
-          <div className="card" key={product.id}>
-            <Link style={{textDecoration: "none" }} to={`/product/${product.id}`}>
-              <img src={product.image[0]} alt={product.name} />
-              <h3>{product.name}</h3>
-            </Link>
-            <p>{product.description}</p>
-            <div className="card-info">
-              <div className="price">
-                <h4>${product.price}</h4>
-              </div>
-              <div className="stock">
-                <h4>Stock: {product.stock}</h4>
-              </div>
-              <div className="add-to-cart">
-                {cart.some((item) => item.id === product.id) ? (
-                  <button disabled>Añadido al carrito</button>
-                ) : (
-                  <button
-                    class="add-to-cart small"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+      <div style={{textAlign: "center"}}>
         <div>
-          {visibleProducts < products.length && (
-            <button onClick={handleLoadMore}>Ver más</button>
-          )}
+          <ProductSlider />
         </div>
-      </div>
-      <div>
-        <h2>Nuestros productos</h2>
-      </div>
-      <div id="product" className={estilo.slider}>
-        {products.slice(0, visibleProducts).map((product) => (
-          <div className="card" key={product.id}>
-            <Link style={{textDecoration: "none" }} to={`/product/${product.id}`}>
-              <img src={product.image[0]} alt={product.name} />
-              <h3>{product.name}</h3>
-            </Link>
-            <p>{product.description}</p>
-            <div className="card-info">
-              <div className="price">
-                <h4>${product.price}</h4>
-              </div>
-              <div className="stock">
-                <h4>Stock: {product.stock}</h4>
-              </div>
-              <div className="add-to-cart">
-                {cart.some((item) => item.id === product.id) ? (
-                  <button disabled>Añadido al carrito</button>
-                ) : (
-                  <button
-                    class="add-to-cart small"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                )}
+        <div>
+          <FilterCategories />
+        </div>
+        <div>
+          <h2>Productos Populares:</h2>
+        </div>
+        <div id="product" className="card-container">
+          {products.slice(0, visibleProducts).map((product) => (
+            <div className="card" key={product.id}>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  textAlign: "center !important",
+                }}
+                to={`/product/${product.id}`}
+              >
+                <img src={product.image[0]} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
+              <p>{product.description}</p>
+              <div className="card-info">
+                <div className="price">
+                  <h4>${product.price}</h4>
+                </div>
+                <div className="stock">
+                  <h4>Stock: {product.stock}</h4>
+                </div>
+                <div className="add-to-cart">
+                  {cart.some((item) => item.id === product.id) ? (
+                    <button disabled>Añadido al carrito</button>
+                  ) : (
+                    <button
+                      class="add-to-cart small"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
+          ))}
+          <div>
+            {visibleProducts < products.length && (
+              <button onClick={handleLoadMore}>Ver más</button>
+            )}
           </div>
-        ))}
+        </div>
         <div>
-          {visibleProducts < products.length && (
-            <button onClick={handleLoadMore}>Ver más</button>
-          )}
+          <h2>Nuestros productos</h2>
+        </div>
+        <div id="product" className={estilo.slider}>
+          {products.slice(0, visibleProducts).map((product) => (
+            <div className="card" key={product.id}>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/product/${product.id}`}
+              >
+                <img src={product.image[0]} alt={product.name} />
+                <h3>{product.name}</h3>
+              </Link>
+              <p>{product.description}</p>
+              <div className="card-info">
+                <div className="price">
+                  <h4>${product.price}</h4>
+                </div>
+                <div className="stock">
+                  <h4>Stock: {product.stock}</h4>
+                </div>
+                <div className="add-to-cart">
+                  {cart.some((item) => item.id === product.id) ? (
+                    <button disabled>Añadido al carrito</button>
+                  ) : (
+                    <button
+                      class="add-to-cart small"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+          <div>
+            {visibleProducts < products.length && (
+              <button onClick={handleLoadMore}>Ver más</button>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

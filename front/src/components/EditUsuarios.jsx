@@ -11,12 +11,10 @@ const EditUsuarios = () => {
   const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
 
   useEffect(() => {
-    console.log("USERLOG", userLogueado);
     axios
       .get(`http://localhost:3001/api/admin`)
       .then((res) => {
         const filtrados = res.data.filter((e) => e.id !== userLogueado.id);
-        console.log("FILTRADO", filtrados);
         setUsers(filtrados);
       })
       .catch(() => {
@@ -25,13 +23,19 @@ const EditUsuarios = () => {
   }, [first]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3001/api/admin/${id}`, {})
-      .then((res) => {
-        alert("usuario borrado");
-        setfirst(Math.random());
-      })
-      .catch((err) => console.log(err));
+    const confirmDelete = window.confirm(
+      "¿Está seguro de que desea eliminar este usuario?"
+    );
+
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:3001/api/admin/${id}`, {})
+        .then((res) => {
+          alert("usuario borrado");
+          setfirst(Math.random());
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleAdmin = (user) => {
@@ -75,7 +79,6 @@ const EditUsuarios = () => {
 
 
 
-     
      
       </div>
     </>
