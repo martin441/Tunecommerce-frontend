@@ -153,11 +153,13 @@ const ProductsAdmin = () => {
                 onChange={(event) => setCategory(event.target.value)}
               >
                 <option value="">-- Seleccione una categoría --</option>
+
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 ))}
+
               </select>
             </div>
             <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>
@@ -195,11 +197,12 @@ const ProductsAdmin = () => {
                     )}
                   </td>
                   <td>{product.stock}</td>
+
                   <td>
-                    {
-                      categories.filter((e) => e.id === product.categoryId)[0]
-                        .name
-                    }
+                    {categories.length === 0
+                      ? window.location.reload()
+                      : categories.filter((e) => e.id === product.categoryId)[0]
+                          .name}
                   </td>
                   <td>
                     <button onClick={() => editProduct(product)}>Editar</button>
