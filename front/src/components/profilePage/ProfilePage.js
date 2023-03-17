@@ -148,7 +148,7 @@ function ProfilePage() {
           >
             Cancelar
           </button>
-          <Link to="/">Volver a inicio</Link>
+          {/* <Link to="/">Volver a inicio</Link> */}
         </div>
       </form>
     </div>

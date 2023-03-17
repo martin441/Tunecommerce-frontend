@@ -9,6 +9,15 @@
   justify-content: center;
   padding: 2rem;
 }
+/*agrego zoom a las imagenes*/
+.zoom-on-hover {
+  transition: transform 0.2s ease-out;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.2);
+}
+
 
 /* Agregamos un fondo y un borde a los contenedores de los elementos principales */
 .details-container,

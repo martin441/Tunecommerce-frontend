@@ -78,7 +78,7 @@ body {
 
 .submitBtn {
   display: block;
-  margin-left: auto;
+  /* margin-left: auto; */
   padding: 15px 30px;
   border: none;
   background-color: crimson;

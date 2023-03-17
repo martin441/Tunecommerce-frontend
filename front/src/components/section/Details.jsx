@@ -63,7 +63,7 @@ const Details = () => {
         <div className="container">
           <div className="details-container">
             <div className="details-image">
-              <img src={product.image[0]} alt={product.name} />
+              <img src={product.image[0]} alt={product.name} className="zoom-on-hover"/>
             </div>
             <div className="details-info">
               <h2>{product.name}</h2>
@@ -76,12 +76,12 @@ const Details = () => {
                 <h3>Otras imágenes:</h3>
                 <div className="details-images">
                   {product.image.map((img, index) => (
-                    <img key={index} src={img} alt={product.name} />
+                    <img key={index} src={img} alt={product.name} className="zoom-on-hover"/>
                   ))}
                 </div>
               </div>
               <div className="details-cart">
-              {cart.some((item) => item.id === product.id) ? (
+                {cart.some((item) => item.id === product.id) ? (
                   <button disabled>Añadido al carrito</button>
                 ) : (
                   <button
@@ -93,8 +93,8 @@ const Details = () => {
                 )}
                 {/* {console.log("CART", cart)} */}
               </div>
-              <Link style={{textDecoration: "none" }} to="/">,
-                <button className="button-volver">Volver</button>
+              <Link style={{ textDecoration: "none" }} to="/">
+                ,<button className="button-volver">Volver</button>
               </Link>
             </div>
           </div>
@@ -104,16 +104,21 @@ const Details = () => {
           <div className="details-reviews">
             <h3>Reviews:</h3>
             <div className="details-review-percentage">
-              <p>{product.ranking[0]} 🌟 de reviews positivas</p>
+              <p>
+                {!product.ranking ? 0 : product.ranking[0] || 0} 🌟 de reviews
+                positivas
+              </p>
             </div>
-            <div className="details-review-list">
-              {reviews.map((review) => (
-                <div className="details-review" key={review.id}>
-                  <p>{review.text}</p>
-                  <p>Por: {review.author}</p>
-                </div>
-              ))}
-            </div>
+            {product.ranking && (
+              <div className="details-review-list">
+                {reviews.map((review) => (
+                  <div className="details-review" key={review.id}>
+                    <p>{review.text}</p>
+                    <p>Por: {review.author}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
