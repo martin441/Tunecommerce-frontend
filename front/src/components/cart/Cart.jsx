@@ -6,7 +6,7 @@ import "../css/Cart.css";
 import axios from "axios";
 import { setCart } from "../../redux/reducers/CartReducers";
 import { useNavigate } from "react-router";
-//import { clearCart } from "../../redux/action/clearCart";
+
 import {
   deleteCartId,
   deleteCartItems,
@@ -196,21 +196,16 @@ const Cart = () => {
     return (
       <div>
         <Navbar />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
+        <h2 style={{ textAlign: "center" }}>
+          {" "}
+          No hay productos en el carrito{" "}
+        </h2>
       </div>
     );
   } else {
     return (
       <>
         <Navbar />
-        <br />
-        <br />
-        <br />
-        <br />
         <div className="details-container">
           {cartItems.map((item) => {
             let contador = 0;
@@ -224,10 +219,11 @@ const Cart = () => {
 
             return (
               <div className="product-container" key={item.id}>
-                <img src={item.image} alt="" />
                 <div className="product-details">
+                  <img src={item.image} alt="" />
                   <h2>{item.name}</h2>
                   <p>Precio: ${item.price}</p>
+
                   <div className="cantidad">
                     <button
                       className="cantidad-button"
@@ -248,13 +244,13 @@ const Cart = () => {
                     >
                       +
                     </button>
+                    <button
+                      className="remove-button"
+                      onClick={() => removeProduct(item.id)}
+                    >
+                      Eliminar
+                    </button>
                   </div>
-                  <button
-                    className="remove-button"
-                    onClick={() => removeProduct(item.id)}
-                  >
-                    Eliminar
-                  </button>
                 </div>
               </div>
             );
