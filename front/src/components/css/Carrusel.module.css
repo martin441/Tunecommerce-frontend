@@ -10,7 +10,6 @@
 
 .right_arrow {
   position: absolute;
-
   right: 32px;
   font-size: 3rem;
   color: #0000001b;
@@ -40,12 +39,14 @@
   transition-duration: 1s;
   transform: scale(1.08);
 }
+
 .root {
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .item {
   height: 100%;
   display: flex;
@@ -54,14 +55,17 @@
   flex-direction: column;
   padding: 0 1rem;
 }
+
 .image {
   width: 70vw;
   height: 30vw;
   margin-bottom: 1rem;
   object-fit: contain;
 }
+
 .title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #444;
 }
+
