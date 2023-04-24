@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import estilo from "../css/Carrusel.module.css";
 import axios from "axios";
+import "../css/Carrusel.css";
 
 function ProductSlider() {
   const [products, setProducts] = useState([]);
@@ -33,7 +33,7 @@ function ProductSlider() {
   }, []);
 
   return (
-    <div>
+    <div className="content">
       <section className={estilo.slider}>
         <FaArrowAltCircleLeft
           className={estilo.left_arrow}
@@ -43,38 +43,38 @@ function ProductSlider() {
           className={estilo.right_arrow}
           onClick={handleNextClick}
         />
-        {products.slice(0, visibleProducts).map(
-          (slide, index) => (
-            //console.log("SLIDE", slide.image[0]),
-            (
-              <div>
-                {index === currentIndex && (
-                  <Link to={`/product/${slide.id}`}>
-                    <div key={slide.id}>
-                      {slide.image && (
-                        <img
-                          key={slide.image[0]}
-                          src={slide.image[0]}
-                          alt={`Imagen 1`}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "/img/image-error.png";
-                          }}
-                        />
-                      )}
-                    </div>
-                    <div className="content">
-                      <h3 style={{ color: "white", fontSize: "18px" }}>
-                        <Link to={`/product/${slide.id}`}>{slide.name}</Link>
-                      </h3>
-                      <span>${slide.price}</span>
-                    </div>
-                  </Link>
-                )}
-              </div>
-            )
-          )
-        )}
+        {products.slice(0, visibleProducts).map((slide, index) => (
+          <div>
+            {index === currentIndex && (
+              <Link to={`/product/${slide.id}`}>
+                <div key={slide.id}>
+                  {slide.image && (
+                    <img
+                      key={slide.image[0]}
+                      src={slide.image[0]}
+                      alt={`Imagen 1`}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/img/image-error.png";
+                      }}
+                    />
+                  )}
+                </div>
+                <div>
+                  <h3>
+                    <Link
+                      style={{ color: "black", fontSize: "18px" }}
+                      to={`/product/${slide.id}`}
+                    >
+                      {slide.name}
+                    </Link>
+                  </h3>
+                  <span style={{ color: "black" }}>${slide.price}</span>
+                </div>
+              </Link>
+            )}
+          </div>
+        ))}
       </section>
     </div>
   );
