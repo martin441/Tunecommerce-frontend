@@ -50,7 +50,7 @@ const FilterCategories = () => {
   };
 
   return (
-    <div>
+    <div className="categories">
       <div
         style={{
           display: "flex",
@@ -119,8 +119,6 @@ const FilterCategories = () => {
           ))
         )}
       </div>
-
-      {/* <input type="text" placeholder="Buscar categorias"></input> */}
     </div>
   );
 };

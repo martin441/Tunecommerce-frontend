@@ -59,42 +59,21 @@ const Products = () => {
     }
 
     const cart = JSON.parse(localStorage.getItem("dataCart"));
-
-    // const newCart = [...cart];
-    // const index = newCart.findIndex((item) => item.id === product.id);
-    // if (index === -1) {
-    //   newCart.push({ ...product, count: 1 });
-    // } else {
-    //   newCart[index].count += 1;
-    // }
-
-    // setCart(newCart);
-    //getTotal(newCart);
   };
 
-  // const getTotal = (cartItems) => {
-  //   const res = cartItems.reduce((prev, item) => {
-  //     return prev + item.price * item.count;
-  //   }, 0);
-  //   setTotal(res);
-  // };
 
   return (
     <>
       <Navbar />
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
       <div style={{textAlign: "center"}}>
         <div>
           <ProductSlider />
         </div>
+
         <div>
           <FilterCategories />
         </div>
+        
         <div>
           <h2>Productos Populares:</h2>
         </div>
