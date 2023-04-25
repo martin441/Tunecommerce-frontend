@@ -50,7 +50,6 @@ const Products = () => {
             .then((response) => {
               dispatch(setCartItems(response.data));
               localStorage.setItem("dataCart", JSON.stringify(response.data));
-              //JSON.stringify(localStorage.setItem("dataCart"));
             });
         })
         .catch((error) => {
@@ -61,11 +60,10 @@ const Products = () => {
     const cart = JSON.parse(localStorage.getItem("dataCart"));
   };
 
-
   return (
     <>
       <Navbar />
-      <div style={{textAlign: "center"}}>
+      <div style={{ textAlign: "center" }}>
         <div>
           <ProductSlider />
         </div>
@@ -73,8 +71,8 @@ const Products = () => {
         <div>
           <FilterCategories />
         </div>
-        
-        <div>
+
+       {/*  <div>
           <h2>Productos Populares:</h2>
         </div>
         <div id="product" className="card-container">
@@ -113,14 +111,10 @@ const Products = () => {
               </div>
             </div>
           ))}
-          <div>
-            {visibleProducts < products.length && (
-              <button onClick={handleLoadMore}>Ver más</button>
-            )}
-          </div>
-        </div>
+        </div> */}
+          
         <div>
-          <h2>Nuestros productos</h2>
+          <h2 style={{margin: "15px"}}>Nuestros productos</h2>
         </div>
         <div id="product" className={estilo.slider}>
           {products.slice(0, visibleProducts).map((product) => (
@@ -155,12 +149,12 @@ const Products = () => {
               </div>
             </div>
           ))}
+        </div>
           <div>
             {visibleProducts < products.length && (
-              <button onClick={handleLoadMore}>Ver más</button>
+              <button className="moreButton" onClick={handleLoadMore}>Ver más</button>
             )}
           </div>
-        </div>
       </div>
       <Footer />
     </>
