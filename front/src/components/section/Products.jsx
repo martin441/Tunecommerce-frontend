@@ -50,7 +50,6 @@ const Products = () => {
             .then((response) => {
               dispatch(setCartItems(response.data));
               localStorage.setItem("dataCart", JSON.stringify(response.data));
-              //JSON.stringify(localStorage.setItem("dataCart"));
             });
         })
         .catch((error) => {
