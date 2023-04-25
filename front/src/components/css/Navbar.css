@@ -2,14 +2,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  /* height: 100%;*/
+  height: 4rem;
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  background-color: crimson; /* Agrega un fondo semi-transparente */
-  z-index: 999;
+  background-color: crimson;
 }
 /* buscador */
 .search-container {
@@ -82,18 +79,6 @@
   font-size: 16px;
   font-weight: bold;
 }
-/* buscador */
-/* form {
-  display: flex;
-  align-items: center;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-form input[type="text"],
-form button[type="submit"] {
-  max-width: 50%;
-} */
 
 .buscarr {
   display: flex;
@@ -115,31 +100,40 @@ form button[type="submit"] {
   margin-left: 10px;
 }
 
-header {
+.header {
   width: 100%;
   min-height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  overflow: hidden;
 }
 
+.navbar {
+  display: flex;
+}
 .buscador {
   height: 5vh;
 }
 
 .user-name {
-  color: white;
-  padding-left: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(203, 203, 203);
+  padding: 0 15px;
 }
 
-header .logo a {
+.user-name:hover {
+  color: rgb(0, 0, 0);
+}
+
+.logo a {
   text-decoration: none;
   text-transform: uppercase;
   color: white;
 }
 
-header nav {
+nav {
   display: flex;
 }
 
@@ -161,7 +155,7 @@ nav ul li a:hover {
   color: rgb(0, 0, 0);
 }
 
-nav .nav-cart {
+.nav-cart {
   cursor: pointer;
   position: relative;
   margin-left: auto;
@@ -169,18 +163,16 @@ nav .nav-cart {
 
 nav .user-menu {
   position: absolute;
-  top: 40px;
-  right: -10px;
   background-color: white;
   border: 1px solid white;
   border-radius: 3px;
+  margin-top: 4px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 120px;
   text-align: center;
-  z-index: 1;
 }
 
 nav .user-menu a,
@@ -211,7 +203,7 @@ nav .user-menu img {
   cursor: pointer;
 }
 
-nav .nav-cart span {
+.nav-cart span {
   position: absolute;
   top: -12px;
   right: -7px;
@@ -223,8 +215,8 @@ nav .nav-cart span {
   z-index: -1;
 }
 
-header .menu,
-header .close {
+.menu,
+.close {
   cursor: pointer;
   display: none;
 }
@@ -237,7 +229,7 @@ header .close {
     padding: 0 15px;
   }
 
-  header ul {
+  ul {
     position: fixed;
     top: 0;
     left: -100%;
@@ -253,18 +245,18 @@ header .close {
     transition: 0.5s linear;
   }
 
-  header .menu,
-  header .close {
+  .menu,
+  .close {
     display: block;
   }
 
-  header .close {
+  .close {
     position: absolute;
     top: 10px;
     right: 20px;
   }
 
-  header ul.toggle {
+  ul.toggle {
     left: 0;
   }
 }
