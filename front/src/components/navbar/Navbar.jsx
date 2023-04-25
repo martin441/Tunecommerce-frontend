@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Menu from "../svg/bars-solid.svg";
 import Close from "../svg/times-solid.svg";
 import CartIcon from "../svg/shopping-cart-solid.svg";
-import UserIcon from "../svg/user-solid.svg";
 import LogoutIcon from "../svg/logout.svg";
 import ProductSearch from "../search/ProductSearch";
 import { Link } from "react-router-dom";

@@ -4,12 +4,13 @@ import styles from "../css/ProfilePage.module.css";
 import { setUser } from "../../redux/reducers/userReducer";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import "../css/ProfilePage.css";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.user);
+  let random = `https://api.multiavatar.com/0.24218016646343754.svg`;
 
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -44,16 +45,45 @@ function ProfilePage() {
       });
   };
 
+  console.log("RANDOM", random);
+
   return !isEditing ? (
     <div className={styles.profilecontainer}>
-      <h2 className={styles.username}>Usuario: {user.username} </h2>
       <div className={styles.profileinfo}>
-        <p className={styles.name}>Nombre: {user.name}</p>
-        <p className={styles.lastname}>Apellido: {user.lastname}</p>
-        <p className={styles.mail}>Mail: {user.email}</p>
-        <p className={styles.address}>Dirección: {user.address}</p>
-        <p className={styles.phone}>Número de teléfono: {user.celnumber}</p>
+        <img className="profileImage" src={random} alt="" />
+
+        <div className="userdata">
+          <div className="item">
+            <p>
+              <b> Nombre:</b> {user.name}
+            </p>
+          </div>
+
+          <div className="item">
+            <p>
+              <b> Apellido:</b> {user.lastname}
+            </p>
+          </div>
+
+          <div className="item">
+            <p>
+              <b> Mail:</b> {user.email}
+            </p>
+          </div>
+          <div className="item">
+            <p>
+              <b> Dirección: </b> {user.address}
+            </p>
+          </div>
+          <div className="item">
+            <p>
+              <b> Número de teléfono:</b> {user.celnumber}
+            </p>
+          </div>
+        </div>
+
         <button
+          className="button"
           onClick={() => {
             navigate("/historial");
           }}
@@ -63,6 +93,7 @@ function ProfilePage() {
         </button>
 
         <button
+          className="button"
           onClick={() => {
             setIsEditing(true);
           }}
@@ -74,8 +105,9 @@ function ProfilePage() {
           <></>
         ) : (
           <>
-            <div>Panel administrador ↓</div>
+            <div className="admin">Panel administrador ↓</div>
             <button
+              className="button"
               onClick={() => {
                 navigate("/editusuarios");
               }}
@@ -83,6 +115,7 @@ function ProfilePage() {
               Editar usuarios
             </button>
             <button
+              className="button"
               onClick={() => {
                 navigate("/admin/categories");
               }}
@@ -90,6 +123,7 @@ function ProfilePage() {
               Editar categorias
             </button>
             <button
+              className="button"
               onClick={() => {
                 navigate("/admin/products");
               }}
@@ -98,49 +132,62 @@ function ProfilePage() {
             </button>
           </>
         )}
-        <Link style={{textDecoration: "none" , color:"grey", marginTop:"10px"}} to="/">Volver a inicio</Link>
+        <button id="inicio">
+          <Link
+            style={{ textDecoration: "none", color: "grey", marginTop: "10px" }}
+            to="/"
+          >
+            Volver a inicio
+          </Link>
+        </button>
       </div>
     </div>
   ) : (
-    <div className={styles.profilecontainer}>
+    <div className="formDiv">
       <h2>Editar Perfil</h2>
-      <form className={styles.profileform} onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label>
-          Dirección:
+          Dirección
           <input
+            className="inputEdit"
             type="text"
-            value={address}
+            value={user.address}
             onChange={(event) => setAddress(event.target.value)}
           />
         </label>
         <label>
           Número de teléfono:
           <input
-            type="number"
-            value={celnumber}
+            className="inputEdit"
+            type="text"
+            defaultValue={user.celnumber}
             onChange={(event) => setCelnumber(event.target.value)}
           />
         </label>
         <label>
           Email:
           <input
+            className="inputEdit"
             type="text"
-            value={email}
+            defaultValue={user.email}
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
         <label>
           Contraseña:
           <input
+            className="inputEdit"
             type="text"
-            value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
 
-        <div className={styles.buttoncontainer}>
-          <button type="submit">Guardar</button>
+        <div className="editButton">
+          <button className="button" type="submit">
+            Guardar
+          </button>
           <button
+            className="button"
             type="button"
             onClick={() => {
               setIsEditing(false);
@@ -148,7 +195,6 @@ function ProfilePage() {
           >
             Cancelar
           </button>
-          {/* <Link to="/">Volver a inicio</Link> */}
         </div>
       </form>
     </div>

@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Cart from "../components/cart/Cart.jsx";
 import NotFoundPage from "../components/notFoundPage/NotFoundPage.js";
-import ProfilePage from "../components/profilePage/ProfilePage.js";
+import ProfilePage from "../components/profilePage/ProfilePage.jsx";
 import Details from "../components/section/Details.jsx";
 import Products from "../components/section/Products.jsx";
 import Login from "../components/login/Login.jsx";
