@@ -50,7 +50,7 @@ const SignUp = () => {
           position: "absolute",
           borderRadius: "5px",
           left: "20vw",
-          top: "50vh",
+          top: "35vh",
           width: "60vw",
           height: "30vh",
           display: "flex",
@@ -75,11 +75,11 @@ const SignUp = () => {
             <div className={styles.inputContainer}>
               <label
                 className={styles.label}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                // style={{
+                //   display: "flex",
+                //   alignItems: "center",
+                //   justifyContent: "center",
+                // }}
               >
                 Nombre de usuario:{" "}
               </label>
@@ -232,7 +232,16 @@ const SignUp = () => {
             </button>
             <br />
             <div>
-              <Link to="/login">¿Ya tienes cuenta? Inicia Sesión aquí</Link>
+              <Link to="/login" className={styles.link}>
+                ¿Ya tienes cuenta? Inicia Sesión aquí
+              </Link>
+            </div>
+            <br />
+            <hr />
+            <div style={{ marginTop: "15px" }}>
+              <Link to="/" className={styles.link}>
+                Volver al inicio
+              </Link>
             </div>
           </form>
         </div>
