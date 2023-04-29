@@ -62,7 +62,7 @@ const Login = () => {
           position: "absolute",
           borderRadius: "5px",
           left: "20vw",
-          top: "50vh",
+          top: "30vh",
           width: "60vw",
           height: "30vh",
           display: "flex",
@@ -103,12 +103,16 @@ const Login = () => {
             </button>
             <br />
             <div>
-              <Link to="/signup">¿No tienes cuenta? Registrate aquí</Link>
+              <Link to="/signup" className={styles.link}>
+                ¿No tienes cuenta? Registrate aquí
+              </Link>
             </div>
             <br />
             <hr />
-            <div>
-              <Link to="/">Volver a inicio</Link>
+            <div style={{ marginTop: "15px" }}>
+              <Link to="/" className={styles.link}>
+                Volver al inicio
+              </Link>
             </div>
           </form>
         </div>

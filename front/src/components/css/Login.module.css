@@ -54,7 +54,7 @@ body {
 .label {
   position: absolute;
   top: -29px;
-  left: 15px;
+  left: 0px;
   padding: 0 4px;
   background-color: white;
   color: #000000;
@@ -77,15 +77,18 @@ body {
 }
 
 .submitBtn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* margin-left: auto; */
-  padding: 15px 30px;
+  /* padding: 15px 30px; */
   border: none;
   background-color: crimson;
   color: white;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
   margin-top: 30px;
 }
 
@@ -112,4 +115,10 @@ body {
 
 .input:focus {
   border: 2px solid rgb(163, 160, 163);
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(142, 133, 142);
 }
