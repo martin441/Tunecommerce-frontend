@@ -115,11 +115,26 @@ const ProductsAdmin = () => {
     setIsEditing(false);
   };
 
+  const scrollToTopAndEdit = (product) => {
+    editProduct(product);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div>
       {error && <div>Error al cargar los productos: {error}</div>}
-      <div style={{ display: "flex" }}>
-        <div style={{ width: "40%" }} className="form-container">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{ width: "100%", maxWidth: "500px" }}
+          className="form-container"
+        >
           <Link to="/profile">
             <FaArrowLeft style={{ width: 18, height: 20 }} />
           </Link>
@@ -179,7 +194,13 @@ const ProductsAdmin = () => {
                 ))}
               </select>
             </div>
-            <div style={{display: "flex", justifyContent: "center", alignItems: "flex-end"}}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
               <button type="submit">{isEditing ? "Guardar" : "Crear"}</button>
               {isEditing && (
                 <button type="button" onClick={handleCancelEdit}>
@@ -190,7 +211,10 @@ const ProductsAdmin = () => {
             {error && <div>{error}</div>}
           </form>
         </div>
-        <div style={{ width: "50%" }}>
+        <div
+          style={{ width: "100%", maxWidth: "800px" }}
+          className="form-container"
+        >
           <h2>Lista de productos</h2>
           <table>
             <thead>
@@ -226,7 +250,9 @@ const ProductsAdmin = () => {
                           .name}
                   </td>
                   <td>
-                    <button onClick={() => editProduct(product)}>Editar</button>
+                    <button onClick={() => scrollToTopAndEdit(product)}>
+                      Editar
+                    </button>
                     <button onClick={() => deleteProduct(product.id)}>
                       Eliminar
                     </button>
