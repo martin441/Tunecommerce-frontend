@@ -14,6 +14,24 @@
   }
 }
 
+@media only screen and (max-width: 752px) {
+  .form-container table {
+    width: 100%;
+  }
+  .form-container td,
+  .form-container th {
+    display: block;
+    text-align: left;
+    width: 100%;
+  }
+  .form-container td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
 .form-container h2 {
   margin-top: 0;
 }
@@ -45,7 +63,7 @@
   font-size: 16px;
 }
 
-.volver{
+.volver {
   background-color: crimson;
   color: white;
   border: none;
