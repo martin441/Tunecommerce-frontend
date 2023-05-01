@@ -3,6 +3,8 @@ import axios from "axios";
 import "../css/ProductsAdmin.css";
 import { Link } from "react-router-dom";
 
+import { FaArrowLeft } from "react-icons/fa";
+
 const ProductsAdmin = () => {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -14,6 +16,7 @@ const ProductsAdmin = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     getProducts();
@@ -98,6 +101,18 @@ const ProductsAdmin = () => {
     setStock(product.stock);
     setCategory(product.categoryId);
     setEditingProduct(product);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setName("");
+    setDescription("");
+    setPrice("");
+    setImage([]);
+    setStock("");
+    setCategory("");
+    setEditingProduct(null);
+    setIsEditing(false);
   };
 
   return (
@@ -105,7 +120,10 @@ const ProductsAdmin = () => {
       {error && <div>Error al cargar los productos: {error}</div>}
       <div style={{ display: "flex" }}>
         <div style={{ width: "40%" }} className="form-container">
-          <h2>{editingProduct ? "Editar Producto" : "Crear Producto"}</h2>
+          <Link to="/profile">
+            <FaArrowLeft style={{ width: 18, height: 20 }} />
+          </Link>
+          <h2>{isEditing ? "Editar Producto" : "Crear Producto"}</h2>
           <form onSubmit={createProduct}>
             <div>
               <label>Nombre:</label>
@@ -159,14 +177,17 @@ const ProductsAdmin = () => {
                     {category.name}
                   </option>
                 ))}
-
               </select>
             </div>
-            <button type="submit">{editingProduct ? "Editar" : "Crear"}</button>
-            <br />
-            <Link to="/profile">
-              <button className="volver">Volver</button>
-            </Link>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "flex-end"}}>
+              <button type="submit">{isEditing ? "Guardar" : "Crear"}</button>
+              {isEditing && (
+                <button type="button" onClick={handleCancelEdit}>
+                  Cancelar
+                </button>
+              )}
+            </div>
+            {error && <div>{error}</div>}
           </form>
         </div>
         <div style={{ width: "50%" }}>
