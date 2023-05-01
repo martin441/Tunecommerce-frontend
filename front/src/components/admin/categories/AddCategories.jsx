@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../css/ProductsAdmin.css";
+import { FaArrowLeft } from "react-icons/fa";
 
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
@@ -79,13 +80,21 @@ const AddCategories = () => {
   console.log(deleteCategoria);
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "33.3%" }} className="form-container">
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div
+        style={{ width: "100%", maxWidth: "500px" }}
+        className="form-container"
+      >
+        <Link to="/profile">
+          <FaArrowLeft style={{ width: 18, height: 20 }} />
+        </Link>
         <h3>Agregar Categorias</h3>
         <form onSubmit={handleAddCategoty}>
           <label>Nombre de categoria: </label>
           <input
-            placeholder="Ingrese el nombre de la categoria"
+            placeholder="nombre de la categoria"
             value={categoriaNombre}
             onChange={(e) => setCategoriaNombre(e.target.value)}
             type="text"
@@ -93,7 +102,7 @@ const AddCategories = () => {
           ></input>
           <label>Descripcion de categoria: </label>
           <input
-            placeholder="Ingrese la descripcion de la"
+            placeholder="descripcion de la categoria"
             value={categoriaDescripcion}
             onChange={(e) => setCategoriaDescripcion(e.target.value)}
             type="text"
@@ -102,12 +111,12 @@ const AddCategories = () => {
           <button type="submit">Agregar</button>
         </form>
         <br />
-        <Link to="/profile">
-          <button className="volver">Volver</button>
-        </Link>
       </div>
       <br></br>
-      <div style={{ width: "33.3%" }} className="form-container">
+      <div
+        style={{ width: "100%", maxWidth: "500px" }}
+        className="form-container"
+      >
         <h3>Editar Categorias</h3>
         <form action="#" onSubmit={handleEditCategory}>
           <label for="cat">Categorias</label>
@@ -141,7 +150,10 @@ const AddCategories = () => {
         </form>
       </div>
       <br></br>
-      <div style={{ width: "33.3%" }} className="form-container">
+      <div
+        style={{ width: "100%", maxWidth: "500px" }}
+        className="form-container"
+      >
         <h3>Eliminar Categorias</h3>
         <form action="#" onSubmit={handleDeleteCategory}>
           <label for="cat">Categorias</label>
