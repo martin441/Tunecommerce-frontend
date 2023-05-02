@@ -208,16 +208,18 @@ const Cart = () => {
     return (
       <>
         <Navbar />
-        <div className="details-container">
-          <Link to="/">
-            <FaArrowLeft
-              className="icon-arrow"
-              style={{ width: 18, height: 20, color: "black" }}
-            />
-          </Link>
-          <div>
-            <button onClick={handleClearCart}>Limpiar</button>
+        <div>
+          <div className="limpiar">
+            <Link to="/">
+              <FaArrowLeft
+                className="icon-arrow"
+                style={{ width: 18, height: 20, color: "black" }}
+              />
+            </Link>
+            <button style={{marginTop: 5}} onClick={handleClearCart}>Limpiar carro</button>
           </div>
+        </div>
+        <div className="details-container">
           {cartItems.map((item) => {
             let contador = 0;
             if (
@@ -272,6 +274,9 @@ const Cart = () => {
           })}
         </div>
         <div className="total-container">
+          <br></br>
+          <br></br>
+          <br></br>
           <h2>Total: ${total}</h2>
           {userLogueado.id ? (
             <div
