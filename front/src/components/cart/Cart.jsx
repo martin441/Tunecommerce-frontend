@@ -198,26 +198,13 @@ const Cart = () => {
     return (
       <div>
         <Navbar />
-        <h2 style={{ textAlign: "center" }}>
-          {" "}
-          No hay productos en el carrito{" "}
-        </h2>
+        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
       </div>
     );
   } else {
     return (
       <>
         <Navbar />
-        <div>
-          <div className="limpiar">
-            {/* <Link to="/">
-              <FaArrowLeft
-                className="icon-arrow"
-                style={{ width: 18, height: 20, color: "black" }}
-              />
-            </Link> */}
-          </div>
-        </div>
         <div className="details-container">
           <Link to="/">
             <FaArrowLeft
