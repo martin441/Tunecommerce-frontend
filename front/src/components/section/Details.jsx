@@ -5,6 +5,7 @@ import "../css/Detail.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Details = () => {
   const [product, setProduct] = useState(null);
@@ -31,39 +32,67 @@ const Details = () => {
   }, [id]);
 
   const addToCart = (product) => {
-    axios
-      .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
-        cantidad: 1,
-      })
-      .then(() => {
-        alert("Producto agregado al carrito");
+    if (Array.isArray(cart)) {
+      const productIndex = cart.findIndex((item) => item.id === product.id);
+      if (productIndex === -1) {
+        setCart([...cart, product]);
         axios
-          .get(`http://localhost:3001/api/products/${product.id}`)
-          .then((response) => {
-            dispatch(setCartItems(response.data));
-            localStorage.setItem("dataCart", JSON.stringify(response.data));
-            //JSON.stringify(localStorage.setItem("dataCart"));
+          .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+            cantidad: 1,
+          })
+          .then(() => {
+            alert("Producto agregado al carrito");
+            axios
+              .get(`http://localhost:3001/api/products/${product.id}`)
+              .then((response) => {
+                dispatch(setCartItems(response.data));
+                localStorage.setItem("dataCart", JSON.stringify(response.data));
+                setCart([...response.data]);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
           });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    const cart = JSON.parse(localStorage.getItem("dataCart"));
+      }
+    } else {
+      console.error("cart is not an array");
+    }
   };
 
   if (!product) {
     return <div>Loading...</div>;
   }
 
+  const isProductInCart =
+    cart.findIndex((item) => item.id === product.id) !== -1;
+
   return (
     <>
       <div>
         <Navbar />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            paddingLeft: "20%",
+            paddingTop: "2%",
+          }}
+        >
+          <Link style={{ textDecoration: "none" }} to="/">
+            <FaArrowLeft style={{ width: 18, height: 20, color: "black" }} />
+          </Link>
+        </div>
         <div className="container">
           <div className="details-container">
-            <div className="details-image">
-              <img src={product.image[0]} alt={product.name} className="zoom-on-hover"/>
+            <div className="details-image-container">
+              <div className="details-image">
+                <img
+                  id="imageprinci"
+                  src={product.image[0]}
+                  alt={product.name}
+                  className="details-image"
+                />
+              </div>
             </div>
             <div className="details-info">
               <h2>{product.name}</h2>
@@ -76,16 +105,27 @@ const Details = () => {
                 <h3>Otras imágenes:</h3>
                 <div className="details-images">
                   {product.image.map((img, index) => (
-                    <img key={index} src={img} alt={product.name} className="zoom-on-hover"/>
+                    <div className="details-image-container">
+                      <div className="details-image">
+                        <img
+                          key={index}
+                          src={img}
+                          alt={product.name}
+                          className="zoom-on-hover"
+                        />
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
-              <div className="details-cart">
-                {cart.some((item) => item.id === product.id) ? (
-                  <button disabled>Añadido al carrito</button>
+              <div className="detailss-cart">
+                {isProductInCart ? (
+                  <button disabled style={{ backgroundColor: "green" }}>
+                    Ya en el carrito
+                  </button>
                 ) : (
                   <button
-                    class="add-to-cart small"
+                    class="button-cart"
                     onClick={() => addToCart(product)}
                   >
                     Añadir al carrito
@@ -93,9 +133,6 @@ const Details = () => {
                 )}
                 {/* {console.log("CART", cart)} */}
               </div>
-              <Link style={{ textDecoration: "none" }} to="/">
-                ,<button className="button-volver">Volver</button>
-              </Link>
             </div>
           </div>
         </div>
