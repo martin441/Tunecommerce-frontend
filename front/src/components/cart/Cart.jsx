@@ -210,16 +210,21 @@ const Cart = () => {
         <Navbar />
         <div>
           <div className="limpiar">
-            <Link to="/">
+            {/* <Link to="/">
               <FaArrowLeft
                 className="icon-arrow"
                 style={{ width: 18, height: 20, color: "black" }}
               />
-            </Link>
-            <button style={{marginTop: 5}} onClick={handleClearCart}>Limpiar carro</button>
+            </Link> */}
           </div>
         </div>
         <div className="details-container">
+          <Link to="/">
+            <FaArrowLeft
+              className="icon icon-arrow"
+              style={{ width: 18, height: 20, color: "black" }}
+            />
+          </Link>
           {cartItems.map((item) => {
             let contador = 0;
             if (
@@ -274,20 +279,18 @@ const Cart = () => {
           })}
         </div>
         <div className="total-container">
-          <br></br>
-          <br></br>
-          <br></br>
           <h2>Total: ${total}</h2>
           {userLogueado.id ? (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Link to="/checkout" className="checkout-button">
-                <button>Comprar</button>
+            <div className="botones-comprarvaciar">
+              <button
+                className="remove-button"
+                style={{ marginTop: "5px" }}
+                onClick={handleClearCart}
+              >
+                Limpiar carro
+              </button>
+              <Link to="/checkout">
+                <button className="checkout-button">Comprar</button>
               </Link>
             </div>
           ) : (
