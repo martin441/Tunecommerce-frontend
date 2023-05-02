@@ -194,6 +194,19 @@ const Cart = () => {
     return (
       <div>
         <Navbar />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            paddingLeft: "20%",
+            paddingTop: "2%",
+          }}
+        >
+          <Link style={{ textDecoration: "none" }} to="/">
+            <FaArrowLeft style={{ width: 18, height: 20, color: "black" }} />
+          </Link>
+        </div>
+        <br></br>
         <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
       </div>
     );
@@ -270,7 +283,7 @@ const Cart = () => {
                 style={{ marginTop: "5px" }}
                 onClick={handleClearCart}
               >
-                Limpiar carro
+                Vaciar carrito
               </button>
               <Link to="/checkout">
                 <button className="checkout-button">Comprar</button>

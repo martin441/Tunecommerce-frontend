@@ -67,11 +67,16 @@ section .cart {
   padding: 0;
   padding-left: 1rem;
   padding-right: 1rem;
+  color: black;
+  background-color: white;
   border: 1px solid rgba(27, 31, 35, 0.753);
   border-radius: 6px;
   text-align: center;
   margin: 3px;
   margin-bottom: 3px;
+  position: fixed;
+  bottom: 0px;
+  left: 18%;
 }
 
 .header-container {
@@ -151,8 +156,8 @@ section .cart {
   margin: 3px;
   margin-bottom: 3px;
   position: fixed;
-	bottom: 0px;
-	right: 18%;
+  bottom: 0px;
+  right: 18%;
 }
 
 .icon {
@@ -168,7 +173,7 @@ section .cart {
   margin-top: 1%;
 }
 
-.total-container{
+.total-container {
   margin-top: 2%;
 }
 
