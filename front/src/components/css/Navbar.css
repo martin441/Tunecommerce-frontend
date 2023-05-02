@@ -121,6 +121,7 @@
   font-weight: bold;
   color: rgb(203, 203, 203);
   padding: 0 15px;
+  cursor: pointer;
 }
 
 .user-name:hover {
@@ -173,6 +174,7 @@ nav .user-menu {
   align-items: center;
   width: 120px;
   text-align: center;
+  cursor: pointer;
 }
 
 nav .user-menu a,
