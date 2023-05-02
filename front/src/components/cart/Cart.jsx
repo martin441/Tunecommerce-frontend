@@ -13,6 +13,7 @@ import {
   deleteCartItems,
   setCartItems,
 } from "../../redux/reducers/CartItemsReducer";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Cart = () => {
   let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
@@ -207,8 +208,13 @@ const Cart = () => {
     return (
       <>
         <Navbar />
-
         <div className="details-container">
+          <Link to="/">
+            <FaArrowLeft
+              className="icon-arrow"
+              style={{ width: 18, height: 20, color: "black" }}
+            />
+          </Link>
           <div>
             <button onClick={handleClearCart}>Limpiar</button>
           </div>

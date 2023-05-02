@@ -113,6 +113,20 @@ section .cart {
   margin-bottom: 20px;
 }
 
+.icon-arrow {
+  position: absolute;
+  top: 10%;
+  left: 23%;
+}
+
+@media (max-width: 768px) {
+  .arrow-icon {
+    width: 16px;
+    height: 18px;
+  }
+}
+
+
 .checkout-button {
   margin-bottom: 20px;
 }
