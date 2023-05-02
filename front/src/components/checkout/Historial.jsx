@@ -5,6 +5,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { setOrders } from "../../redux/reducers/OrderReducer";
 import styles from "../css/ProfilePage.module.css";
+import { FiArrowLeft } from "react-icons/fi";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Historial = () => {
   const dispatch = useDispatch();
@@ -20,8 +22,22 @@ const Historial = () => {
 
   return (
     <div
-      style={{ marginTop: "30vh", textAlign: "center", textDecoration: "none" }}
+      style={{ marginTop: "20vh", textAlign: "center", textDecoration: "none" }}
     >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Link to="/profile" style={{ color: "black", textDecoration: "none" }}>
+          <FiArrowLeft size={20} style={{ marginRight: "10px" }} />
+        </Link>
+        <h1 style={{ textAlign: "center", margin: "0" }}>
+          Historial de compras
+        </h1>
+      </div>
       {orders.length ? (
         orders.map((compra) => {
           return (
@@ -29,14 +45,22 @@ const Historial = () => {
               to={`/detalleOrden/${compra.id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className={styles.profilecontainer}>
+              <div className={`${styles.profilecontainer} ${styles.box3d}`}>
                 <div className={styles.profileinfo}>
-                  <p style={{ color: "black" }}>Número de orden: {compra.id}</p>
-                  <p style={{ color: "black" }}>Fecha: {compra.createdAt}</p>
+                  <br /> <br />
                   <p style={{ color: "black" }}>
-                    Estado de la compra: {compra.status}
+                    <strong>Número de orden:</strong> {compra.id}
                   </p>
-                  <br /> <br /> <br />
+                  <p style={{ color: "black" }}>
+                    <strong>Fecha:</strong> {compra.createdAt.substring(0, 10)}
+                  </p>
+                  <p style={{ color: "black" }}>
+                    <strong>Estado de la compra:</strong> {compra.status}{" "}
+                    <FaCheckCircle
+                      style={{ color: "green", marginLeft: "5px" }}
+                    />
+                  </p>
+                  <br /> <br />
                 </div>
               </div>
             </Link>
@@ -44,17 +68,9 @@ const Historial = () => {
         })
       ) : (
         <div style={{ marginTop: "30vh", textAlign: "center" }}>
-          <p >No hay órdenes</p>
+          <p>No hay órdenes</p>
         </div>
       )}
-
-      <Link
-        style={{ textAlign: "center", color: "red", textDecoration: "none" }}
-        to="/profile"
-      >
-        Volver
-
-      </Link>
     </div>
   );
 };
