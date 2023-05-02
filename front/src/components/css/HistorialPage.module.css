@@ -23,8 +23,18 @@
   background-color: white;
 }
 
+.profileinfo:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Agregamos un fondo negro semi-transparente cuando se pase el cursor por encima */
+}
 
 .profileinfo:hover::before {
+  content: "Haz clic para ver los detalles"; /* Agregamos un texto que aparecerá en el centro del contenedor cuando se pase el cursor por encima */
+  color: white;
   font-size: 20px;
   position: absolute; /* Establecemos posición absoluta para que el elemento esté contenido en el elemento padre */
   top: 50%; /* Alineamos el texto en el centro vertical del contenedor */
@@ -33,14 +43,11 @@
   z-index: 1; /* Aseguramos que el texto esté por encima del contenido interno del contenedor */
 }
 
-
-
 .profileinfo p {
   margin: 10px 0;
   font-size: 18px;
   color: rgb(79, 77, 77);
 }
-
 
 .box3d {
   perspective: 500px;

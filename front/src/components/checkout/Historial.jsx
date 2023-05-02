@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { setOrders } from "../../redux/reducers/OrderReducer";
-import styles from "../css/ProfilePage.module.css";
+import styles from "../css/HistorialPage.module.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 
