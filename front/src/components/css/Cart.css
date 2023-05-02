@@ -81,7 +81,6 @@ section .cart {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-
 }
 
 .product-details p {
@@ -92,11 +91,49 @@ section .cart {
   overflow: hidden;
 }
 
-.product-details h2{
+.product-details h2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
   height: 56px;
+}
+
+.details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-container {
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+.checkout-button {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .details-container {
+    max-width: 100%;
+    flex-direction: column;
+  }
+
+  .product-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details {
+    font-size: 0.8rem;
+  }
+
+  .cantidad {
+    margin-top: 10px;
+  }
 }

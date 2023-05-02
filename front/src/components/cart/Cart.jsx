@@ -6,6 +6,7 @@ import "../css/Cart.css";
 import axios from "axios";
 import { setCart } from "../../redux/reducers/CartReducers";
 import { useNavigate } from "react-router";
+import { FiTrash2 } from "react-icons/fi";
 
 import {
   deleteCartId,
@@ -206,7 +207,11 @@ const Cart = () => {
     return (
       <>
         <Navbar />
+
         <div className="details-container">
+          <div>
+            <button onClick={handleClearCart}>Limpiar</button>
+          </div>
           {cartItems.map((item) => {
             let contador = 0;
             if (
@@ -218,38 +223,42 @@ const Cart = () => {
             }
 
             return (
-              <div className="product-container" key={item.id}>
-                <div className="product-details">
-                  <img src={item.image} alt="" />
-                  <h2>{item.name}</h2>
-                  <p>Precio: ${item.price}</p>
+              <div className="cart-container">
+                <div className="product-container" key={item.id}>
+                  <div>
+                    <div className="product-details">
+                      <img src={item.image} alt="" />
+                      <h2>{item.name}</h2>
+                      <p>Precio: ${item.price}</p>
 
-                  <div className="cantidad">
-                    <button
-                      className="cantidad-button"
-                      onClick={() => {
-                        reduction(item.id, contador);
-                        return contador--;
-                      }}
-                    >
-                      -
-                    </button>
-                    <span>{`${contador}`}</span>
-                    <button
-                      className="cantidad-button"
-                      onClick={() => {
-                        increase(item.id, contador);
-                        return contador++;
-                      }}
-                    >
-                      +
-                    </button>
-                    <button
-                      className="remove-button"
-                      onClick={() => removeProduct(item.id)}
-                    >
-                      Eliminar
-                    </button>
+                      <div className="cantidad">
+                        <button
+                          className="cantidad-button"
+                          onClick={() => {
+                            reduction(item.id, contador);
+                            return contador--;
+                          }}
+                        >
+                          -
+                        </button>
+                        <span>{`${contador}`}</span>
+                        <button
+                          className="cantidad-button"
+                          onClick={() => {
+                            increase(item.id, contador);
+                            return contador++;
+                          }}
+                        >
+                          +
+                        </button>
+                        <button
+                          className="remove-button"
+                          onClick={() => removeProduct(item.id)}
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -258,11 +267,18 @@ const Cart = () => {
         </div>
         <div className="total-container">
           <h2>Total: ${total}</h2>
-          <button onClick={handleClearCart}>Vaciar carrito</button>
           {userLogueado.id ? (
-            <Link to="/checkout" className="checkout-button">
-              Comprar
-            </Link>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Link to="/checkout" className="checkout-button">
+                <button>Comprar</button>
+              </Link>
+            </div>
           ) : (
             <Link to="/login" className="login-button">
               Ingresar
