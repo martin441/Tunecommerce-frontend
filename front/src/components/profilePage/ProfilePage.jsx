@@ -134,7 +134,11 @@ function ProfilePage() {
         )}
         <button id="inicio">
           <Link
-            style={{ textDecoration: "none", color: "grey", marginTop: "10px" }}
+            style={{
+              textDecoration: "none",
+              color: "black",
+              marginTop: "10px",
+            }}
             to="/"
           >
             Volver a inicio
