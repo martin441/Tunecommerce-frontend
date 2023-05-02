@@ -12,6 +12,48 @@ h2 {
   color: rgb(0, 0, 0);
 }
 
+.inputCheckout {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #b8b8b8;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.inputCheckout:focus {
+  outline: none;
+  background-color: #e2e2e2;
+}
+
+.normal-text {
+  font-weight: normal;
+  font-size: medium;
+}
+
+.formCheckout h5 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.formCheckout label {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.formCheckout select {
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .formCheckout {
   max-width: 500px;
   margin: 0 auto;

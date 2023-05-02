@@ -8,6 +8,7 @@ import "../admin/css/Checkout.css";
 
 //import Cards from "react-credit-cards";
 //import "react-credit-cards/es/styles-compiled.css";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Checkout = () => {
   // //probando otro metodo
@@ -65,18 +66,35 @@ const Checkout = () => {
   console.log(date);
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Checkout</h2>
-
-      <h3>Checkout</h3>
+      <h2
+        style={{ textAlign: "center", paddingBottom: "2%", paddingTop: "2%" }}
+      >
+        Checkout
+      </h2>
       <form className="formCheckout" onSubmit={handleCheckout}>
+        <Link to="/cart">
+          <FaArrowLeft style={{ width: 18, height: 20 }} />
+        </Link>
         <h5>
-          Comprador: {user.name} {user.lastname}
+          <strong>Comprador:</strong>{" "}
+          <span className="normal-text">
+            {user.name} {user.lastname}
+          </span>
         </h5>
-        <h5>Direccion: {user.address}</h5>
-        <h5>Celular: {user.celnumber}</h5>
-        <h5>Total a pagar:{total}</h5>
+        <h5>
+          <strong>Dirección:</strong>{" "}
+          <span className="normal-text">{user.address}</span>
+        </h5>
+        <h5>
+          <strong>Celular:</strong>{" "}
+          <span className="normal-text">{user.celnumber}</span>
+        </h5>
+        <h5>
+          <strong>Total a pagar:</strong>{" "}
+          <span className="normal-text">{total}</span>
+        </h5>
         {/* pasar el total a pagar desde el carrito */}
-        <label for="pay">Metodo de pago</label>
+        <label for="pay">Metodo de pago:</label>
         <select
           name="paymentM"
           id="pay"
@@ -87,18 +105,21 @@ const Checkout = () => {
           <option value="Transferencia">Transferencia</option>
         </select>
         <br></br>
-        {paymentM ? (
+        {paymentM && paymentM !== "Metodo" ? (
           <>
             {paymentM === "Tarjeta" ? (
               <>
                 <label>Numero de tarjeta: </label>
                 <input
+                  className="inputCheckout"
                   value={tarjeta}
                   onChange={(e) => setTarjeta(e.target.value)}
                   required
                 ></input>
                 <label>Numero de Seguridad: </label>
                 <input
+                  className="inputCheckout"
+                  style={{ marginBottom: "6%" }}
                   value={tarjetaSeg}
                   onChange={(e) => setTarjetaSeg(e.target.value)}
                   required
@@ -108,6 +129,8 @@ const Checkout = () => {
               <>
                 <label>Numero de tranferencia: </label>
                 <input
+                  className="inputCheckout"
+                  style={{ marginBottom: "6%" }}
                   value={transferencia}
                   onChange={(e) => setTransferencia(e.target.value)}
                   required
@@ -118,13 +141,11 @@ const Checkout = () => {
         ) : (
           ""
         )}
+
         <br></br>
         <button type="submit" className="buttons">
           Pagar
         </button>
-        <Link to="/cart">
-          <button>Volver al carrito</button>
-        </Link>
       </form>
     </div>
   );
