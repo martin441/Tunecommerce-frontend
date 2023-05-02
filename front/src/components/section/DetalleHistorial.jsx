@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Products from "./Products";
 import styles from "../css/ProfilePage.module.css";
+import { FiArrowLeft } from "react-icons/fi";
 
 const DetalleHistorial = () => {
   const [first, setfirst] = useState(0);
@@ -31,7 +32,18 @@ const DetalleHistorial = () => {
   useEffect(() => {}, [first]);
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Detalles de la compra </h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Link to="/historial" style={{ color: "black", textDecoration: "none" }}>
+          <FiArrowLeft size={20} style={{ marginRight: "10px" }} />
+        </Link>
+        <h1 style={{ textAlign: "center" }}>Detalles de la compra </h1>
+      </div>
       {productos[0] ? (
         <div>
           {productos.map((unidad) => {
@@ -54,17 +66,6 @@ const DetalleHistorial = () => {
           textDecoration: "none",
         }}
       >
-        <Link
-          to="/historial"
-          style={{
-            textAlign: "center",
-            color: "red",
-            textDecoration: "none",
-            paddingBottom: "3em",
-          }}
-        >
-          Volver
-        </Link>
       </div>
     </>
   );

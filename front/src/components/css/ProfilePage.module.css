@@ -15,12 +15,45 @@
 .profileinfo {
   display: flex;
   flex-direction: column;
-  border: 2px solid rgb(9, 9, 9);
   padding: 20px;
   width: 50vh;
   align-items: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: white;
 }
+
+.profileinfo:hover {
+  background-color: rgba(0,0,0,0.8); /* Agregamos un fondo negro semi-transparente cuando se pase el cursor por encima */
+}
+
+.profileinfo:hover::before {
+  content: "Haz clic para ver los detalles"; /* Agregamos un texto que aparecerá en el centro del contenedor cuando se pase el cursor por encima */
+  color: white;
+  font-size: 20px;
+  position: absolute; /* Establecemos posición absoluta para que el elemento esté contenido en el elemento padre */
+  top: 50%; /* Alineamos el texto en el centro vertical del contenedor */
+  left: 50%; /* Alineamos el texto en el centro horizontal del contenedor */
+  transform: translate(-50%, -50%); /* Centramos el texto */
+  z-index: 1; /* Aseguramos que el texto esté por encima del contenido interno del contenedor */
+}
+
+
 
 .profileinfo p {
   margin: 10px 0;
+  font-size: 18px;
+  color: rgb(79, 77, 77);
+}
+
+
+.box3d {
+  perspective: 500px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.box3d:hover {
+  transform: rotateX(10deg) rotateY(10deg) translateY(-6px);
 }
