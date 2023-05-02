@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 import "../css/Cart.css";
 import axios from "axios";
 import { setCart } from "../../redux/reducers/CartReducers";
-import { useNavigate } from "react-router";
 import { FiTrash2 } from "react-icons/fi";
 
 import {
   deleteCartId,
   deleteCartItems,
-  setCartItems,
 } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -27,8 +25,6 @@ const Cart = () => {
   });
 
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const cartItems = useSelector((state) => {
     return state.cartItems;

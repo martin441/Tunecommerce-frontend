@@ -73,16 +73,7 @@ const SignUp = () => {
               Crea tu cuenta
             </h1>
             <div className={styles.inputContainer}>
-              <label
-                className={styles.label}
-                // style={{
-                //   display: "flex",
-                //   alignItems: "center",
-                //   justifyContent: "center",
-                // }}
-              >
-                Nombre de usuario:{" "}
-              </label>
+              <label className={styles.label}>Nombre de usuario: </label>
               <input
                 className={styles.input}
                 placeholder="Ingrese su nombre de usuario"
@@ -123,7 +114,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Nombre:{" "}
+                Nombre:
               </label>
               <input
                 className={styles.input}
@@ -144,7 +135,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Apellido:{" "}
+                Apellido:
               </label>
               <input
                 className={styles.input}
@@ -165,7 +156,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Email:{" "}
+                Email:
               </label>
               <input
                 className={styles.input}
@@ -186,7 +177,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Dirección:{" "}
+                Dirección:
               </label>
               <input
                 className={styles.input}
@@ -207,7 +198,7 @@ const SignUp = () => {
                   justifyContent: "center",
                 }}
               >
-                Número de teléfono:{" "}
+                Número de teléfono:
               </label>
               <input
                 className={styles.input}

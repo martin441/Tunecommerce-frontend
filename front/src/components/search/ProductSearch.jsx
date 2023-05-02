@@ -37,10 +37,6 @@ function ProductSearch() {
     }
   };
 
-  const handleButtonClick = () => {
-    setExpandUserMenu(true);
-  };
-
   const handleChange = (event) => {
     setNombre(event.target.value);
   };
@@ -77,13 +73,6 @@ function ProductSearch() {
           placeholder="Buscar producto"
           className="search-input"
         />
-        {/* <button
-          type="submit"
-          className="search-button"
-          onClick={handleButtonClick}
-        >
-          <i className="fas fa-search"></i>
-        </button> */}
       </form>
     </div>
   );

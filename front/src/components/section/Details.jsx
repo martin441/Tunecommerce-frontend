@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar.jsx";
 import "../css/Detail.css";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
 

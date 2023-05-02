@@ -5,21 +5,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
-
-//import Cards from "react-credit-cards";
-//import "react-credit-cards/es/styles-compiled.css";
 import { FaArrowLeft } from "react-icons/fa";
 
 const Checkout = () => {
-  // //probando otro metodo
-  // const [cardDetails, setCardDetails] = useState({
-  //   cvc: "",
-  //   expiry: "",
-  //   focus: "",
-  //   name: "",
-  //   number: "",
-  // });
-
   const [paymentM, setPaymentM] = useState("");
   const [date, setDate] = useState("");
   const [tarjeta, setTarjeta] = useState("");

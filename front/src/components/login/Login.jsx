@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import Products from "../section/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/reducers/userReducer";
 import Navbar from "../navbar/Navbar";
@@ -11,10 +10,8 @@ import Navbar from "../navbar/Navbar";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [user, setUser] = useState({});
-
   const [loading, setLoading] = useState(false);
-  const [userCreated, setUserCreated] = useState(false);
+  //const [userCreated, setUserCreated] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -48,9 +45,6 @@ const Login = () => {
   };
 
   console.log("USER", user);
-  // if (userCreated) {
-
-  // }
 
   return loading ? (
     <div>Loading...</div>

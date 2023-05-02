@@ -5,7 +5,7 @@ import ProductSlider from "../carusel/ImageSilder.jsx";
 import "../css/Products.css";
 import Navbar from "../navbar/Navbar.jsx";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
 import Footer from "../footer/Footer";
@@ -15,10 +15,7 @@ const Products = () => {
   const [visibleProducts, setVisibleProducts] = useState(5);
   const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
-  const [total, setTotal] = useState(0);
-  const [loadMore, setLoadMore] = useState(10);
   const user = JSON.parse(localStorage.getItem("user"));
-  const cartItems = useSelector((state) => state.cartItems);
 
   useEffect(() => {
     axios
@@ -56,8 +53,6 @@ const Products = () => {
           console.log(error);
         });
     }
-
-    const cart = JSON.parse(localStorage.getItem("dataCart"));
   };
 
   return (
@@ -72,49 +67,8 @@ const Products = () => {
           <FilterCategories />
         </div>
 
-       {/*  <div>
-          <h2>Productos Populares:</h2>
-        </div>
-        <div id="product" className="card-container">
-          {products.slice(0, visibleProducts).map((product) => (
-            <div className="card" key={product.id}>
-              <Link
-                style={{
-                  textDecoration: "none",
-                  textAlign: "center !important",
-                }}
-                to={`/product/${product.id}`}
-              >
-                <img src={product.image[0]} alt={product.name} />
-                <h3>{product.name}</h3>
-              </Link>
-              <p>{product.description}</p>
-              <div className="card-info">
-                <div className="price">
-                  <h4>${product.price}</h4>
-                </div>
-                <div className="stock">
-                  <h4>Stock: {product.stock}</h4>
-                </div>
-                <div className="add-to-cart">
-                  {cart.some((item) => item.id === product.id) ? (
-                    <button disabled>Añadido al carrito</button>
-                  ) : (
-                    <button
-                      class="add-to-cart small"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      Añadir al carrito
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
-          
         <div>
-          <h2 style={{margin: "15px"}}>Nuestros productos</h2>
+          <h2 style={{ margin: "15px" }}>Nuestros productos</h2>
         </div>
         <div id="product" className={estilo.slider}>
           {products.slice(0, visibleProducts).map((product) => (
@@ -150,11 +104,13 @@ const Products = () => {
             </div>
           ))}
         </div>
-          <div>
-            {visibleProducts < products.length && (
-              <button className="moreButton" onClick={handleLoadMore}>Ver más</button>
-            )}
-          </div>
+        <div>
+          {visibleProducts < products.length && (
+            <button className="moreButton" onClick={handleLoadMore}>
+              Ver más
+            </button>
+          )}
+        </div>
       </div>
       <Footer />
     </>
