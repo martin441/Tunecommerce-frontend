@@ -1,6 +1,6 @@
 /* Centramos los elementos principales verticalmente y le agregamos un padding */
 .container {
-  padding-top: 8vh;
+  padding-top: 7vh;
 }
 
 .details-container {
@@ -11,13 +11,28 @@
 }
 /*agrego zoom a las imagenes*/
 .zoom-on-hover {
-  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease;
 }
 
 .zoom-on-hover:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
+.details-image-container {
+  overflow: hidden;
+  height: 350px; /* ajusta la altura de acuerdo a tu necesidad */
+}
+
+.details-image {
+  background-size: cover;
+  transition: background-position 0.2s ease;
+}
+
+.details-image:hover {
+  transform: scale(1.1);
+  background-position: 50% 50%; /* ajusta la posición para explorar diferentes partes de la imagen */
+  cursor: zoom-in; /* cambia el cursor para indicar que la imagen es zoomable */
+}
 
 /* Agregamos un fondo y un borde a los contenedores de los elementos principales */
 .details-container,
@@ -32,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 85%;
 }
 
 /* Damos estilo al botón "Añadir al carrito" */
@@ -108,4 +124,48 @@
 
 .details-images img:hover {
   border-color: #000;
+}
+
+.detailss-cart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .details-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .details-image-container {
+    height: 250px;
+  }
+  #imageprinci{
+    height: 220px;
+  }
+  .details-image {
+    width: 100%;
+  }
+  .details-images {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .details-images img {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .details-container {
+    padding: 0.5rem;
+  }
+  .details-image-container {
+    height: 200px;
+  }
+  .details-images img {
+    width: 150px;
+    height: 150px;
+  }
 }
