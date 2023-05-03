@@ -9,7 +9,11 @@ const SearchUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:3001/api/users").then((res) => res.data);
+    axios
+      .get("http://localhost:3001/api/users", {
+        withCredentials: true,
+      })
+      .then((res) => res.data);
     navigate("/users");
   };
 
@@ -19,7 +23,6 @@ const SearchUser = () => {
 
   return (
     <>
-      {" "}
       <form className="d-flex ms-5 me-5" role="search" onSubmit={handleSubmit}>
         <input
           className="form-control me-2"

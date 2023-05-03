@@ -11,7 +11,9 @@ const EditUsuarios = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/admin`)
+      .get(`http://localhost:3001/api/admin`, {
+        withCredentials: true,
+      })
       .then((res) => {
         const filtrados = res.data.filter((e) => e.id !== userLogueado.id);
         setUsers(filtrados);
@@ -28,7 +30,9 @@ const EditUsuarios = () => {
 
     if (confirmDelete) {
       axios
-        .delete(`http://localhost:3001/api/admin/${id}`, {})
+        .delete(`http://localhost:3001/api/admin/${id}`, {
+          withCredentials: true,
+        })
         .then((res) => {
           alert("usuario borrado");
           setfirst(Math.random());
@@ -39,9 +43,15 @@ const EditUsuarios = () => {
 
   const handleAdmin = (user) => {
     axios
-      .put(`http://localhost:3001/api/admin/${user.id}`, {
-        isAdmin: !user.isAdmin,
-      })
+      .put(
+        `http://localhost:3001/api/admin/${user.id}`,
+        {
+          isAdmin: !user.isAdmin,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setfirst(Math.random());
       })
