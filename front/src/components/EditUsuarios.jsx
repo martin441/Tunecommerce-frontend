@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./css/EditUsuarios.module.css";
+import { FiArrowLeft } from "react-icons/fi";
 
 const EditUsuarios = () => {
   const [users, setUsers] = useState([]);
@@ -61,43 +62,38 @@ const EditUsuarios = () => {
   return (
     <>
       <div className={styles.marcoEditar}>
-        <h1 className={styles.editarUsuario}>Editar usuarios</h1>
-        {users.map((user) => {
-          console.log("USERMAP", user);
-          return (
-            <div>
-              <li>{user.name}, Admin: </li>{" "}
-              <input
-                className={styles.checkbox}
-                onClick={() => handleAdmin(user)}
-                type="checkbox"
-                checked={user.isAdmin ? true : false}
-              />
-              <div className={styles.text}>
-                <button
-                  className={styles.botonEliminar}
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Eliminar usuario
-                </button>
+        <div className={styles.title}>
+          <Link to="/profile">
+            <FiArrowLeft size={20} style={{ marginRight: "10px" }} />
+          </Link>
+          <h1 className={styles.editarUsuario}>Editar usuarios</h1>
+        </div>
+        <div className={styles.usermap}>
+          {users.map((user) => {
+            console.log("USERMAP", user);
+            return (
+              <div className={styles.conainerUser}>
+                <li className={styles.name}>
+                  {user.name} {user.isAdmin ? "-> Admin" : ""}{" "}
+                </li>
+                <input
+                  className={styles.checkbox}
+                  onClick={() => handleAdmin(user)}
+                  type="checkbox"
+                  checked={user.isAdmin ? true : false}
+                />
+                <div className={styles.text}>
+                  <button
+                    className={styles.botonEliminar}
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Eliminar usuario
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-
-        <Link
-          style={{
-            marginTop: "30vh",
-            textAlign: "center",
-            textDecoration: "none",
-            color: "grey",
-            paddingBottom: "30px",
-            paddingTop: "30px",
-          }}
-          to="/"
-        >
-          Volver a inicio
-        </Link>
+            );
+          })}
+        </div>
       </div>
     </>
   );

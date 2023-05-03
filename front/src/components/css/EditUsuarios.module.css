@@ -1,23 +1,59 @@
-
-.marcoEditar{
-justify-content: center;
-  margin-top: 10%;
-  margin-left: 40%;
- 
+.marcoEditar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  border-radius: 5px;
+  padding: 20px;
 }
 
-.editarUsuario{
-    color: rgb(99, 96, 96)
+.usermap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-:checked{
-  
-    border: 1px solid rgb(127, 127, 147);
+.title {
+  display: flex;
+  flex-direction: row;
 }
 
-li{
-    
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: none;
-    list-style: none;
+.editarUsuario {
+  color: rgb(99, 96, 96);
+  margin: auto;
+  margin-bottom: 3%;
+}
+
+:checked {
+  border: 1px solid rgb(127, 127, 147);
+}
+
+li {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+.conainerUser {
+  margin-bottom: 10%;
+}
+
+.name {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.botonEliminar {
+  width: 250px;
+  border: 1px solid rgba(27, 31, 35, 0.753);
+  border-radius: 6px;
+  padding: 2%;
+  font-size: 1rem;
 }
