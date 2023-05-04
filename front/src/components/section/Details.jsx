@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaStar } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar.jsx";
 import "../css/Detail.css";
@@ -6,18 +7,18 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
-
+import { Rating } from "react-simple-star-rating";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Details = () => {
   const [product, setProduct] = useState(null);
   const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [reviews, setReviews] = useState([
-    { id: 1, text: "Excelente producto", author: "Juan Pérez" },
-    { id: 2, text: "Muy buena calidad", author: "María Gómez" },
-    { id: 3, text: "Lo recomiendo totalmente", author: "Pedro Rodríguez" },
-  ]);
-
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+  console.log(product);
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -31,6 +32,10 @@ const Details = () => {
       });
   }, [id]);
 
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+
   const addToCart = (product) => {
     if (Array.isArray(cart)) {
       const productIndex = cart.findIndex((item) => item.id === product.id);
@@ -41,7 +46,7 @@ const Details = () => {
             cantidad: 1,
           })
           .then(() => {
-            alert("Producto agregado al carrito");
+            toast.success("Producto agregado al carrito");
             axios
               .get(`http://localhost:3001/api/products/${product.id}`)
               .then((response) => {
@@ -131,7 +136,6 @@ const Details = () => {
                     Añadir al carrito
                   </button>
                 )}
-                {/* {console.log("CART", cart)} */}
               </div>
             </div>
           </div>
@@ -141,11 +145,41 @@ const Details = () => {
           <div className="details-reviews">
             <h3>Reviews:</h3>
             <div className="details-review-percentage">
-              <p>
-                {!product.ranking ? 0 : product.ranking[0] || 0} 🌟 de reviews
-                positivas
-              </p>
+              {/* <p>
+                <Rating onClick={handleRating} initialValue={rating} />
+              </p> */}
             </div>
+            <div>
+              {[...Array(5)].map((star, i) => {
+                const ratingValue = i + 1;
+                return (
+                  <label>
+                    <input
+                      type="radio"
+                      name="rating"
+                      value={ratingValue}
+                      onClick={() => {
+                        setRating(ratingValue);
+                      }}
+                    />
+                    <FaStar
+                      className="star"
+                      color={
+                        ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"
+                      }
+                      size={100}
+                      onMouseEnter={() => setHover(ratingValue)}
+                      onMouseLeave={() => setHover(null)}
+                    />
+                  </label>
+                );
+              })}
+            </div>
+            <p>
+              {!product.ranking ? 0 : product.ranking || 0} 🌟 de reviews
+              positivas
+            </p>
+
             {product.ranking && (
               <div className="details-review-list">
                 {reviews.map((review) => (

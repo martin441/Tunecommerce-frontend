@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./css/EditUsuarios.module.css";
 import { FiArrowLeft } from "react-icons/fi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditUsuarios = () => {
   const [users, setUsers] = useState([]);
@@ -20,7 +22,7 @@ const EditUsuarios = () => {
         setUsers(filtrados);
       })
       .catch(() => {
-        alert("No se encontraron usuarios");
+        toast.success("No se encontraron usuarios");
       });
   }, [first]);
 
@@ -35,7 +37,7 @@ const EditUsuarios = () => {
           withCredentials: true,
         })
         .then((res) => {
-          alert("usuario borrado");
+          toast.success("usuario borrado");
           setfirst(Math.random());
         })
         .catch((err) => console.log(err));

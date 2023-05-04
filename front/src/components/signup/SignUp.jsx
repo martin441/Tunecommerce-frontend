@@ -4,6 +4,8 @@ import styles from "../css/Signup.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Navbar from "../navbar/Navbar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
@@ -30,10 +32,10 @@ const SignUp = () => {
       })
       .then((res) => {
         setUserCreated(true);
-        alert("Se creó el usuario correctamente");
+        toast.success("Se creó el usuario correctamente");
       })
       .catch(() => {
-        alert("Hubo un error al crear el usuario");
+        toast.error("Hubo un error al crear el usuario");
       });
   };
 

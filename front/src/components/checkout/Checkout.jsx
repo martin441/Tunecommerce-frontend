@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
 import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
@@ -31,11 +33,11 @@ const Checkout = () => {
       })
       .then((res) => {
         if (res.status === 201) {
-          alert("Pago realizado correctamente");
+          toast.success("Pago realizado correctamente");
           dispatch(deleteCartItems([]));
           return navigate("/");
         } else {
-          alert("No se pudo realizar el pago");
+          toast.error("No se pudo realizar el pago");
         }
       });
   };

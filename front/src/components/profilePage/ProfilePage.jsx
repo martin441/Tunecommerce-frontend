@@ -5,6 +5,8 @@ import { setUser } from "../../redux/reducers/userReducer";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/ProfilePage.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -38,10 +40,10 @@ function ProfilePage() {
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsEditing(false);
 
-        alert("Se realizaron los cambios satisfactoriamente");
+        toast.success("Se realizaron los cambios satisfactoriamente");
       })
       .catch(() => {
-        alert("Hubo un error al actualizar los datos");
+        toast.error("Hubo un error al actualizar los datos");
       });
   };
 

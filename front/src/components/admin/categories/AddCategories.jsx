@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import "../css/ProductsAdmin.css";
 import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
@@ -54,7 +56,7 @@ const AddCategories = () => {
         description: editarDescripcion,
       })
       .then(() => {
-        alert("Categoria editada correctamente");
+        toast.success("Categoria editada correctamente");
         setEditarNombre("");
         setEditarDescripcion("");
         // Recargar la página para cargar los datos
@@ -71,7 +73,7 @@ const AddCategories = () => {
       axios
         .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
         .then(() => {
-          alert("Categoria eliminada correctamente");
+          toast.success("Categoria eliminada correctamente");
           // Recargar la página para cargar los datos
           window.location.reload();
         });

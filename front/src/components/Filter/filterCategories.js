@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import "../css/Products.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FilterCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -35,7 +37,7 @@ const FilterCategories = () => {
         cantidad: 1,
       })
       .then(() => {
-        alert("Producto agregado al carrito");
+        toast.success("Producto agregado al carrito");
         axios
           .get(`http://localhost:3001/api/products/${product.id}`)
           .then((response) => {
