@@ -1,7 +1,9 @@
 import React from "react";
 import SimpleReactFooter from "simple-react-footer";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const url = useLocation();
   // Define the data for the footer
   const description =
     //poner una descripcion
@@ -11,16 +13,22 @@ const Footer = () => {
   const columns = [];
 
   return (
-    <SimpleReactFooter
-      description={description}
-      title={title}
-      columns={columns}
-      copyright="Tunecommerce 2023"
-      iconColor="black"
-      backgroundColor="crimson"
-      fontColor="white"
-      copyrightColor="white"
-    />
+    <>
+      {url.pathname === "/login" || url.pathname === "/signup" ? (
+        ""
+      ) : (
+        <SimpleReactFooter
+          description={description}
+          title={title}
+          columns={columns}
+          copyright="Tunecommerce 2023"
+          iconColor="black"
+          backgroundColor="crimson"
+          fontColor="white"
+          copyrightColor="white"
+        />
+      )}
+    </>
   );
 };
 

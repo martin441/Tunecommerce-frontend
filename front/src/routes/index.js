@@ -24,6 +24,7 @@ const isAuthenticated = () => {
   const userLogueadoo = JSON.parse(localStorage.getItem("user")) || {};
   return userLogueadoo;
 };
+
 const userLogueado = JSON.parse(localStorage.getItem("user")) || {};
 // Componente para renderizar rutas privadas
 function PrivateRoute(props) {
@@ -31,6 +32,7 @@ function PrivateRoute(props) {
   const { component: Component, path } = props;
 
   // Devuelvo una ruta que renderice el componente sólo si el usuario está autenticado
+
   return (
     <Route path={path}>
       {userLogueado.name ? (
@@ -53,7 +55,6 @@ const App = () => {
     <>
       <ToastContainer />
       <Navbar />
-
       <Routes>
         {/* rutas de admin */}
         <Route exact path="/admin/products" element={<ProductsAdmin />} />
@@ -62,6 +63,7 @@ const App = () => {
         <Route path="/" element={<Products />} />
         <Route path="/product/:id" element={<Details />} />
         <Route exact path="/cart" element={<Cart />} />
+
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/admin/products" element={<ProductsAdmin />} />

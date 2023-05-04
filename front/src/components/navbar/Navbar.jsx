@@ -8,8 +8,12 @@ import { Link } from "react-router-dom";
 import "../css/Navbar.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const url = useLocation();
+  console.log(url.pathname !== "/login");
+
   const [toggle, setToggle] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(
     localStorage.getItem("user")
@@ -53,10 +57,13 @@ const Navbar = () => {
         <h1 className="logo">
           <Link to="/">Tunecommerce</Link>
         </h1>
-
-        <div className="buscador">
-          <ProductSearch />
-        </div>
+        {url.pathname === "/login" || url.pathname === "/signup" ? (
+          ""
+        ) : (
+          <div className="buscador">
+            <ProductSearch />
+          </div>
+        )}
 
         <nav>
           <div className="navbar">
