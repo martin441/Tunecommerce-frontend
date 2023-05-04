@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
 import Footer from "../footer/Footer";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -33,15 +35,17 @@ const Products = () => {
   };
 
   const handleAddToCart = (product) => {
+    // const notificacion = () => {toast("agregado al carrito")}
+
     if (!user) {
-      alert("Debes loguearte para agregar productos al carrito");
+      toast.error("Debes loguearte para agregar productos al carrito");
     } else {
       axios
         .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
           cantidad: 1,
         })
         .then(() => {
-          alert("Producto agregado al carrito");
+          toast.success("Producto agregado al carrito");
           axios
             .get(`http://localhost:3001/api/products/${product.id}`)
             .then((response) => {

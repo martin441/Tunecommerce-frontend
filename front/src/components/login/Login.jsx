@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/reducers/userReducer";
 import Navbar from "../navbar/Navbar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       setLoading(false);
-      alert("Hubo un error al iniciar sesión");
+      toast.error("Hubo un error al iniciar sesión");
     }
   };
 

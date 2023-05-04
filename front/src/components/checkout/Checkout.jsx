@@ -6,10 +6,15 @@ import { useDispatch } from "react-redux";
 import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
 import { FaArrowLeft } from "react-icons/fa";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { css } from "@emotion/react";
 import { BeatLoader } from "react-spinners";
 import Confetti from "react-confetti";
 import { useMediaQuery } from "react-responsive";
+
 
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
@@ -40,14 +45,18 @@ const Checkout = () => {
       })
       .then((res) => {
         if (res.status === 201) {
+
+          toast.success("Pago realizado correctamente");
+
           setIsPaymentSuccessful(true);
           //alert("Pago realizado correctamente");
+
           dispatch(deleteCartItems([]));
           Confetti();
           //alert("pago realizado correctamante")
           return navigate("/");
         } else {
-          alert("No se pudo realizar el pago");
+          toast.error("No se pudo realizar el pago");
         }
       })
       .finally(() => {

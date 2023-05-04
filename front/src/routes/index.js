@@ -13,6 +13,8 @@ import Checkout from "../components/checkout/Checkout.jsx";
 import AddCategories from "../components/admin/categories/AddCategories.jsx";
 import Navbar from "../components/navbar/Navbar.jsx";
 import EditUsuarios from "../components/EditUsuarios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -48,7 +50,8 @@ function PrivateRoute(props) {
 const App = () => {
   return (
     <>
-    <Navbar/>
+      <ToastContainer />
+      <Navbar />
       <Routes>
         {/* rutas de admin */}
         <Route exact path="/admin/products" element={<ProductsAdmin />} />

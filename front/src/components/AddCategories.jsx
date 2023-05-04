@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
@@ -43,7 +45,7 @@ const AddCategories = () => {
         description: editarDescripcion,
       })
       .then(() => {
-        alert("Categoria editada correctamente");
+        toast.success("Categoria editada correctamente");
       });
   };
 
@@ -53,7 +55,7 @@ const AddCategories = () => {
     axios
       .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
       .then(() => {
-        alert("Categoria eliminada correctamente");
+        toast.success("Categoria eliminada correctamente");
       });
   };
   console.log(deleteCategoria);

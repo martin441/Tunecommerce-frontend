@@ -3,6 +3,8 @@ import axios from "axios";
 import "../css/ProductsAdmin.css";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductsAdmin = () => {
   const [products, setProducts] = useState([]);
@@ -74,7 +76,7 @@ const ProductsAdmin = () => {
         setEditingProduct(null);
       })
       .catch((error) => {
-        alert("Ocurrió un error inesperado");
+        toast.error("Ocurrió un error inesperado");
         setError(error.message);
       });
   };
