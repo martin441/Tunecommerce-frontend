@@ -15,6 +15,7 @@ import Navbar from "../components/navbar/Navbar.jsx";
 import EditUsuarios from "../components/EditUsuarios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../components/footer/Footer.jsx";
 
 // Función para verificar si el usuario está autenticado
 const isAuthenticated = () => {
@@ -52,6 +53,7 @@ const App = () => {
     <>
       <ToastContainer />
       <Navbar />
+
       <Routes>
         {/* rutas de admin */}
         <Route exact path="/admin/products" element={<ProductsAdmin />} />
@@ -70,6 +72,7 @@ const App = () => {
         <Route path="/detalleOrden/:id" element={<DetalleHistorial />} />
         <Route path="/editusuarios" element={<EditUsuarios />} />
       </Routes>
+      <Footer />
     </>
   );
 };
