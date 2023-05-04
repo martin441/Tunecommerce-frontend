@@ -6,8 +6,15 @@ import { useDispatch } from "react-redux";
 import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
 import { FaArrowLeft } from "react-icons/fa";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { css } from "@emotion/react";
+import { BeatLoader } from "react-spinners";
+import Confetti from "react-confetti";
+import { useMediaQuery } from "react-responsive";
+
 
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
@@ -15,6 +22,8 @@ const Checkout = () => {
   const [tarjeta, setTarjeta] = useState("");
   const [tarjetaSeg, setTarjetaSeg] = useState("");
   const [transferencia, setTransferencia] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false); // Nuevo estado para verificar si el pago se realizó con éxito
   const user = JSON.parse(localStorage.getItem("user"));
   const total = JSON.parse(localStorage.getItem("totales"));
   const navigate = useNavigate();
@@ -23,8 +32,11 @@ const Checkout = () => {
   const cartItems = useSelector((state) => state.cartItems);
   console.log("CARTITEMS", cartItems);
 
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
   const handleCheckout = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     axios
       .post(`http://localhost:3001/api/order/${user.id}`, {
         status: "realizada",
@@ -33,12 +45,22 @@ const Checkout = () => {
       })
       .then((res) => {
         if (res.status === 201) {
+
           toast.success("Pago realizado correctamente");
+
+          setIsPaymentSuccessful(true);
+          //alert("Pago realizado correctamente");
+
           dispatch(deleteCartItems([]));
+          Confetti();
+          //alert("pago realizado correctamante")
           return navigate("/");
         } else {
           toast.error("No se pudo realizar el pago");
         }
+      })
+      .finally(() => {
+        setIsLoading(false); // establecer isLoading a false cuando se completa la solicitud
       });
   };
 
@@ -55,12 +77,46 @@ const Checkout = () => {
   }, []);
   console.log(date);
   return (
-    <div>
+    <div style={{ position: "relative", height: isMobile ? "100%" : "100vh" }}>
+      {isPaymentSuccessful && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <Confetti
+            width={isMobile ? window.innerWidth : undefined}
+            height={isMobile ? window.innerHeight : undefined}
+          />
+
+          <div
+            className="payment-confirmation"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "#fff",
+              padding: "20px",
+              borderRadius: "5px",
+            }}
+          >
+            <p>Pago realizado correctamente</p>
+            <button onClick={() => navigate("/")}>OK</button>
+          </div>
+        </div>
+      )}
       <h2
         style={{ textAlign: "center", paddingBottom: "2%", paddingTop: "2%" }}
       >
         Checkout
       </h2>
+      {/* resto del código... */}
       <form className="formCheckout" onSubmit={handleCheckout}>
         <Link to="/cart">
           <FaArrowLeft style={{ width: 18, height: 20 }} />
@@ -81,7 +137,7 @@ const Checkout = () => {
         </h5>
         <h5>
           <strong>Total a pagar:</strong>{" "}
-          <span className="normal-text">{total}</span>
+          <span className="normal-text">{total + "$"}</span>
         </h5>
         {/* pasar el total a pagar desde el carrito */}
         <label for="pay">Metodo de pago:</label>
@@ -133,8 +189,16 @@ const Checkout = () => {
         )}
 
         <br></br>
-        <button type="submit" className="buttons">
-          Pagar
+
+        <button disabled={isLoading} type="submit" className="buttons">
+          {isLoading ? (
+            <BeatLoader
+              color={"#fff"}
+              css={{ display: "block", margin: "0 auto" }}
+            />
+          ) : (
+            "Pagar"
+          )}
         </button>
       </form>
     </div>
