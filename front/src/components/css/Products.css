@@ -1,0 +1,134 @@
+#product {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 480px;
+  height: 500px;
+  border: 1px solid #eee;
+  overflow: hidden;
+  padding: 10px;
+  box-shadow: 2px 8px 20px #ddd;
+  margin: 10px;
+  transition: 0.5s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card:hover {
+  box-shadow: none;
+}
+
+.card-info {
+  margin: 0px;
+  padding: 10px;
+}
+
+.card img {
+  width: 300px;
+  height: 250px;
+  object-fit: contain;
+}
+
+.card-container {
+  max-width: 90%;
+  margin-top: 2%;
+}
+
+.card h3 {
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.card h3 a {
+  text-decoration: none;
+  color: #333;
+}
+
+.card h3 a:hover {
+  color: crimson;
+}
+
+.card span {
+  color: crimson;
+}
+
+.card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 85%;
+  margin-bottom: 5px;
+  height: 38px;
+}
+
+.card button {
+  border: none;
+  outline: none;
+  background: #333;
+  color: white;
+  width: 100%;
+  height: 40px;
+  display: block;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 15px 0;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.add-to-cart button:hover {
+  background-color: rgb(91, 5, 22);
+}
+.add-to-cart button:active {
+  transform: translateY(1px);
+}
+
+/*Estilo para botones "add-to-cart"*/
+.add-to-cart {
+  font-size: 14px; /*Tamaño de fuente original*/
+  border-radius: 4px; /*Borde original*/
+}
+
+/*Estilo para botones "add-to-cart" reducidos*/
+.add-to-cart.small {
+  font-size: 12px;
+  padding: 6px 12px;
+  background-color: crimson;
+  color: #fff;
+  width: auto;
+  border: 1px solid rgba(27, 31, 35, 0.753);
+  border-radius: 6px;
+  margin: 8px;
+}
+
+.categories {
+  margin-bottom: 5%;
+}
+
+.moreButton {
+  width: 100%;
+  border: 1px solid rgba(27, 31, 35, 0.753);
+  border-radius: 6px;
+  padding-bottom: 1.5%;
+  font-size: 1rem;
+  margin-top: 2%;
+  margin-bottom: 8%;
+}
