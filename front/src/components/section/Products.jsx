@@ -8,7 +8,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
-import Footer from "../footer/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -116,7 +115,6 @@ const Products = () => {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 };

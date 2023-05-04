@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Details = () => {
   const [product, setProduct] = useState(null);
   const [cart, setCart] = useState([]);
@@ -141,15 +142,13 @@ const Details = () => {
           </div>
         </div>
 
-        <div>
-          <div className="details-reviews">
-            <h3>Reviews:</h3>
-            <div className="details-review-percentage">
-              {/* <p>
+        {/* <h3>Reviews:</h3> */}
+        <div className="details-review-percentage">
+          {/* <p>
                 <Rating onClick={handleRating} initialValue={rating} />
               </p> */}
-            </div>
-            <div>
+        </div>
+        {/* <div>
               {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
@@ -174,13 +173,13 @@ const Details = () => {
                   </label>
                 );
               })}
-            </div>
-            <p>
-              {!product.ranking ? 0 : product.ranking || 0} 🌟 de reviews
+            </div> */}
+        {/* <p>
+              {!product.ranking ? 0 : product.ranking[0] || 0} 🌟 de reviews
               positivas
-            </p>
+            </p> */}
 
-            {product.ranking && (
+        {/* {product.ranking && (
               <div className="details-review-list">
                 {reviews.map((review) => (
                   <div className="details-review" key={review.id}>
@@ -189,9 +188,7 @@ const Details = () => {
                   </div>
                 ))}
               </div>
-            )}
-          </div>
-        </div>
+            )} */}
       </div>
     </>
   );
