@@ -8,6 +8,7 @@ import { setUser } from "../../redux/reducers/userReducer";
 import Navbar from "../navbar/Navbar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../config/env"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ const Login = () => {
     setEmail("");
     setPassword("");
     try {
-      const res = await axios.post("http://localhost:3001/api/user/login", {
+      const res = await axios.post(`${env.API_BASE_URL}/api/user/login`, {
         email: email,
         password: password,
       });
