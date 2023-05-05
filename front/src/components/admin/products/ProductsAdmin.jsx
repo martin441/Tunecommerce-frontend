@@ -6,6 +6,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//importar env
+import env from "../../../config/env";
+
 const ProductsAdmin = () => {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -26,7 +29,7 @@ const ProductsAdmin = () => {
 
   const getProducts = () => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${env.API_BASE_URL}/api/products`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -37,7 +40,7 @@ const ProductsAdmin = () => {
 
   const getCategories = () => {
     axios
-      .get("http://localhost:3001/api/categories/todo")
+      .get(`${env.API_BASE_URL}/api/categories/todo`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -57,8 +60,8 @@ const ProductsAdmin = () => {
       category,
     };
     const url = editingProduct
-      ? `http://localhost:3001/api/products/${editingProduct.id}`
-      : "http://localhost:3001/api/products/1";
+      ? `${env.API_BASE_URL}/api/products/${editingProduct.id}`
+      : `${env.API_BASE_URL}/api/products/1`;
 
     axios({
       method: editingProduct ? "put" : "post",
@@ -84,7 +87,7 @@ const ProductsAdmin = () => {
   const deleteProduct = (productId) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
       axios
-        .delete(`http://localhost:3001/api/products/${productId}`)
+        .delete(`${env.API_BASE_URL}/api/products/${productId}`)
         .then(() => {
           getProducts();
         })

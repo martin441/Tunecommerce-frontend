@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+//importar env
+import env from "../../../config/env";
+
 const SearchUser = () => {
   const [inputUser, setImputUser] = useState("");
   const { id } = useParams();
@@ -10,7 +13,7 @@ const SearchUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:3001/api/users", {
+      .get(`${env.API_BASE_URL}/api/users`, {
         withCredentials: true,
       })
       .then((res) => res.data);

@@ -7,6 +7,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//importar env
+import env from "../../../config/env";
+
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
   const [categoriaDescripcion, setCategoriaDescripcion] = useState("");
@@ -17,7 +20,7 @@ const AddCategories = () => {
   const [deleteCategoria, setDeleteCategoria] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/categories/todo`).then((res) => {
+    axios.get(`${env.API_BASE_URL}/api/categories/todo`).then((res) => {
       setCategorias(res.data);
     });
   }, []);
@@ -25,7 +28,7 @@ const AddCategories = () => {
   const handleAddCategoty = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/api/categories`, {
+      .post(`${env.API_BASE_URL}/api/categories`, {
         name: categoriaNombre,
         description: categoriaDescripcion,
       })
@@ -51,7 +54,7 @@ const AddCategories = () => {
   const handleEditCategory = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3001/api/categories/${categoria.id}`, {
+      .put(`${env.API_BASE_URL}/api/categories/${categoria.id}`, {
         name: editarNombre,
         description: editarDescripcion,
       })
@@ -71,7 +74,7 @@ const AddCategories = () => {
     );
     if (confirmation) {
       axios
-        .delete(`http://localhost:3001/api/categories/${deleteCategoria}`)
+        .delete(`${env.API_BASE_URL}/api/categories/${deleteCategoria}`)
         .then(() => {
           toast.success("Categoria eliminada correctamente");
           // Recargar la página para cargar los datos
