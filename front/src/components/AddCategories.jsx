@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import env from "../../../config/env";
+import env from "../../../src/config/env";
 
 const AddCategories = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");

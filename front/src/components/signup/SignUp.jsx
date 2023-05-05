@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import Navbar from "../navbar/Navbar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import env from "../../../config/env";
+import env from "../../../src/config/env";
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
