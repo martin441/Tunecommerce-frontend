@@ -10,6 +10,7 @@ import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import FilterCategories from "../Filter/filterCategories";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../../config/env";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${env.API_BASE_URL}/api/products`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -40,13 +41,13 @@ const Products = () => {
       toast.error("Debes loguearte para agregar productos al carrito");
     } else {
       axios
-        .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+        .post(`${env.API_BASE_URL}/api/cart/${user.id}/${product.id}`, {
           cantidad: 1,
         })
         .then(() => {
           toast.success("Producto agregado al carrito");
           axios
-            .get(`http://localhost:3001/api/products/${product.id}`)
+            .get(`${env.API_BASE_URL}/api/products/${product.id}`)
             .then((response) => {
               dispatch(setCartItems(response.data));
               localStorage.setItem("dataCart", JSON.stringify(response.data));

@@ -5,6 +5,7 @@ import axios from "axios";
 import Products from "./Products";
 import styles from "../css/ProfilePage.module.css";
 import { FiArrowLeft } from "react-icons/fi";
+import env from "../../../config/env";
 
 const DetalleHistorial = () => {
   const [first, setfirst] = useState(0);
@@ -16,11 +17,11 @@ const DetalleHistorial = () => {
   useEffect(() => {
     let prod = [];
     axios
-      .get(`http://localhost:3001/api/order/${user.id}/${params.id}`)
+      .get(`${env.API_BASE_URL}/api/order/${user.id}/${params.id}`)
       .then((res) => {
         res.data[1].map((producto) => {
           axios
-            .get(`http://localhost:3001/api/products/${producto.productId}/`)
+            .get(`${env.API_BASE_URL}/api/products/${producto.productId}/`)
             .then((res) => {
               prod.push(res.data);
               setfirst(Math.random());
@@ -39,7 +40,10 @@ const DetalleHistorial = () => {
           justifyContent: "center",
         }}
       >
-        <Link to="/historial" style={{ color: "black", textDecoration: "none" }}>
+        <Link
+          to="/historial"
+          style={{ color: "black", textDecoration: "none" }}
+        >
           <FiArrowLeft size={20} style={{ marginRight: "10px" }} />
         </Link>
         <h1 style={{ textAlign: "center" }}>Detalles de la compra </h1>
@@ -65,8 +69,7 @@ const DetalleHistorial = () => {
           textAlign: "center",
           textDecoration: "none",
         }}
-      >
-      </div>
+      ></div>
     </>
   );
 };

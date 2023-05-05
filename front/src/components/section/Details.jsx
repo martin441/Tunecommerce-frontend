@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 //import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../../config/env";
 
 const Details = () => {
   const [product, setProduct] = useState(null);
@@ -24,7 +25,7 @@ const Details = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/products/${id}`)
+      .get(`${env.API_BASE_URL}/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
       })
@@ -43,13 +44,13 @@ const Details = () => {
       if (productIndex === -1) {
         setCart([...cart, product]);
         axios
-          .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+          .post(`${env.API_BASE_URL}/api/cart/${user.id}/${product.id}`, {
             cantidad: 1,
           })
           .then(() => {
             toast.success("Producto agregado al carrito");
             axios
-              .get(`http://localhost:3001/api/products/${product.id}`)
+              .get(`${env.API_BASE_URL}/api/products/${product.id}`)
               .then((response) => {
                 dispatch(setCartItems(response.data));
                 localStorage.setItem("dataCart", JSON.stringify(response.data));
