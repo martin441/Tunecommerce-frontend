@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../css/Products.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../config/env";
 
 const FilterCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -18,13 +19,13 @@ const FilterCategories = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/categories/todo")
+      .get(`http://${env.API_BASE_URL}/api/categories/todo`)
       .then((categories) => setCategories(categories.data));
   }, []);
 
   const handleCategoryClick = (id) => {
     axios
-      .get(`http://localhost:3001/api/products/filter/${id}`)
+      .get(`http://${env.API_BASE_URL}/api/products/filter/${id}`)
       .then((products) => {
         setSelectedCategory(products.data);
         console.log(selectedCategory);
@@ -33,13 +34,13 @@ const FilterCategories = () => {
 
   const handleAddToCart = (product) => {
     axios
-      .post(`http://localhost:3001/api/cart/${user.id}/${product.id}`, {
+      .post(`http://${env.API_BASE_URL}/api/cart/${user.id}/${product.id}`, {
         cantidad: 1,
       })
       .then(() => {
         toast.success("Producto agregado al carrito");
         axios
-          .get(`http://localhost:3001/api/products/${product.id}`)
+          .get(`http://${env.API_BASE_URL}/api/products/${product.id}`)
           .then((response) => {
             dispatch(setCartItems(response.data));
             localStorage.setItem("dataCart", JSON.stringify(response.data));

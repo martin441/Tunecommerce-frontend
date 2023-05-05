@@ -7,6 +7,7 @@ import { setOrders } from "../../redux/reducers/OrderReducer";
 import styles from "../css/HistorialPage.module.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
+import env from "../../config/env";
 
 const Historial = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Historial = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/order/${user.id}`).then((res) => {
+    axios.get(`http://${env.API_BASE_URL}/api/order/${user.id}`).then((res) => {
       dispatch(setOrders(res.data));
     });
   }, []);

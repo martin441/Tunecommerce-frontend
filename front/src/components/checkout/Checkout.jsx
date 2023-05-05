@@ -1,20 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteCartItems } from "../../redux/reducers/CartItemsReducer";
 import "../admin/css/Checkout.css";
 import { FaArrowLeft } from "react-icons/fa";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { css } from "@emotion/react";
 import { BeatLoader } from "react-spinners";
 import Confetti from "react-confetti";
 import { useMediaQuery } from "react-responsive";
-
+import env from "../../config/env";
 
 const Checkout = () => {
   const [paymentM, setPaymentM] = useState("");
@@ -38,14 +35,13 @@ const Checkout = () => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post(`http://localhost:3001/api/order/${user.id}`, {
+      .post(`http://${env.API_BASE_URL}/api/order/${user.id}`, {
         status: "realizada",
         date: date,
         paymentM: paymentM,
       })
       .then((res) => {
         if (res.status === 201) {
-
           toast.success("Pago realizado correctamente");
 
           setIsPaymentSuccessful(true);
