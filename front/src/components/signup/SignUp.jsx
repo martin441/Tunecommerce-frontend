@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import Navbar from "../navbar/Navbar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../../config/env";
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
@@ -21,7 +22,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/api/user/register", {
+      .post(`${env.API_BASE_URL}/api/user/register`, {
         username: username,
         password: password,
         name: name,

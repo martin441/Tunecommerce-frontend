@@ -5,6 +5,7 @@ import styles from "./css/EditUsuarios.module.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../../config/env";
 
 const EditUsuarios = () => {
   const [users, setUsers] = useState([]);
@@ -14,7 +15,7 @@ const EditUsuarios = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/admin`, {
+      .get(`${env.API_BASE_URL}/api/admin`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -33,7 +34,7 @@ const EditUsuarios = () => {
 
     if (confirmDelete) {
       axios
-        .delete(`http://localhost:3001/api/admin/${id}`, {
+        .delete(`${env.API_BASE_URL}/api/admin/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -47,7 +48,7 @@ const EditUsuarios = () => {
   const handleAdmin = (user) => {
     axios
       .put(
-        `http://localhost:3001/api/admin/${user.id}`,
+        `${env.API_BASE_URL}/api/admin/${user.id}`,
         {
           isAdmin: !user.isAdmin,
         },

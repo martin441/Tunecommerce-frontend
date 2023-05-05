@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/Navbar.css";
 import { Link } from "react-router-dom";
+import env from "../../../config/env";
 
 function ProductSearch() {
   const [nombre, setNombre] = useState("");
@@ -27,7 +28,7 @@ function ProductSearch() {
 
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/products/search/${nombre}`
+        `${env.API_BASE_URL}/api/products/search/${nombre}`
       );
       console.log("response", response.data);
       setProductos(response.data);
