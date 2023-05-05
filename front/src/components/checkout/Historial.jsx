@@ -16,7 +16,7 @@ const Historial = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    axios.get(`http://${env.API_BASE_URL}/api/order/${user.id}`).then((res) => {
+    axios.get(`${env.API_BASE_URL}/api/order/${user.id}`).then((res) => {
       dispatch(setOrders(res.data));
     });
   }, []);
