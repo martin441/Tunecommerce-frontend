@@ -7,7 +7,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setCartItems } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
-import { Rating } from "react-simple-star-rating";
+//import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
