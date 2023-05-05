@@ -4,7 +4,7 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import estilo from "../css/Carrusel.module.css";
 import axios from "axios";
 import "../css/Carrusel.css";
-import env from "../../../config/env";
+import env from "../../config/env";
 
 function ProductSlider() {
   const [products, setProducts] = useState([]);

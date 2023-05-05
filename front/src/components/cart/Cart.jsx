@@ -12,7 +12,7 @@ import {
   deleteCartItems,
 } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
-import env from "../../../config/env";
+import env from "../../config/env";
 
 const Cart = () => {
   let userLogueado = JSON.parse(localStorage.getItem("user")) || {};

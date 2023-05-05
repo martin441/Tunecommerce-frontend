@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../css/ProfilePage.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import env from "../../../config/env";
+import env from "../../config/env";
 
 function ProfilePage() {
   const navigate = useNavigate();

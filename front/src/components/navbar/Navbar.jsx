@@ -9,7 +9,7 @@ import "../css/Navbar.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import env from "../../../config/env";
+import env from "../../config/env";
 
 const Navbar = () => {
   const url = useLocation();
