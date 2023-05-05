@@ -12,6 +12,7 @@ import {
   deleteCartItems,
 } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
+import env from "../../config/env";
 
 //importar env
 import env from "../../config/env";

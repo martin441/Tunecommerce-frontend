@@ -9,6 +9,7 @@ import "../css/Navbar.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import env from "../../config/env";
 
 const Navbar = () => {
   const url = useLocation();
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // Obtener productos del servidor
-    axios.get("http://localhost:3001/api/products").then((response) => {
+    axios.get(`${env.API_BASE_URL}/api/products`).then((response) => {
       setProducts(response.data);
     });
   }, []);
