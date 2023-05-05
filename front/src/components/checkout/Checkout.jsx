@@ -35,7 +35,7 @@ const Checkout = () => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post(`http://${env.API_BASE_URL}/api/order/${user.id}`, {
+      .post(`${env.API_BASE_URL}/api/order/${user.id}`, {
         status: "realizada",
         date: date,
         paymentM: paymentM,

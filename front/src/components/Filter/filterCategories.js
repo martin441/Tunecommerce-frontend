@@ -19,13 +19,13 @@ const FilterCategories = () => {
 
   useEffect(() => {
     axios
-      .get(`http://${env.API_BASE_URL}/api/categories/todo`)
+      .get(`${env.API_BASE_URL}/api/categories/todo`)
       .then((categories) => setCategories(categories.data));
   }, []);
 
   const handleCategoryClick = (id) => {
     axios
-      .get(`http://${env.API_BASE_URL}/api/products/filter/${id}`)
+      .get(`${env.API_BASE_URL}/api/products/filter/${id}`)
       .then((products) => {
         setSelectedCategory(products.data);
         console.log(selectedCategory);
@@ -34,13 +34,13 @@ const FilterCategories = () => {
 
   const handleAddToCart = (product) => {
     axios
-      .post(`http://${env.API_BASE_URL}/api/cart/${user.id}/${product.id}`, {
+      .post(`${env.API_BASE_URL}/api/cart/${user.id}/${product.id}`, {
         cantidad: 1,
       })
       .then(() => {
         toast.success("Producto agregado al carrito");
         axios
-          .get(`http://${env.API_BASE_URL}/api/products/${product.id}`)
+          .get(`${env.API_BASE_URL}/api/products/${product.id}`)
           .then((response) => {
             dispatch(setCartItems(response.data));
             localStorage.setItem("dataCart", JSON.stringify(response.data));
