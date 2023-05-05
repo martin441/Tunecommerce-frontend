@@ -10,7 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 //import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import env from "../../../config/env";
+import env from "../../../src/config/env.js";
 
 const Details = () => {
   const [product, setProduct] = useState(null);

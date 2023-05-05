@@ -5,7 +5,7 @@ import axios from "axios";
 import Products from "./Products";
 import styles from "../css/ProfilePage.module.css";
 import { FiArrowLeft } from "react-icons/fi";
-import env from "../../../config/env";
+import env from "../../../src/config/env.js";
 
 const DetalleHistorial = () => {
   const [first, setfirst] = useState(0);
