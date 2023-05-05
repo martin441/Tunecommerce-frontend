@@ -4,6 +4,7 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import estilo from "../css/Carrusel.module.css";
 import axios from "axios";
 import "../css/Carrusel.css";
+import env from "../../../config/env";
 
 function ProductSlider() {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ function ProductSlider() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${env.API_BASE_URL}/api/products`)
       .then((res) => setProducts(res.data));
   }, []);
 

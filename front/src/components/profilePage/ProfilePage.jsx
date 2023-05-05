@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../css/ProfilePage.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import env from "../../../config/env";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function ProfilePage() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:3001/api/user/update/${user.id}`, {
+      .put(`${env.API_BASE_URL}/api/user/update/${user.id}`, {
         password: password,
         email: email,
         address: address,
