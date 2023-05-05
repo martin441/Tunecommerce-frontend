@@ -1,10 +1,10 @@
-
-import axios  from 'axios';
-import { setCart } from '../reducers/CartReducers';
+import axios from "axios";
+import { setCart } from "../reducers/CartReducers";
+import env from "../../../config/env";
 
 export const clearCart = (userId) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3001/api/cart/${userId}`);
+    await axios.delete(`${env.API_BASE_URL}/api/cart/${userId}`);
     dispatch(setCart([]));
   } catch (error) {
     console.log(error);
