@@ -8,7 +8,7 @@ import { setUser } from "../../redux/reducers/userReducer";
 import Navbar from "../navbar/Navbar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import env from "../../../config/env";
+import env from "../../config/env"
 
 const Login = () => {
   const [email, setEmail] = useState("");

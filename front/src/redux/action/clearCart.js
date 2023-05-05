@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setCart } from "../reducers/CartReducers";
-import env from "../../../config/env";
+import env from "../../config/env";
 
 export const clearCart = (userId) => async (dispatch) => {
   try {
