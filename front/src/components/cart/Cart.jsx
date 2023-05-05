@@ -13,6 +13,9 @@ import {
 } from "../../redux/reducers/CartItemsReducer";
 import { FaArrowLeft } from "react-icons/fa";
 
+//importar env
+import env from "../../config/env";
+
 const Cart = () => {
   let userLogueado = JSON.parse(localStorage.getItem("user")) || {};
   const [carts, setCarts] = useState(() => {
@@ -39,7 +42,7 @@ const Cart = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+      .get(`${env.API_BASE_URL}/api/cart/${userLogueado.id}`)
       .then((response) => {
         dispatch(setCart(response.data));
       })
@@ -59,7 +62,7 @@ const Cart = () => {
     );
     if (confirmClearCart) {
       axios
-        .delete(`http://localhost:3001/api/cart/${userLogueado.id}`)
+        .delete(`${env.API_BASE_URL}/api/cart/${userLogueado.id}`)
         .then((response) => {
           console.log("CART-CLEAR", response.data);
           dispatch(deleteCartItems([]));
@@ -74,7 +77,7 @@ const Cart = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+      .get(`${env.API_BASE_URL}/api/cart/${userLogueado.id}`)
       .then((response) => {
         dispatch(setCart(response.data));
       })
@@ -93,11 +96,11 @@ const Cart = () => {
 
   const getTotal = () => {
     axios
-      .get(`http://localhost:3001/api/cart/${userLogueado.id}`)
+      .get(`${env.API_BASE_URL}/api/cart/${userLogueado.id}`)
       .then((response) => {
         const cart = response.data;
         axios
-          .get(`http://localhost:3001/api/products`)
+          .get(`${env.API_BASE_URL}/api/products`)
           .then((response) => {
             const cartItems = response.data;
             if (!Array.isArray(cart) || cart.length === 0) {
@@ -123,7 +126,7 @@ const Cart = () => {
 
   const increase = (id, contador) => {
     axios
-      .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+      .put(`${env.API_BASE_URL}/api/cart/${userLogueado.id}/${id}`, {
         cantidad: contador + 1,
       })
       .then((response) => {
@@ -141,7 +144,7 @@ const Cart = () => {
       }
     } else {
       axios
-        .put(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`, {
+        .put(`${env.API_BASE_URL}/api/cart/${userLogueado.id}/${id}`, {
           cantidad: contador - 1,
         })
         .then((response) => {
@@ -156,7 +159,7 @@ const Cart = () => {
   const removeProduct = (id) => {
     if (window.confirm("¿Quieres quitar este producto?")) {
       axios
-        .delete(`http://localhost:3001/api/cart/${userLogueado.id}/${id}`)
+        .delete(`${env.API_BASE_URL}/api/cart/${userLogueado.id}/${id}`)
         .then((response) => {
           // actualizo el estado del carrito con los nuevos datos que devuelve la API
           dispatch(deleteCartId(id));
@@ -169,7 +172,7 @@ const Cart = () => {
             // actualizo la cantidad del otro producto en la base de datos
             axios
               .put(
-                `http://localhost:3001/api/cart/${userLogueado.id}/${otroProducto.productId}`,
+                `${env.API_BASE_URL}/api/cart/${userLogueado.id}/${otroProducto.productId}`,
                 {
                   cantidad: nuevaCantidad,
                 }
