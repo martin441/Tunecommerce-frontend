@@ -66,7 +66,7 @@ const SignUp = () => {
         }}
       >
          
-        <div  style={{margin:"auto", marginTop:"5%"}}>
+        <div  style={{margin:"auto", marginTop:"1.5%"}}>
           <form className={styles.form} onSubmit={handleSubmit}>
             <h3 className={styles.title} >
               Crea tu cuenta
