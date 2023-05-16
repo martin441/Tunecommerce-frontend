@@ -195,14 +195,14 @@ const Cart = () => {
 
   if (cart.length === 0) {
     return (
-      <div>
+      <div style={{height:"150%"}}>
         <Navbar />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             paddingLeft: "20%",
-            paddingTop: "2%",
+            paddingTop: "2%"
           }}
         >
           <Link style={{ textDecoration: "none" }} to="/">
@@ -210,13 +210,18 @@ const Cart = () => {
           </Link>
         </div>
         <br></br>
-        <h2 style={{ textAlign: "center" }}>No hay productos en el carrito</h2>
+     
+<div style={{ display:"flex"}}>
+
+        <h2 style={{ width:"50%" , margin:"auto", padding:"5%", fontSize:"30px", border:"2px solid black", borderRadius:"3px", boxShadow:" 2px 2px 2px 1px rgba(0, 0, 0, 0.2)" }}>No hay productos en el carrito</h2>
+</div>
+  
       </div>
     );
   } else {
     return (
       <>
-        <Navbar />
+    
         <div className="details-container">
           <Link to="/">
             <FaArrowLeft
