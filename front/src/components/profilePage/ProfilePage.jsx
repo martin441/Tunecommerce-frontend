@@ -51,34 +51,31 @@ function ProfilePage() {
   console.log("RANDOM", random);
 
   return !isEditing ? (
-    <div className={styles.profilecontainer}>
+    <div className={styles.profilecontainer} style={{ paddingTop: "10px" }}>
       <div className={styles.profileinfo}>
         <img className="profileImage" src={random} alt="" />
 
-        <div className="userdata">
-          <div className="item">
+        <div
+          className="userdata"
+          style={{ margin:"auto" }}
+        >
+          <div className="item" style={{ marginRight: "auto" }}>
             <p>
               <b> Nombre:</b> {user.name}
             </p>
-          </div>
 
-          <div className="item">
             <p>
               <b> Apellido:</b> {user.lastname}
             </p>
-          </div>
 
-          <div className="item">
             <p>
               <b> Mail:</b> {user.email}
             </p>
-          </div>
-          <div className="item">
+
             <p>
               <b> Dirección: </b> {user.address}
             </p>
-          </div>
-          <div className="item">
+
             <p>
               <b> Número de teléfono:</b> {user.celnumber}
             </p>
@@ -150,11 +147,14 @@ function ProfilePage() {
       </div>
     </div>
   ) : (
-    <div className="formDiv">
-      <h2>Editar Perfil</h2>
+    <div style={{display:"flex", marginTop:"10%"}}>
+    <div className="formDiv" style={{ maxWidth:"35%", margin:"auto", padding:"20px 55px 20px", borderRadius:"5px", border:"2px solid grey"}}>
+
+    <p style={{fontSize:"30px",fontWeight:"bold", marginBottom:"20px"}}>Editar Perfil</p>
+
       <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Dirección
+        <label style={{marginRight:"30px" }}>
+          Dirección:
           <input
             className="inputEdit"
             type="text"
@@ -204,6 +204,7 @@ function ProfilePage() {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

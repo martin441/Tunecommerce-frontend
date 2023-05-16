@@ -10,11 +10,6 @@
     margin-bottom: 2%;
 }
 
-.item {
-    font-size: large;
-    align-items: center;
-    margin: -2px;
-}
 
 .admin{
     margin-top: 2rem;
@@ -61,5 +56,5 @@
     width: 20rem;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 20px;
 }
