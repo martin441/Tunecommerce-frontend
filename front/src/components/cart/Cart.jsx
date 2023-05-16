@@ -196,13 +196,13 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div style={{height:"150%"}}>
-        <Navbar />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             paddingLeft: "20%",
-            paddingTop: "2%"
+            paddingTop: "2%",
+          
           }}
         >
           <Link style={{ textDecoration: "none" }} to="/">
@@ -222,7 +222,7 @@ const Cart = () => {
     return (
       <>
     
-        <div className="details-container">
+        <div className="details-container" >
           <Link to="/">
             <FaArrowLeft
               className="icon icon-arrow"
@@ -240,7 +240,7 @@ const Cart = () => {
             }
 
             return (
-              <div className="cart-container">
+              <div className="cart-container" >
                 <div className="product-container" key={item.id}>
                   <div>
                     <div className="product-details">
@@ -285,7 +285,7 @@ const Cart = () => {
         <div className="total-container">
           <h2>Total: ${total}</h2>
           {userLogueado.id ? (
-            <div className="botones-comprarvaciar">
+            <div className="botones-comprarvaciar" styles={{}}>
               <button
                 className="remove-button"
                 style={{ marginTop: "5px" }}

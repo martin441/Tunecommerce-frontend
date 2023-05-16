@@ -133,7 +133,7 @@ section .cart {
 
 .details-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
