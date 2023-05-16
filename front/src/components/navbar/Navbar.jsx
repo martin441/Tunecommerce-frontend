@@ -49,7 +49,7 @@ const Navbar = () => {
   const user = JSON.parse(loggedInUser); // Parseamos la información del usuario
 
   return (
-    <div className="contenedor">
+    <div className="contenedor" style={{zIndex:"100%"}}>
       <div className="header">
         <div className="menu" onClick={menuToggle}>
           <img src={Menu} alt="" width="20" />

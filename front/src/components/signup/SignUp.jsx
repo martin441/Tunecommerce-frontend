@@ -46,35 +46,31 @@ const SignUp = () => {
 
   return localStorage.getItem("user") === null ? (
     <>
-      <Navbar />
-
+         
+    {/* <div style={{ width:"150vh" , height:"130vh",  backgroundColor:"pink",}}> */}
       <div
         style={{
-          position: "absolute",
-          borderRadius: "5px",
-          left: "20vw",
-          top: "35vh",
-          width: "60vw",
-          height: "30vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          // position: "absolute",
+          // borderRadius: "5px",
+          // left: "20vw",
+          // top: "50vh",
+          // width: "60vw",
+          // height: "30vh",
+          // display: "flex",
+          // alignItems: "center",
+          // justifyContent: "center",
 
-          backgroundSize: "80vw",
+          // backgroundSize: "80vw",
+          display:"flex",
+          width:"100%" , height:"110%"
         }}
       >
-        <div className={styles.wrapper}>
+         
+        <div  style={{margin:"auto", marginTop:"5%"}}>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <h1
-              className={styles.title}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <h3 className={styles.title} >
               Crea tu cuenta
-            </h1>
+            </h3>
             <div className={styles.inputContainer}>
               <label className={styles.label}>Nombre de usuario: </label>
               <input
@@ -240,6 +236,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+         {/* </div> */}
     </>
   ) : (
     navigate("/")
