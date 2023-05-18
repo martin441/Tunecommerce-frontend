@@ -18,11 +18,12 @@ const SignUp = () => {
   const [celnumber, setcelNumber] = useState("");
   const [userCreated, setUserCreated] = useState(false);
   const navigate = useNavigate();
-
+  // `${env.API_BASE_URL}/api/user/register`
   const handleSubmit = (e) => {
+    console.log("HOLAAA", e)
     e.preventDefault();
     axios
-      .post(`${env.API_BASE_URL}/api/user/register`, {
+      .post("http://localhost:3001/api/user/register", {
         username: username,
         password: password,
         name: name,
@@ -34,6 +35,9 @@ const SignUp = () => {
       .then((res) => {
         setUserCreated(true);
         toast.success("Se creó el usuario correctamente");
+        if (userCreated) {
+          navigate("/login");
+        }
       })
       .catch(() => {
         toast.error("Hubo un error al crear el usuario");
@@ -43,6 +47,8 @@ const SignUp = () => {
   if (userCreated) {
     navigate("/login");
   }
+
+  console.log(name,lastname, username, "AVER")
 
   return localStorage.getItem("user") === null ? (
     <>
@@ -71,39 +77,7 @@ const SignUp = () => {
             <h3 className={styles.title} >
               Crea tu cuenta
             </h3>
-            <div className={styles.inputContainer}>
-              <label className={styles.label}>Nombre de usuario: </label>
-              <input
-                className={styles.input}
-                placeholder="Ingrese su nombre de usuario"
-                type="text"
-                required
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-              ></input>
-            </div>
-            <br />
-            <div className={styles.inputContainer}>
-              <label
-                className={styles.label}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                Contraseña: (minimo 8 caracteres)
-              </label>
-              <input
-                className={styles.input}
-                placeholder="Ingrese su contraseña"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </div>
-            <br />
+           
             <div className={styles.inputContainer}>
               <label
                 className={styles.label}
@@ -145,6 +119,19 @@ const SignUp = () => {
                 onChange={(e) => setLastName(e.target.value)}
               ></input>
             </div>
+            <br />
+            <div className={styles.inputContainer}>
+              <label className={styles.label}>Nombre de usuario: </label>
+              <input
+                className={styles.input}
+                placeholder="Nombre de usuario"
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+              ></input>
+            </div>
+ 
             <br />
             <div className={styles.inputContainer}>
               <label
@@ -202,10 +189,31 @@ const SignUp = () => {
               <input
                 className={styles.input}
                 placeholder="Ingrese su número de teléfono"
-                type="text"
+                type="number"
                 required
                 value={celnumber}
                 onChange={(e) => setcelNumber(e.target.value)}
+              ></input>
+            </div>
+            <br />
+            <div className={styles.inputContainer}>
+              <label
+                className={styles.label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Contraseña: (mínimo 8 caracteres)
+              </label>
+              <input
+                className={styles.input}
+                placeholder="Ingrese su contraseña"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
             <br />

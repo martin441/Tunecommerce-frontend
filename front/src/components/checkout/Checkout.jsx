@@ -102,7 +102,8 @@ const Checkout = () => {
               borderRadius: "5px",
             }}
           >
-            <p>Pago realizado correctamente</p>
+            <p>Pago realizado correctamente <br/>
+            Gracias por su compra</p>
             <button onClick={() => navigate("/")}>OK</button>
           </div>
         </div>

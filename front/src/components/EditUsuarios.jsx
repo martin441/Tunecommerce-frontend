@@ -64,7 +64,7 @@ const EditUsuarios = () => {
 
   return (
     <>
-      <div className={styles.marcoEditar}>
+      <div className={styles.marcoEditar} style={{paddingTop:"5%"}}>
         <div className={styles.title}>
           <Link to="/profile">
             <FiArrowLeft size={20} style={{ marginRight: "10px" }} />
@@ -73,23 +73,25 @@ const EditUsuarios = () => {
         </div>
         <div className={styles.usermap}>
           {users.map((user) => {
-            console.log("USERMAP", user);
             return (
-              <div className={styles.conainerUser}>
-                <li className={styles.name}>
-                  {user.name} {user.isAdmin ? "-> Admin" : ""}{" "}
-                </li>
-                <input
-                  className={styles.checkbox}
-                  onClick={() => handleAdmin(user)}
-                  type="checkbox"
-                  checked={user.isAdmin ? true : false}
-                />
+              <div>
+                <div
+                  className={styles.conainerUser}
+                  style={{ display: "flex", flexWrap: "wrap" }} >
+                  <li className={styles.name} style={{ margin: "auto" }}>
+                    {user.name} {user.isAdmin ? "-> Admin" : ""}{" "}
+                  </li>
+                  <input
+                    className={styles.checkbox}
+                    onClick={() => handleAdmin(user)}
+                    type="checkbox"
+                    checked={user.isAdmin ? true : false}
+                  />
+                </div>
                 <div className={styles.text}>
                   <button
                     className={styles.botonEliminar}
-                    onClick={() => handleDelete(user.id)}
-                  >
+                    onClick={() => handleDelete(user.id)} >
                     Eliminar usuario
                   </button>
                 </div>

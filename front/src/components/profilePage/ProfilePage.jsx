@@ -48,7 +48,7 @@ function ProfilePage() {
       });
   };
 
-  console.log("RANDOM", random);
+  console.log("EMAIL", email);
 
   return !isEditing ? (
     <div className={styles.profilecontainer} style={{ paddingTop: "10px" }}>
@@ -148,7 +148,7 @@ function ProfilePage() {
     </div>
   ) : (
     <div style={{display:"flex", marginTop:"10%"}}>
-    <div className="formDiv" style={{ maxWidth:"35%", margin:"auto", padding:"20px 55px 20px", borderRadius:"5px", border:"2px solid grey"}}>
+    <div className="formDiv" style={{ maxWidth:"35%", margin:"auto", padding:"20px 55px 20px", borderRadius:"5px", border:"2px solid grey", backgroundColor:"#fafafa"}}>
 
     <p style={{fontSize:"30px",fontWeight:"bold", marginBottom:"20px"}}>Editar Perfil</p>
 
@@ -158,7 +158,7 @@ function ProfilePage() {
           <input
             className="inputEdit"
             type="text"
-            value={user.address}
+            placeholder={address}
             onChange={(event) => setAddress(event.target.value)}
           />
         </label>
@@ -167,7 +167,7 @@ function ProfilePage() {
           <input
             className="inputEdit"
             type="text"
-            defaultValue={user.celnumber}
+            placeholder={celnumber}
             onChange={(event) => setCelnumber(event.target.value)}
           />
         </label>
@@ -176,7 +176,7 @@ function ProfilePage() {
           <input
             className="inputEdit"
             type="text"
-            defaultValue={user.email}
+            placeholder={email}
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
@@ -184,7 +184,8 @@ function ProfilePage() {
           Contraseña:
           <input
             className="inputEdit"
-            type="text"
+            type="password"
+            placeholder="* * * * * * *"
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
