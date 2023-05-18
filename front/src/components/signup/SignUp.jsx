@@ -22,7 +22,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/api/user/register", {
+      .post(`${env.API_BASE_URL}/api/user/register`, {
         username: username,
         password: password,
         name: name,
@@ -95,7 +95,7 @@ const SignUp = () => {
                 placeholder="Ingrese su nombre"
                 type="text"
                 required
-                // value={name}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
@@ -116,7 +116,7 @@ const SignUp = () => {
                 placeholder="Ingrese su apellido"
                 type="text"
                 required
-                // value={lastname}
+                value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
               ></input>
             </div>
@@ -128,7 +128,7 @@ const SignUp = () => {
                 placeholder="Nombre de usuario"
                 type="text"
                 required
-                // value={username}
+                value={username}
                 onChange={(e) => setUserName(e.target.value)}
               ></input>
             </div>
@@ -150,7 +150,7 @@ const SignUp = () => {
                 placeholder="Ingrese su email"
                 type="email"
                 required
-              //  value={email}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
@@ -171,7 +171,7 @@ const SignUp = () => {
                 placeholder="Ingrese su dirección"
                 type="text"
                 required
-              //  value={address}
+                value={address}
                 onChange={(e) => setAddress(e.target.value)}
               ></input>
             </div>
@@ -192,7 +192,7 @@ const SignUp = () => {
                 placeholder="Ingrese su número de teléfono"
                 type="number"
                 required
-              //  value={celnumber}
+                value={celnumber}
                 onChange={(e) => setcelNumber(e.target.value)}
               ></input>
             </div>
@@ -213,7 +213,7 @@ const SignUp = () => {
                 placeholder="Ingrese su contraseña"
                 type="password"
                 required
-              //  value={password}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
